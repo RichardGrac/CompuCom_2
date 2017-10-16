@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/Compucom?useSSL=false
+    username: root
+    password: admin
+  jpa:
+    show-sql: true # Que nos muestre el sql en pantalla (En el Log las diferentes Queries)
+    hibernate:
+      # Cuando arranquemos el servidor comprobará si las Entidades corresponden con las tablas, sino las actualiza.
+      ddl-auto: update
+      naming:
+        # Dialecto que usara a la hora de hacer las consultas
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect

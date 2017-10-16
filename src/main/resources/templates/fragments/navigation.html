@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="navbar">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-fondo" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand letra-titulo"> <span class="color-titulo">OPTICAS CRISTAL</span></a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle navbar-usuario" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i><span> Richard Grac &nbsp; </span><i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a disabled=""><i class="fa fa-gear fa-fw"></i> Configuración</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
+                            <form name="logoutForm" method="post" th:hidden="true">
+                                <input hidden="" type="submit" value="Sign Out"/>
+                            </form>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse menu-lateral">
+                    <ul class="nav" id="side-menu">
+                        <!--<li class="sidebar-search">-->
+                            <!--<div class="input-group custom-search-form">-->
+                                <!--<input type="text" class="form-control" placeholder="Buscar..." />-->
+                                <!--<span class="input-group-btn">-->
+                                <!--<button class="btn btn-default" type="button">-->
+                                    <!--<i class="fa fa-search"></i>-->
+                                <!--</button>-->
+                            <!--</span>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash; /input-group &ndash;&gt;-->
+                        <!--</li>-->
+                        <li>
+                            <a class="letra-menu-lateral" th:href="@{/index}"><i class="fa fa-home fa-fw"></i> Página principal</a>
+                        </li>
+                        <li>
+                            <a class="letra-menu-lateral" href="javascript:;" data-toggle="collapse" data-target="#usuarios"><i class="fa fa-group fa-fw"></i> Usuarios <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse in" id="usuarios" >
+                                <li>
+                                    <a class="letra-menu-lateral" th:href="@{/usuarios/list}"><span class="fa fa-users fa-fw"></span>Todos los usuarios</a>
+                                </li>
+                                <li>
+                                    <a class="letra-menu-lateral" th:href="@{/users/new-user}"><i class="fa fa-plus fa-fw"></i>Nuevo usuario</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a class="letra-menu-lateral" href="javascript:;" data-toggle="collapse" data-target="#pacientes"><i class="fa fa-asterisk fa-fw"></i> Pacientes <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse in" id="pacientes">
+                                <li>
+                                    <a class="letra-menu-lateral" th:href="@{/pacientes/list}"><span class="fa fa-asterisk fa-fw"></span>Todos los pacientes</a>
+                                </li>
+                                <li>
+                                    <a class="letra-menu-lateral" th:href="@{/pacientes/formapaciente}"><i class="fa fa-plus fa-fw"></i>Nuevo Paciente</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a class="letra-menu-lateral" href="#"><i class="fa fa-files-o fa-fw"></i> Ordenes de laboratorio </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+    </div>
+</body>
+</html>
