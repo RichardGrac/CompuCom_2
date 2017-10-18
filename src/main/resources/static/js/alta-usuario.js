@@ -7,27 +7,6 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            'name': {
-                validators: {
-                    notEmpty: {
-                        message: 'Por favor completa tú nombre'
-                    }
-                }
-            },
-            'firstlastname': {
-                validators: {
-                    notEmpty: {
-                        message: 'Por favor completa tú primer apellido'
-                    }
-                }
-            },
-            'secondlastname': {
-                validators: {
-                    notEmpty: {
-                        message: 'Por favor completa tú segundo apellido'
-                    }
-                }
-            },
             'username': {
                 validators: {
                     notEmpty: {
@@ -46,7 +25,7 @@ $(document).ready(function() {
                         message: 'Por favor completa contraseña'
                     },
                     identical:{
-                        field: 'confirmpass',
+                        field: 'password2',
                         message: 'La contraseña y la confirmación no son iguales'
                     },
                     different:{
@@ -55,7 +34,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            'confirmpass': {
+            'password2': {
                 validators: {
                     stringLength: {
                         min: 8,

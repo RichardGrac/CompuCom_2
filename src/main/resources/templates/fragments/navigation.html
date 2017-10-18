@@ -6,7 +6,7 @@
 </head>
 <body>
     <div th:fragment="navbar">
-        <nav class="navbar navbar-default navbar-fixed-top navbar-fondo" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-static-top navbar-fondo" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -14,7 +14,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand letra-titulo"> <span class="color-titulo">OPTICAS CRISTAL</span></a>
+                <a class="navbar-brand letra-titulo"> <span class="color-titulo">ADMINISTRACIÓN COMPUCOM</span></a>
             </div>
             <!-- /.navbar-header -->
 
@@ -72,19 +72,16 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a class="letra-menu-lateral" href="javascript:;" data-toggle="collapse" data-target="#pacientes"><i class="fa fa-asterisk fa-fw"></i> Pacientes <span class="fa arrow"></span></a>
+                            <a class="letra-menu-lateral" href="javascript:;" data-toggle="collapse" data-target="#pacientes"><i class="fa fa-tags fa-fw"></i> Productos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse in" id="pacientes">
                                 <li>
-                                    <a class="letra-menu-lateral" th:href="@{/pacientes/list}"><span class="fa fa-asterisk fa-fw"></span>Todos los pacientes</a>
+                                    <a class="letra-menu-lateral" th:href="@{/pacientes/list}"><span class="fa fa-tags fa-fw"></span>Todos los productos</a>
                                 </li>
                                 <li>
-                                    <a class="letra-menu-lateral" th:href="@{/pacientes/formapaciente}"><i class="fa fa-plus fa-fw"></i>Nuevo Paciente</a>
+                                    <a class="letra-menu-lateral" th:href="@{/pacientes/formapaciente}"><i class="fa fa-tag fa-fw"></i>Nuevo Producto</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a class="letra-menu-lateral" href="#"><i class="fa fa-files-o fa-fw"></i> Ordenes de laboratorio </a>
                         </li>
                     </ul>
                 </div>

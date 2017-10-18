@@ -22,14 +22,18 @@ public class User {
     @Column(name = "role", nullable = false)
     private String role;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private UserAddress userAdress;
+
     public User(){}
 
-    public User(int id, String username, String password, String email, String role) {
-        this.id = id;
+    public User(String username, String password, String email, String role, UserAddress userAdress) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
+        this.userAdress = userAdress;
     }
 
     public int getId() {
@@ -72,6 +76,14 @@ public class User {
         this.role = role;
     }
 
+    public UserAddress getUserAdress() {
+        return userAdress;
+    }
+
+    public void setUserAdress(UserAddress userAdress) {
+        this.userAdress = userAdress;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -80,6 +92,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
+                ", userAdress=" + userAdress +
                 '}';
     }
 }

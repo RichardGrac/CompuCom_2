@@ -1,20 +1,26 @@
 package com.example.CompuCom2.model;
 
+import com.example.CompuCom2.entity.UserAddress;
+
 public class UserModel {
     private int id;
     private String username;
     private String password;
     private String email;
     private String role;
+    private UserAddress userAdress;
 
-    public UserModel(){}
+    public UserModel(){
+        userAdress = new UserAddress();
+    }
 
-    public UserModel(int id, String username, String password, String email, String role) {
+    public UserModel(int id, String username, String password, String email, String role, UserAddress userAdress) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = role;
+        this.userAdress = userAdress;
     }
 
     public int getId() {
@@ -57,6 +63,14 @@ public class UserModel {
         this.role = role;
     }
 
+    public UserAddress getUserAdress() {
+        return userAdress;
+    }
+
+    public void setUserAdress(UserAddress userAdress) {
+        this.userAdress = userAdress;
+    }
+
     @Override
     public String toString() {
         return "UserModel{" +
@@ -65,6 +79,7 @@ public class UserModel {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
+                ", userAdress=" + userAdress +
                 '}';
     }
 }

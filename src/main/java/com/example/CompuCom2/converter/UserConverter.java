@@ -13,6 +13,7 @@ public class UserConverter {
         user.setPassword(userModel.getPassword());
         user.setEmail(userModel.getEmail());
         user.setRole(userModel.getRole());
+//        user.setUserAdress(userModel.getUserAdress());
         return user;
     }
 
@@ -23,6 +24,7 @@ public class UserConverter {
         userModel.setPassword(user.getPassword());
         userModel.setEmail(user.getEmail());
         userModel.setRole(user.getRole());
+//        userModel.setUserAdress(user.getUserAdress());
         return userModel;
     }
 }
