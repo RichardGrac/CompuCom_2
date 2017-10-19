@@ -11,5 +11,7 @@ public interface UserService {
     public abstract List<UserModel> listAllUsers();
 //    public abstract void removeUser(int id);
     public abstract UserModel findUserByIdModel(int id);
+
+    public abstract UserAddressModel addAddressUser(UserAddressModel userAddressModel);
     public abstract UserAddressModel findUserAddressByIdModel(int id);
 }

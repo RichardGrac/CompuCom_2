@@ -1,4 +1,4 @@
-package com.example.CompuCom2;
+package com.example.CompuCom2.Constants;
 
 public class Constants {
     public static final String USERS = "users";

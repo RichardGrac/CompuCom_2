@@ -35,11 +35,11 @@
                             Información del usuario:
                         </div>
                         <div class="panel-body ajuste-padding">  
-                            <form class="well form-horizontal ajuste-margen-inferior" th:action="@{/users/addUser}" th:object="${userModel}"  method="post"  id="formato-alta-usuario">
+                            <form class="well form-horizontal ajuste-margen-inferior" th:action="@{/users/addUser}" method="post"  id="formato-alta-usuario">
 
                             <fieldset>
 
-                            <input type="hidden" th:field="*{id}" />
+                            <input type="hidden" th:field="*{userModel.id}" />
 
                             <!-- Form Name -->
                             <legend>Datos de la cuenta</legend>
@@ -50,7 +50,7 @@
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input name="user.username" placeholder="Elige tú nombre de usuario" class="form-control" type="text" th:field="*{username}"/>
+                                        <input name="user.username" placeholder="Elige tú nombre de usuario" class="form-control" type="text" th:field="*{userModel.username}"/>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                        <input name="user.password" placeholder="Crea una contraseña" class="form-control" type="password" th:field="*{password}"/>
+                                        <input name="user.password" placeholder="Crea una contraseña" class="form-control" type="password" th:field="*{userModel.password}"/>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                        <input name="user.email" placeholder="Introduce un email" class="form-control" type="email" th:field="*{email}"/>
+                                        <input name="user.email" placeholder="Introduce un email" class="form-control" type="email" th:field="*{userModel.email}"/>
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@
                                 <div class="col-md-5 selectContainer">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                <select name="user.role" class="form-control selectpicker" th:field="*{role}">
+                                <select name="user.role" class="form-control selectpicker" th:field="*{userModel.role}">
                                     <option value="1">USUARIO</option>
                                     <option value="2">ADMIN</option>
                                 </select>
@@ -110,7 +110,7 @@
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input name="user.userAddress.street" placeholder="Índica tu calle" class="form-control" type="text" th:field="*{userAddress.street}"/>
+                                        <input name="user.userAddress.street" placeholder="Índica tu calle" class="form-control" type="text" th:field="*{userAddressModel.street}"/>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                        <input name="user.userAddress.number" placeholder="Índica tú numero" class="form-control" type="text" th:field="*{userAddress.number}"/>
+                                        <input name="user.userAddress.number" placeholder="Índica tú numero" class="form-control" type="text" th:field="*{userAddressModel.number}"/>
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                        <input name="user.userAddress.colony" placeholder="Índica tú colonia" class="form-control" type="text" th:field="*{userAddress.colony}"/>
+                                        <input name="user.userAddress.colony" placeholder="Índica tú colonia" class="form-control" type="text" th:field="*{userAddressModel.colony}"/>
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                        <input name="user.userAddress.city" placeholder="Índica tú ciudad" class="form-control" type="email" th:field="*{userAddress.city}"/>
+                                        <input name="user.userAddress.city" placeholder="Índica tú ciudad" class="form-control" type="text" th:field="*{userAddressModel.city}"/>
                                     </div>
                                 </div>
                             </div>
@@ -152,17 +152,17 @@
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                        <input name="user.userAddress.state" placeholder="Índica tú estado" class="form-control" type="email" th:field="*{userAddress.state}"/>
+                                        <input name="user.userAddress.state" placeholder="Índica tú estado" class="form-control" type="text" th:field="*{userAddressModel.state}"/>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Estado </label>
+                                <label class="col-md-4 control-label">Zip </label>
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                        <input name="user.userAddress.zip" placeholder="Índica tú estado" class="form-control" type="email" th:field="*{userAddress.zip}"/>
+                                        <input name="user.userAddress.zip" placeholder="Índica tú zip/cp" class="form-control" type="text" th:field="*{userAddressModel.zip}"/>
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                        <input name="user.userAddress.country" placeholder="Índica tú país" class="form-control" type="email" th:field="*{userAddress.country}"/>
+                                        <input name="user.userAddress.country" placeholder="Índica tú país" class="form-control" type="text" th:field="*{userAddressModel.country}"/>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                        <textarea name="user.userAddress.reference" class="form-control" placeholder="Dejanos cualquier referencia que pueda facilitar tús envíos" id="" cols="30" rows="10" th:field="*{userAddress.reference}"></textarea>
+                                        <textarea name="user.userAddress.reference" class="form-control" placeholder="Dejanos cualquier referencia que pueda facilitar tús envíos" id="" cols="30" rows="10" th:field="*{userAddressModel.reference}"></textarea>
                                     </div>
                                 </div>
                             </div>

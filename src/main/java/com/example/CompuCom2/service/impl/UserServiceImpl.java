@@ -3,6 +3,7 @@ package com.example.CompuCom2.service.impl;
 import com.example.CompuCom2.converter.UserAddressConverter;
 import com.example.CompuCom2.converter.UserConverter;
 import com.example.CompuCom2.entity.User;
+import com.example.CompuCom2.entity.UserAddress;
 import com.example.CompuCom2.model.UserAddressModel;
 import com.example.CompuCom2.model.UserModel;
 import com.example.CompuCom2.repository.UserAddressRepository;
@@ -61,6 +62,14 @@ public class UserServiceImpl implements UserService {
     public UserModel findUserByIdModel(int id) {
         LOG.info("METHOD: findUserByModel() --PARAMS: id=" + id);
         return userConverter.convertUser2UserModel(userRepository.findById(id));
+    }
+
+    @Override
+    public UserAddressModel addAddressUser(UserAddressModel userAddressModel) {
+        LOG.info("METHOD: addUser() --PARAMS: " + userAddressModel.toString());
+        UserAddress userAddress = userAddressRepository.save(userAddressConverter.convertUserAddressModel2UserAddress(userAddressModel));
+        // Retornamos en forma de "Modelo" para el controlador
+        return userAddressConverter.convertUserAddress2UserAddressModel(userAddress);
     }
 
     @Override
