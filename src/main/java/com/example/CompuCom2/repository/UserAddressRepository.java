@@ -8,5 +8,5 @@ import java.io.Serializable;
 
 @Repository("userAddressRepository")
 public interface UserAddressRepository  extends JpaRepository<UserAddress, Serializable> {
-    public abstract UserAddress findById(int id);
+    UserAddress findById(int id);
 }

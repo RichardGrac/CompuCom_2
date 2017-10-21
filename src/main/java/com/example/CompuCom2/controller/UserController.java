@@ -72,4 +72,10 @@ public class UserController {
         mav.addObject("users", userService.listAllUsers());
         return mav;
     }
+
+    @GetMapping("/removeUser")
+    public ModelAndView removeUser(@RequestParam(name = "id", required = true) int id){
+        userService.removeUser(id);
+        return showUsers();
+    }
 }

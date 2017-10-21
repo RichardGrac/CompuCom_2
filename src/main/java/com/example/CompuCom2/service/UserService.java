@@ -7,11 +7,15 @@ import com.example.CompuCom2.model.UserModel;
 import java.util.List;
 
 public interface UserService {
-    public abstract UserModel addUser(UserModel userModel);
-    public abstract List<UserModel> listAllUsers();
-//    public abstract void removeUser(int id);
-    public abstract UserModel findUserByIdModel(int id);
+    // Para los usuarios y su cuenta
+    UserModel addUser(UserModel userModel);
+    List<UserModel> listAllUsers();
+    //    public abstract void removeUser(int id);
+    UserModel findUserByIdModel(int id);
+    void removeUser(int id);
 
-    public abstract UserAddressModel addAddressUser(UserAddressModel userAddressModel);
-    public abstract UserAddressModel findUserAddressByIdModel(int id);
+    // Para la dirección de los usuarios
+    UserAddressModel addAddressUser(UserAddressModel userAddressModel);
+    UserAddressModel findUserAddressByIdModel(int id);
+    void removeUserAddress(int id);
 }

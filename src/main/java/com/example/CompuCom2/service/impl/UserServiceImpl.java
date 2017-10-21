@@ -65,6 +65,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void removeUser(int id) {
+        LOG.info("METHOD: removeUser() --PARAMS: id=" + id);
+        User user = userRepository.findById(id);
+        if (user != null){
+            userRepository.delete(user);
+        }
+    }
+
+    @Override
     public UserAddressModel addAddressUser(UserAddressModel userAddressModel) {
         LOG.info("METHOD: addUser() --PARAMS: " + userAddressModel.toString());
         UserAddress userAddress = userAddressRepository.save(userAddressConverter.convertUserAddressModel2UserAddress(userAddressModel));
@@ -74,7 +83,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserAddressModel findUserAddressByIdModel(int id) {
-        LOG.info("METHOD: findUserByModel() --PARAMS: id=" + id);
-        return userAddressConverter.convertUserAddress2UserAddressModel(userAddressRepository.findById(id));
+        LOG.info("METHOD: findUserAddressByIdModel() --PARAMS: id=" + id);
+        UserAddress userAddress = userAddressRepository.findById(id);
+        if (userAddress != null){
+            return userAddressConverter.convertUserAddress2UserAddressModel(userAddressRepository.findById(id));
+        }
+        return new UserAddressModel();
+    }
+
+    @Override
+    public void removeUserAddress(int id) {
+        LOG.info("METHOD: removeUserAddress() --PARAMS: " + id);
+        UserAddress userAddress = userAddressRepository.findById(id);
+        if (userAddress != null){
+            userAddressRepository.delete(userAddress);
+        }
     }
 }

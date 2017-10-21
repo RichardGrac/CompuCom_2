@@ -75,8 +75,8 @@
                                         <td th:text="${user.email}"></td>
                                         <td th:text="${user.role}"></td>
                                         <td>
-                                            <a th:href="@{/users/addUser?id=__${user.id}__}"><i class="fa fa-pencil fa-fw"></i></a>
-                                            <a th:attr="data-href=@{/users/removeuser?id=__${user.id}__}" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times fa-fw"></i></a>
+                                            <a th:href="@{/users/userform?id=__${user.id}__}"><i class="fa fa-pencil fa-fw"></i></a>
+                                            <a th:attr="data-href=@{/users/removeUser?id=__${user.id}__}" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times fa-fw"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -140,3 +140,4 @@
 </body>
 
 </html>
+x

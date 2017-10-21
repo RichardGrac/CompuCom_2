@@ -81,7 +81,7 @@
                                 <label class="col-md-4 control-label">Correo electrónico </label>
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                                        <span class="input-group-addon">@&nbsp;</span>
                                         <input name="user.email" placeholder="Introduce un email" class="form-control" type="email" th:field="*{userModel.email}"/>
                                     </div>
                                 </div>
@@ -94,8 +94,8 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
                                 <select name="user.role" class="form-control selectpicker" th:field="*{userModel.role}">
-                                    <option value="1">USUARIO</option>
-                                    <option value="2">ADMIN</option>
+                                    <option value="USUARIO">USUARIO</option>
+                                    <option value="ADMIN">ADMIN</option>
                                 </select>
                               </div>
                             </div>
@@ -110,17 +110,17 @@
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input name="user.userAddress.street" placeholder="Índica tu calle" class="form-control" type="text" th:field="*{userAddressModel.street}"/>
+                                        <input name="user.userAddress.street" placeholder="Índica tú calle" class="form-control" type="text" th:field="*{userAddressModel.street}"/>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Text input-->
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Numero </label>
+                                <label class="col-md-4 control-label">Número </label>
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                                        <span class="input-group-addon">#&nbsp;</span>
                                         <input name="user.userAddress.number" placeholder="Índica tú numero" class="form-control" type="text" th:field="*{userAddressModel.number}"/>
                                     </div>
                                 </div>
@@ -182,7 +182,7 @@
                                 <div class="col-md-5 inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                        <textarea name="user.userAddress.reference" class="form-control" placeholder="Dejanos cualquier referencia que pueda facilitar tús envíos" id="" cols="30" rows="10" th:field="*{userAddressModel.reference}"></textarea>
+                                        <textarea name="user.userAddress.reference" class="form-control" placeholder="Dejanos cualquier referencia que pueda facilitar tus envíos" id="" cols="30" rows="10" th:field="*{userAddressModel.reference}"></textarea>
                                     </div>
                                 </div>
                             </div>
