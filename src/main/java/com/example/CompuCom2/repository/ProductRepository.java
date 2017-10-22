@@ -14,7 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, Serializable> 
 @Transactional
     void deleteById(Integer id);
 
-@Query("SELECT r.image FROM Product r where r.idproduct = :id")
-    String findImagenById(@Param("id") Integer id);
+@Query("SELECT r.image FROM Product r where r.id = :id")
+    String findImageById(@Param("id") Integer id);
 
 }

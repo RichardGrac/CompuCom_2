@@ -9,5 +9,5 @@ public interface ProductService {
     ProductModel getProductById(Integer id);
     List<ProductModel> getAllProducts();
     void deleteProductById(Integer id);
-    String findImagenById(Integer id);
+    String findImageById(Integer id);
 }
