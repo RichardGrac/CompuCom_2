@@ -42,9 +42,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserModel addUser(UserModel userModel) {
         LOG.info("METHOD: addUser() --PARAMS: " + userModel.toString());
-        User user = userRepository.save(userConverter.convertUserModel2User(userModel));
+        User user = userRepository.save(userConverter.modelToEntity(userModel));
         // Retornamos en forma de "Modelo" para el controlador
-        return userConverter.convertUser2UserModel(user);
+        return userConverter.entityToModel(user);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         List<UserModel> usersModel = new ArrayList<>();
         List<User> users = userRepository.findAll();
         for (User user: users) {
-            usersModel.add(userConverter.convertUser2UserModel(user));
+            usersModel.add(userConverter.entityToModel(user));
         }
         return usersModel;
     }
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserModel findUserByIdModel(int id) {
         LOG.info("METHOD: findUserByModel() --PARAMS: id=" + id);
-        return userConverter.convertUser2UserModel(userRepository.findById(id));
+        return userConverter.entityToModel(userRepository.findById(id));
     }
 
     @Override
@@ -76,9 +76,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserAddressModel addAddressUser(UserAddressModel userAddressModel) {
         LOG.info("METHOD: addUser() --PARAMS: " + userAddressModel.toString());
-        UserAddress userAddress = userAddressRepository.save(userAddressConverter.convertUserAddressModel2UserAddress(userAddressModel));
+        UserAddress userAddress = userAddressRepository.save(userAddressConverter.modelToEntity(userAddressModel));
         // Retornamos en forma de "Modelo" para el controlador
-        return userAddressConverter.convertUserAddress2UserAddressModel(userAddress);
+        return userAddressConverter.entityToModel(userAddress);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
         LOG.info("METHOD: findUserAddressByIdModel() --PARAMS: id=" + id);
         UserAddress userAddress = userAddressRepository.findById(id);
         if (userAddress != null){
-            return userAddressConverter.convertUserAddress2UserAddressModel(userAddressRepository.findById(id));
+            return userAddressConverter.entityToModel(userAddressRepository.findById(id));
         }
         return new UserAddressModel();
     }

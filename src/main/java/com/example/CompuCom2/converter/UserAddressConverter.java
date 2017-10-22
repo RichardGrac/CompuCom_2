@@ -6,7 +6,7 @@ import com.example.CompuCom2.entity.UserAddress;
 
 @Component("userAddressConverter")
 public class UserAddressConverter {
-    public UserAddress convertUserAddressModel2UserAddress(UserAddressModel userAddressModel){
+    public UserAddress modelToEntity(UserAddressModel userAddressModel){
         UserAddress userAddress = new UserAddress();
         userAddress.setId(userAddressModel.getId());
         userAddress.setStreet(userAddressModel.getStreet());
@@ -20,7 +20,7 @@ public class UserAddressConverter {
         return userAddress;
     }
 
-    public UserAddressModel convertUserAddress2UserAddressModel(UserAddress userAddress){
+    public UserAddressModel entityToModel(UserAddress userAddress){
         UserAddressModel userAddressModel = new UserAddressModel();
         userAddressModel.setId(userAddress.getId());
         userAddressModel.setStreet(userAddress.getStreet());

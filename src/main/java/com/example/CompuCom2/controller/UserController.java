@@ -49,7 +49,7 @@ public class UserController {
                            Model model){
         LOG.info("METHOD: addUser() --PARAMS: " + userModel.toString());
         // Seteamos el obj. UserAddress que tenemos dentro de userModel
-        userModel.setUserAdress(userAddressConverter.convertUserAddressModel2UserAddress(userAddressModel));
+        userModel.setUserAdress(userAddressConverter.modelToEntity(userAddressModel));
         //Lo añadimos, si es correcta la adición sacamos su ID para hacer referencia al Domicilio:
         UserModel userModel1 = userService.addUser(userModel);
         if (userModel1 != null){

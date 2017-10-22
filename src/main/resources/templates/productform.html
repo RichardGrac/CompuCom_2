@@ -29,7 +29,7 @@
                             Información del producto:
                         </div>
                         <div class="panel-body ajuste-padding">
-                            <form class="well form-horizontal ajuste-margen-inferior" th:action="@{/products/addproducts}" method="post"  id="">
+                            <form class="well form-horizontal ajuste-margen-inferior" th:action="@{/products/addproducts}" method="post"  th:object="*{product}" enctype="multipart/form-data">
 
                                 <fieldset>
 
@@ -43,7 +43,7 @@
                                         <div class="col-md-6 inputGroupContainer">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                <input placeholder="Nombre del producto" class="form-control" type="text"/>
+                                                <input placeholder="Nombre del producto" class="form-control" type="text" th:field="*{name}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@
                                         <div class="col-md-6 inputGroupContainer">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                                <textarea class="form-control" placeholder="Descripción del producto" rows="5"></textarea>
+                                                <textarea class="form-control" placeholder="Descripción del producto" rows="5" th:field="*{description}"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +64,7 @@
                                         <div class="col-md-6 inputGroupContainer">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                <input placeholder="Categoría en la que aparecerá el producto" class="form-control" type="text"/>
+                                                <input placeholder="Categoría en la que aparecerá el producto" class="form-control" type="text" th:field="*{category}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                         <div class="col-md-6 inputGroupContainer">
                                             <div class="input-group">
                                                 <span class="input-group-addon">$&nbsp;</span>
-                                                <input placeholder="Precio del producto" class="form-control" type="number" min="0.0" step="any"/>
+                                                <input placeholder="Precio del producto" class="form-control" type="number" min="0.0" step="any" th:field="*{price}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -85,7 +85,7 @@
                                         <label class="col-md-4 control-label">Imagen: </label>
                                         <div class="col-md-6 inputGroupContainer">
                                             <div class="input-group">
-                                                <input type="file" />
+                                                <input type="file"  th:field="*{image}"/>
                                             </div>
                                         </div>
                                     </div>

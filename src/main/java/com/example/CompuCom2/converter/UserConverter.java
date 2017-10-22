@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component("userConverter")
 public class UserConverter {
-    public User convertUserModel2User(UserModel userModel){
+    public User modelToEntity(UserModel userModel){
         User user = new User();
         user.setId(userModel.getId());
         user.setUsername(userModel.getUsername());
@@ -17,7 +17,7 @@ public class UserConverter {
         return user;
     }
 
-    public UserModel convertUser2UserModel(User user){
+    public UserModel entityToModel(User user){
         UserModel userModel = new UserModel();
         userModel.setId(user.getId());
         userModel.setUsername(user.getUsername());
