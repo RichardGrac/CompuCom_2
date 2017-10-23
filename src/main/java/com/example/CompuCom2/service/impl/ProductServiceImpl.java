@@ -52,6 +52,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public String findImagenById(Integer id) {
-        return productRepository.findImagenById(id);
+        return productRepository.findImageById(id);
     }
 }
