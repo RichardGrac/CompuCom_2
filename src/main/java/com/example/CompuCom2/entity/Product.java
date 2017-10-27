@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Product implements Serializable {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "idproduct", unique = true, nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     private Integer id;
 
     @Column(name = "name", nullable = false)
