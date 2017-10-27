@@ -46,12 +46,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProductById(Integer id) {
-        storageService.deleteOne(findImageById(id));
+        storageService.deleteOne(findImagenById(id));
         productRepository.deleteById(id);
     }
 
     @Override
-    public String findImageById(Integer id) {
+    public String findImagenById(Integer id) {
         return productRepository.findImageById(id);
     }
 }
