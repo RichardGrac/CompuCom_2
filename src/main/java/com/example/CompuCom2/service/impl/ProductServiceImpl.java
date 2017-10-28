@@ -25,9 +25,10 @@ public class ProductServiceImpl implements ProductService {
     private StorageService storageService;
 
     @Override
-    public void saveProduct(ProductModel productModel) {
-        productRepository.save(productConverter.modelToEntity(productModel));
+    public ProductModel saveProduct(ProductModel productModel) {
+        productModel = productConverter.entityToModel(productRepository.save(productConverter.modelToEntity(productModel)));
         storageService.store(productModel.getImage());
+        return productModel;
     }
 
     @Override
@@ -46,12 +47,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProductById(Integer id) {
-        storageService.deleteOne(findImagenById(id));
+        storageService.deleteOne(findImageById(id));
         productRepository.deleteById(id);
     }
 
     @Override
-    public String findImagenById(Integer id) {
+    public String findImageById(Integer id) {
         return productRepository.findImageById(id);
     }
 }

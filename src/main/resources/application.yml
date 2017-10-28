@@ -8,7 +8,6 @@ spring:
       multipart:
               max-file-size: -1
               max-request-size: -1
-
   jpa:
 #    show-sql: true # Que nos muestre el sql en pantalla (En el Log las diferentes Queries)
     hibernate:

@@ -29,7 +29,7 @@
                             Información del producto:
                         </div>
                         <div class="panel-body ajuste-padding">
-                            <form class="well form-horizontal ajuste-margen-inferior" th:action="@{/products/addproducts}" method="post"  th:object="${product}" enctype="multipart/form-data">
+                            <form class="well form-horizontal ajuste-margen-inferior" method="post"  th:object="${productModel}" th:action="@{/products/addproduct}" enctype="multipart/form-data">
 
                                 <fieldset>
 

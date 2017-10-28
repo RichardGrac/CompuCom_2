@@ -19,3 +19,6 @@ public class StorageProperties {
     }
 
 }
+
+//http://www.mdoninger.de/2015/05/16/completion-for-custom-properties-in-spring-boot.html
+//https://docs.spring.io/spring-boot/docs/1.5.7.RELEASE/reference/html/configuration-metadata.html#configuration-metadata-annotation-processor
