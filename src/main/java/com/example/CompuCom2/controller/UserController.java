@@ -41,7 +41,7 @@ public class UserController {
         return Constants.USER_FORM;
     }
 
-    @PostMapping("/addUser")
+    @PostMapping("/adduser")
     //El name="userModel" se corresponde con el objeto en el HTML 'contactModel'
     // y el UserModel usermodel se corresponde con Java
     private String addUser(@ModelAttribute(name="userModel") UserModel userModel,
@@ -62,10 +62,10 @@ public class UserController {
         }else{
             model.addAttribute("result", 0);
         }
-        return "redirect:/users/showUsers";
+        return "redirect:/users/userform";
     }
 
-    @GetMapping("/showUsers")
+    @GetMapping("/showusers")
     public ModelAndView showUsers(){
         ModelAndView mav = new ModelAndView(Constants.USERS);
         // El for:each que se recorre en el HTML es "users"
