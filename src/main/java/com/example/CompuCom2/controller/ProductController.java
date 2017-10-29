@@ -40,13 +40,11 @@ public class ProductController {
     public String addProduct(@ModelAttribute(name = "productModel") ProductModel productModel, Model model){
         LOG.info("METHOD: addProduct() --PARAMS: id=" + productModel);
         ProductModel productModel1 = productService.saveProduct(productModel);
-        System.out.println("Hello");
         if (productModel1 != null){
             model.addAttribute("result", 1);
         }else{
             model.addAttribute("result", 0);
         }
-        System.out.println("Hello1");
         return "redirect:/products/productform";
     }
 
