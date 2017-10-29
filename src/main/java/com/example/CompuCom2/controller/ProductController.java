@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/products")
@@ -48,6 +49,14 @@ public class ProductController {
         return "redirect:/products/productform";
     }
 
+    @GetMapping("/showproducts")
+    public ModelAndView showProducts(){
+        LOG.info("METHOD: showProducts()");
+        ModelAndView mav = new ModelAndView(Constants.PRODUCTS);
+        mav.addObject("products", productService.getAllProducts());
+        return mav;
+    }
+
     @GetMapping("/files")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@RequestParam Integer id) {
@@ -58,5 +67,12 @@ public class ProductController {
                     "attachment; filename=\"" + file.getFilename() + "\"").body(file);
         }
         return null;
+    }
+
+
+    @GetMapping("/removeproduct")
+    public String deleteProduct(@RequestParam(name = "id") Integer id){
+        productService.deleteProductById(id);
+        return "redirect:/products/showproducts";
     }
 }
