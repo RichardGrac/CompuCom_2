@@ -1,7 +1,9 @@
 package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
+import com.example.CompuCom2.entity.Product;
 import com.example.CompuCom2.model.ProductModel;
+import com.example.CompuCom2.service.ProductCategoryService;
 import com.example.CompuCom2.service.ProductService;
 import com.example.CompuCom2.utils.storage.StorageService;
 import org.apache.commons.logging.Log;
@@ -24,6 +26,9 @@ public class ProductController {
     private ProductService productService;
 
     @Autowired
+    private ProductCategoryService productCategoryService;
+
+    @Autowired
     private StorageService storageService;
 
     @GetMapping("/productform")
@@ -34,19 +39,28 @@ public class ProductController {
             productModel = productService.getProductById(id);
         }
         model.addAttribute("productModel", productModel);
+        model.addAttribute("categories", productCategoryService.findAll());
         return Constants.PRODUCT_FORM;
     }
 
     @PostMapping("/addproduct")
     public String addProduct(@ModelAttribute(name = "productModel") ProductModel productModel, Model model){
         LOG.info("METHOD: addProduct() --PARAMS: id=" + productModel);
-        ProductModel productModel1 = productService.saveProduct(productModel);
+        ProductModel productModel1;
+        if (productModel.getId() != 0){
+            //edita
+            productModel1 = productService.updateProduct(productModel);
+        }else {
+            //nuevo
+            productModel1 = productService.saveProduct(productModel);
+        }
+//        ProductModel productModel1 = productService.saveProduct(productModel);
         if (productModel1 != null){
             model.addAttribute("result", 1);
         }else{
             model.addAttribute("result", 0);
         }
-        return "redirect:/products/productform";
+        return "redirect:/products/showproducts";
     }
 
     @GetMapping("/showproducts")
@@ -68,7 +82,6 @@ public class ProductController {
         }
         return null;
     }
-
 
     @GetMapping("/removeproduct")
     public String deleteProduct(@RequestParam(name = "id") Integer id){

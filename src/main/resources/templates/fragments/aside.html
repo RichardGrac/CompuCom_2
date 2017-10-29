@@ -35,7 +35,10 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">Menú de navegación</li>
 
-                    <li class="treeview">
+                    <li
+                            class="treeview"
+                            th:classappend="${#httpServletRequest.requestURI.contains('users')} ? 'active' : ''"
+                    >
                         <a href="#">
                             <i class="fa fa-users fa-fw"></i> <span>Usuarios</span>
                             <span class="pull-right-container">
@@ -48,18 +51,36 @@
                         </ul>
                     </li>
 
-                    <li class="treeview">
+                    <li
+                            class="treeview"
+                            th:classappend="${#httpServletRequest.requestURI.contains('category') || #httpServletRequest.requestURI.contains('products')} ? 'active' : ' '"
+                    >
                         <a href="#">
                             <i class="fa fa-tags fa-fw"></i> <span>Productos</span>
                             <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
+                              <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="#" th:href="@{/products/showproducts}"><i class="fa fa-tags fa-fw"></i> Todos los productos </a></li>
                             <li><a href="#" th:href="@{/products/productform}"><i class="fa fa-tag fa-fw"></i> Alta de producto </a></li>
+                            <li
+                                    class="treeview"
+                                    th:classappend="${#httpServletRequest.requestURI.contains('category')} ? 'active' : ' '"
+                            >
+                                <a href="#"><i class="fa fa-circle-o"></i> Categorias
+                                    <span class="pull-right-container">
+                                      <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#" th:href="@{/category/show-categories}"><i class="fa fa-tags fa-fw"></i> Todas las categorias </a></li>
+                                    <li><a  href="#" th:href="@{/category/category-form?id=0}"><i class="fa fa-tag fa-fw"></i> Añadir categoria </a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
+
 
                     <li class="treeview">
                         <a href="#">
@@ -160,7 +181,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="treeview active">
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-folder"></i> <span>Examples</span>
                             <span class="pull-right-container">

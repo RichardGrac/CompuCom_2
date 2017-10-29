@@ -38,6 +38,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductModel updateProduct(ProductModel productModel) {
+        if (!productModel.getImage().isEmpty()){
+            //se hizo una modificacion a la imagen
+            storageService.deleteOne(productRepository.findImageById(productModel.getId()));
+            return saveProduct(productModel);
+        }else {
+            //no se modifico la imagen
+            Product updatedProduct = productRepository.findById(productModel.getId());
+            updatedProduct.setCategory(productModel.getCategory());
+            updatedProduct.setDescription(productModel.getDescription());
+            updatedProduct.setName(productModel.getName());
+            updatedProduct.setPrice(productModel.getPrice());
+            return productConverter.entityToModel(productRepository.save(updatedProduct));
+        }
+    }
+
+    @Override
     public List<ProductModel> getAllProducts() {
         List<ProductModel> productModels = new ArrayList<>();
         for (Product producto : productRepository.findAll()){
