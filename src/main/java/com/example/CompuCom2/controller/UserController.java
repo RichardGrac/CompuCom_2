@@ -62,11 +62,12 @@ public class UserController {
         }else{
             model.addAttribute("result", 0);
         }
-        return "redirect:/users/userform";
+        return "redirect:/users/showusers";
     }
 
     @GetMapping("/showusers")
     public ModelAndView showUsers(){
+        LOG.info("METHOD: showUsers()");
         ModelAndView mav = new ModelAndView(Constants.USERS);
         // El for:each que se recorre en el HTML es "users"
         mav.addObject("users", userService.listAllUsers());
@@ -74,7 +75,8 @@ public class UserController {
     }
 
     @GetMapping("/removeUser")
-    public ModelAndView removeUser(@RequestParam(name = "id", required = true) int id){
+    public ModelAndView removeUser(@RequestParam(name = "id", required = true) Integer id){
+        LOG.info("METHOD: removeUser() --PARAMS: id=" + id);
         userService.removeUser(id);
         return showUsers();
     }
