@@ -1,221 +1,245 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-
-    <title>Nuevo Usuario - CompuCom</title>
-
+    <title>Alta de usuario</title>
+    <!-- Tell the browser to be responsive to screen width -->
     <div th:replace="fragments/imports::css">&nbsp;</div>
 </head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
 
-<body>
+    <div th:replace="fragments/header::header">&nbsp;</div>
+    <div th:replace="fragments/aside::aside">&nbsp;</div>
 
-    <div id="wrapper">
-        <div th:replace="fragments/navigation::navbar">&nbsp;</div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                USUARIOS /
+                <small>Nuevo usuario</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#">Usuarios</a></li>
+                <li class="active">Nuevo usuario</li>
+            </ol>
+        </section>
 
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">USUARIOS <small>/ Nuevo usuario</small></h1>
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Alta de usuario</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                            <i class="fa fa-times"></i></button>
+                    </div>
+                    <!--./box-tools pull-right-->
                 </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-        
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            Información del usuario:
-                        </div>
-                        <div class="panel-body ajuste-padding">  
-                            <form class="well form-horizontal ajuste-margen-inferior" th:action="@{/users/addUser}" method="post"  id="formato-alta-usuario">
+                <!-- ./box-header with-border -->
 
-                            <fieldset>
+                <div class="box-body">
+                    <div class="row">
+                        <form class="" th:action="@{/users/adduser}" method="post"  id="formato-alta-usuario">
+                            <div class="col-md-12">
+                                <legend>Datos de la cuenta</legend>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="hidden" th:field="*{userModel.id}"/>
 
-                            <input type="hidden" th:field="*{userModel.id}" />
-
-                            <!-- Form Name -->
-                            <legend>Datos de la cuenta</legend>
-
-                            <!-- Text input-->                   
-                            <div class="form-group">
-                              <label class="col-md-4 control-label">Nombre de usuario </label>  
-                                <div class="col-md-5 inputGroupContainer">
+                                <div class="form-group">
+                                    <label>Nombre de usuario</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input name="user.username" placeholder="Elige tú nombre de usuario" class="form-control" type="text" th:field="*{userModel.username}"/>
                                     </div>
                                 </div>
-                            </div>
+                                <!-- /.form-group -->
 
-                             <!-- Text input-->                   
-                            <div class="form-group">
-                              <label class="col-md-4 control-label">Contraseña </label>  
-                                <div class="col-md-5 inputGroupContainer">
+                                <!-- form-group -->
+                                <div class="form-group">
+                                    <label>Contraseña</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                        <input name="user.password" placeholder="Crea una contraseña" class="form-control" type="password" th:field="*{userModel.password}"/>
+                                        <input name="user.password" placeholder="Crea una contraseña" class="form-control" type="password" th:field="*{userModel.password}" />
                                     </div>
                                 </div>
-                            </div>
+                                <!-- /.form-group -->
 
-                             <!-- Text input-->                   
-                            <div class="form-group">
-                              <label class="col-md-4 control-label">Repetir contraseña </label>  
-                                <div class="col-md-5 inputGroupContainer">
+                                <!-- form-group -->
+                                <div class="form-group">
+                                    <label>Repetir contraseña</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
                                         <input name="password2" placeholder="Confirma tú contraseña" class="form-control" type="password" />
                                     </div>
                                 </div>
+                                <!-- /.form-group -->
                             </div>
+                            <!-- ./ col-md-6 -->
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Correo electrónico </label>
-                                <div class="col-md-5 inputGroupContainer">
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label>Correo electrónico</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">@&nbsp;</span>
                                         <input name="user.email" placeholder="Introduce un email" class="form-control" type="email" th:field="*{userModel.email}"/>
                                     </div>
                                 </div>
-                            </div>
+                                <!-- /.form-group -->
 
-                            <!-- Select Basic -->             
-                            <div class="form-group"> 
-                              <label class="col-md-4 control-label"> Tipo </label>
-                                <div class="col-md-5 selectContainer">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                <select name="user.role" class="form-control selectpicker" th:field="*{userModel.role}">
-                                    <option value="USUARIO">USUARIO</option>
-                                    <option value="ADMIN">ADMIN</option>
-                                </select>
-                              </div>
+                                <!-- form-group -->
+                                <div class="form-group">
+                                    <label>Tipo</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                        <select name="user.role" class="form-control selectpicker" th:field="*{userModel.role}">
+                                            <option value="USUARIO">USUARIO</option>
+                                            <option value="ADMIN">ADMIN</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- /.form-group -->
                             </div>
+                            <!-- ./ col-md-6 -->
+
+                            <div class="col-md-12">
+                                <legend>Datos de envío</legend>
                             </div>
+                            <div class="col-md-6">
 
-                            <!-- Form Name -->
-                            <legend>Datos de Envío</legend>
-
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Calle </label>
-                                <div class="col-md-5 inputGroupContainer">
+                                <div class="form-group">
+                                    <label>Calle</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input name="user.userAddress.street" placeholder="Índica tú calle" class="form-control" type="text" th:field="*{userAddressModel.street}"/>
                                     </div>
                                 </div>
-                            </div>
+                                <!-- /.form-group -->
 
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Número </label>
-                                <div class="col-md-5 inputGroupContainer">
+                                <!-- form-group -->
+                                <div class="form-group">
+                                    <label>Número</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">#&nbsp;</span>
                                         <input name="user.userAddress.number" placeholder="Índica tú numero" class="form-control" type="text" th:field="*{userAddressModel.number}"/>
                                     </div>
                                 </div>
-                            </div>
+                                <!-- /.form-group -->
 
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Colonia </label>
-                                <div class="col-md-5 inputGroupContainer">
+                                <div class="form-group">
+                                    <label>Colonia</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
                                         <input name="user.userAddress.colony" placeholder="Índica tú colonia" class="form-control" type="text" th:field="*{userAddressModel.colony}"/>
                                     </div>
                                 </div>
-                            </div>
+                                <!-- /.form-group -->
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Ciudad </label>
-                                <div class="col-md-5 inputGroupContainer">
+                                <!-- form-group -->
+                                <div class="form-group">
+                                    <label>Ciudad</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
                                         <input name="user.userAddress.city" placeholder="Índica tú ciudad" class="form-control" type="text" th:field="*{userAddressModel.city}"/>
                                     </div>
                                 </div>
+                                <!-- /.form-group -->
                             </div>
+                            <!-- ./ col-md-6 -->
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Estado </label>
-                                <div class="col-md-5 inputGroupContainer">
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label>Estado</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
                                         <input name="user.userAddress.state" placeholder="Índica tú estado" class="form-control" type="text" th:field="*{userAddressModel.state}"/>
                                     </div>
                                 </div>
-                            </div>
+                                <!-- /.form-group -->
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Zip </label>
-                                <div class="col-md-5 inputGroupContainer">
+                                <!-- form-group -->
+                                <div class="form-group">
+                                    <label>Zip/CP</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
                                         <input name="user.userAddress.zip" placeholder="Índica tú zip/cp" class="form-control" type="text" th:field="*{userAddressModel.zip}"/>
                                     </div>
                                 </div>
-                            </div>
+                                <!-- /.form-group -->
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">País </label>
-                                <div class="col-md-5 inputGroupContainer">
+                                <div class="form-group">
+                                    <label>País</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
                                         <input name="user.userAddress.country" placeholder="Índica tú país" class="form-control" type="text" th:field="*{userAddressModel.country}"/>
                                     </div>
                                 </div>
-                            </div>
+                                <!-- /.form-group -->
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Referencia </label>
-                                <div class="col-md-5 inputGroupContainer">
+                            </div>
+                            <!-- ./ col-md-6 -->
+
+                            <!-- form-group -->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Referencia</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                        <textarea name="user.userAddress.reference" class="form-control" placeholder="Dejanos cualquier referencia que pueda facilitar tus envíos" id="" cols="30" rows="10" th:field="*{userAddressModel.reference}"></textarea>
+                                        <textarea name="user.userAddress.reference" class="form-control" placeholder="Dejanos cualquier referencia que pueda facilitar tus envíos" id="" cols="70" rows="3" th:field="*{userAddressModel.reference}"></textarea>
                                     </div>
                                 </div>
                             </div>
+                            <!-- /.form-group -->
 
-                            <!-- Button -->
-                            <div class="form-group">
-                              <label class="col-md-4 control-label"></label>
-                              <div class="col-md-5">
-                                <button type="submit" class="btn btn-primary btn-lg btn-block"> Dar de alta &nbsp; <span class="fa fa-upload"></span></button>
-                              </div>
+                            <br></br>
+                            <!-- Alta de usuario -->
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label"></label>
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block"> Dar de alta &nbsp; <span class="fa fa-upload"></span></button>
+                                    </div>
+                                </div>
                             </div>
+                            <!--./col-lg-12-->
 
-                            </fieldset>
                         </form>
                     </div>
-                    <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel panel-primary -->    
+                    <!-- /.row -->
                 </div>
-                <!-- /.col-lg-12 -->
+                <!-- /.box-body -->
             </div>
-            <!-- /.row -->
+            <!-- /.box -->
 
-        </div>
-        <!-- /#page-wrapper -->
-
+        </section>
+        <!-- <section> /.content -->
     </div>
-    <!-- /#wrapper -->
+    <!-- /.content-wrapper -->
 
+    <div th:replace="fragments/aside::aside-right">&nbsp;</div>
+    <!-- /.control-sidebar -->
+    <div th:replace="fragments/footer::footer">&nbsp;</div>
+    <div th:replace="fragments/imports::js">&nbsp;</div>
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
 
-    <div th:replace="fragments/imports :: js">&nbsp;</div>
-    <script th:src="@{/js/alta-usuario.js}"></script>
-    <!--<script th:src="@{/js/edicion-usuario.js}"></script>-->
+    <div class="control-sidebar-bg"></div>
+
+</div>
+<!-- ./wrapper -->
+
 </body>
-
 </html>

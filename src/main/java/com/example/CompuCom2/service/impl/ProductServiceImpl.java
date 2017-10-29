@@ -26,9 +26,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductModel saveProduct(ProductModel productModel) {
-        productModel = productConverter.entityToModel(productRepository.save(productConverter.modelToEntity(productModel)));
+        ProductModel aux = new ProductModel();
+        aux = productConverter.entityToModel(productRepository.save(productConverter.modelToEntity(productModel)));
         storageService.store(productModel.getImage());
-        return productModel;
+        return aux;
     }
 
     @Override

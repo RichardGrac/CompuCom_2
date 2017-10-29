@@ -48,7 +48,6 @@ public class ProductController {
         return "redirect:/products/productform";
     }
 
-
     @GetMapping("/files")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@RequestParam Integer id) {
