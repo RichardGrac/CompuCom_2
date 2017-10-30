@@ -16,8 +16,9 @@ th{
     vertical-align: middle;
 }
 
+/* resize for the images of the products */
 .resize-column{
-    width: 20%;
+    width: 22%;
 }
 
 .btn-outline {

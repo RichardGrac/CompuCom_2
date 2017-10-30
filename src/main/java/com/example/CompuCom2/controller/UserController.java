@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -47,7 +49,7 @@ public class UserController {
     private String addUser(@ModelAttribute(name="userModel") UserModel userModel,
                            @ModelAttribute(name = "userAddressModel") UserAddressModel userAddressModel,
                            Model model){
-        LOG.info("METHOD: addUser() --PARAMS: " + userModel.toString());
+        LOG.info("METHOD: addUser() --PARAMS: " + userModel.toString() + " --userAddressModel: " + userAddressModel);
         // Seteamos el obj. UserAddress que tenemos dentro de userModel
         userModel.setUserAdress(userAddressConverter.modelToEntity(userAddressModel));
         //Lo añadimos, si es correcta la adición sacamos su ID para hacer referencia al Domicilio:

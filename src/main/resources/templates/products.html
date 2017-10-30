@@ -82,17 +82,15 @@
                                 <span th:text="${product.description}"></span>
                             </td>
                             <td th:text="${product.category}"> </td>
-                            <td th:text="${product.price}"> </td>
-                            <td>20%</td>
-                            <td class="center"><img th:src="@{/products/files?id=__${product.id}__}" alt="Image not found" height="230" width="100%"/></td>
-                            <td class="center vertical-center">
-                                <a href="#">
-                                    <button type="button" class="btn btn-outline btn-success">Añadir descuento</button>
-                                </a>
-                                <br></br><br></br>
+                            <td>$<span th:text="${product.price}"></span></td>
+                            <td><span th:text="${product.discount.percentage}"></span> %</td>
+                            <td class="center"><img th:src="@{/products/files?id=__${product.id}__}" alt="Image not found" height="200" width="100%"/></td>
+                            <td>
                                 <a th:href="@{/products/productform?id=__${product.id}__}">
                                     <button type="button" class="btn btn-outline btn-warning">Editar</button>
                                 </a>
+                                <br></br>
+                                <br></br>
                                 <a th:attr="data-href=@{/products/removeproduct?id=__${product.id}__}" data-toggle="modal" data-target="#confirm-delete">
                                     <button type="button" class="btn btn-outline btn-danger">Eliminar</button>
                                 </a>
@@ -181,6 +179,14 @@
             'autoWidth'   : false
         })
     })
+</script>
+
+<script>
+    function verify_num(name) {
+        if(name.value > 100){
+            document.getElementById(name.id).value = 100;
+        }
+    }
 </script>
 
 </body>

@@ -1,12 +1,19 @@
 package com.example.CompuCom2.service.impl;
 
+import com.example.CompuCom2.controller.ProductController;
+import com.example.CompuCom2.converter.DiscountConverter;
 import com.example.CompuCom2.converter.ProductConverter;
 import com.example.CompuCom2.entity.Product;
+import com.example.CompuCom2.model.DiscountModel;
 import com.example.CompuCom2.model.ProductModel;
+import com.example.CompuCom2.repository.DiscountRepository;
 import com.example.CompuCom2.repository.ProductRepository;
 import com.example.CompuCom2.service.ProductService;
 import com.example.CompuCom2.utils.storage.StorageService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,17 +22,27 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+    public static final Log LOG = LogFactory.getLog(ProductServiceImpl.class);
+
     @Autowired
     private ProductRepository productRepository;
 
     @Autowired
+    @Qualifier("discountRepository")
+    private DiscountRepository discountRepository;
+
+    @Autowired
     private ProductConverter productConverter;
+
+    @Autowired
+    private DiscountConverter discountConverter;
 
     @Autowired
     private StorageService storageService;
 
     @Override
     public ProductModel saveProduct(ProductModel productModel) {
+        LOG.info("METHOD: saveProduct() --PARAMS: productModel=" + productModel);
         ProductModel aux = new ProductModel();
         aux = productConverter.entityToModel(productRepository.save(productConverter.modelToEntity(productModel)));
         storageService.store(productModel.getImage());
@@ -40,8 +57,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductModel> getAllProducts() {
         List<ProductModel> productModels = new ArrayList<>();
-        for (Product producto : productRepository.findAll()){
-            productModels.add(productConverter.entityToModel(producto));
+        for (Product product : productRepository.findAll()){
+            // Para cada Producto seteamos su Descuento
+            ProductModel productModel = productConverter.entityToModel(product);
+            productModel.setDiscount(getDiscountById(productModel.getId()));
+            productModels.add(productModel);
         }
         return productModels;
     }
@@ -55,5 +75,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public String findImageById(Integer id) {
         return productRepository.findImageById(id);
+    }
+
+    @Override
+    public DiscountModel getDiscountById(int id) {
+        return discountConverter.entityToModel(discountRepository.findById(id));
+    }
+
+    @Override
+    public DiscountModel saveDiscount(DiscountModel discountModel) {
+        LOG.info("METHOD: saveDiscount() --PARAMS: discountModel=" + discountModel);
+        return discountConverter.entityToModel(discountRepository.save(discountConverter.modelToEntity(discountModel)));
     }
 }
