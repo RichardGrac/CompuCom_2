@@ -35,10 +35,7 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">Menú de navegación</li>
 
-                    <li
-                            class="treeview"
-                            th:classappend="${#httpServletRequest.requestURI.contains('users')} ? 'active' : ' '"
-                    >
+                    <li class="treeview" th:classappend="${#httpServletRequest.requestURI.contains('users')} ? 'active' : ' '">
                         <a href="#">
                             <i class="fa fa-users fa-fw"></i> <span>Usuarios</span>
                             <span class="pull-right-container">
@@ -51,10 +48,7 @@
                         </ul>
                     </li>
 
-                    <li
-                            class="treeview"
-                            th:classappend="${#httpServletRequest.requestURI.contains('products')} ? 'active' : ' '"
-                    >
+                    <li class="treeview" th:classappend="${#httpServletRequest.requestURI.contains('products')} ? 'active' : ' '">
                         <a href="#">
                             <i class="fa fa-tags fa-fw"></i> <span>Productos</span>
                             <span class="pull-right-container">
@@ -67,20 +61,7 @@
                         </ul>
                     </li>
 
-                    <li
-                            class="treeview"
-                            th:classappend="${#httpServletRequest.requestURI.contains('category')} ? 'active' : ' '"
-                    >
-                        <a href="#">
-                            <i class="fa fa-tags fa-fw"></i> <span>Categorias</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a th:href="@{/category/show-categories}"><i class="fa fa-tags fa-fw"></i> Todas las categorias </a></li>
-                        </ul>
-                    </li>
+                    <li th:classappend="${#httpServletRequest.requestURI.contains('category')} ? 'active' : ' '"><a href="#" th:href="@{/category/show-categories}"><i class="fa fa-reorder"></i> <span>Categorias</span></a></li>
 
                     <li class="treeview">
                         <a href="#">
