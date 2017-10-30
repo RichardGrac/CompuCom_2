@@ -1,5 +1,6 @@
 package com.example.CompuCom2.model;
 
+import com.example.CompuCom2.entity.Discount;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProductModel {
@@ -9,16 +10,18 @@ public class ProductModel {
     private Double price;
     private MultipartFile image;
     private String description;
+    private DiscountModel discount;
 
     public ProductModel(){}
 
-    public ProductModel(Integer id, String name, String category, Double price, MultipartFile image, String description) {
+    public ProductModel(Integer id, String name, String category, Double price, MultipartFile image, String description, DiscountModel discount) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.price = price;
         this.image = image;
         this.description = description;
+        this.discount = discount;
     }
 
     public Integer getId() {
@@ -69,6 +72,14 @@ public class ProductModel {
         this.description = description;
     }
 
+    public DiscountModel getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(DiscountModel discount) {
+        this.discount = discount;
+    }
+
     @Override
     public String toString() {
         return "ProductModel{" +
@@ -78,6 +89,7 @@ public class ProductModel {
                 ", price=" + price +
                 ", image=" + image +
                 ", description='" + description + '\'' +
+                ", discountModel=" + discount +
                 '}';
     }
 }

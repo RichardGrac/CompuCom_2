@@ -50,16 +50,16 @@
 
         <div class="box-body">
           <div class="row">
-            <form class="" method="post"  th:object="${productModel}" th:action="@{/products/addproduct}" enctype="multipart/form-data">
+            <form class="" method="post" th:action="@{/products/addproduct}" enctype="multipart/form-data">
               <div class="col-md-6">
 
-                <input type="hidden" th:field="*{id}"/>
+                <input type="hidden" th:field="*{productModel.id}"/>
               
                 <div class="form-group">
                   <label>Nombre</label>
                   <div class="input-group">
                       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                      <input placeholder="Nombre del producto" class="form-control" type="text" th:field="*{name}"/>
+                      <input placeholder="Nombre del producto" class="form-control" type="text" th:field="*{productModel.name}"/>
                   </div>
                 </div>
                 <!-- /.form-group -->
@@ -69,7 +69,7 @@
                   <label>Categoria</label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input placeholder="Categoría en la que aparecerá el producto" class="form-control" type="text" th:field="*{category}"/>
+                        <input placeholder="Categoría en la que aparecerá el producto" class="form-control" type="text" th:field="*{productModel.category}"/>
                     </div>
                 </div>
                 <!-- /.form-group -->
@@ -79,7 +79,7 @@
                   <label>Precio</label>
                   <div class="input-group">
                       <span class="input-group-addon">&nbsp;$&nbsp;</span>
-                      <input placeholder="Precio del producto" class="form-control" type="number" min="0.0" step="any" th:field="*{price}"/>
+                      <input placeholder="Precio del producto" class="form-control" type="number" min="0.0" step="any" th:field="*{productModel.price}"/>
                   </div>
                 </div>
                 <!-- /.form-group -->
@@ -91,7 +91,7 @@
                     <label>Descripción: </label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                        <textarea class="form-control" placeholder="Descripción del producto" rows="5" th:field="*{description}" style="resize: none;"></textarea>
+                        <textarea class="form-control" placeholder="Descripción del producto" rows="5" th:field="*{productModel.description}" style="resize: none;"></textarea>
                     </div>
                 </div>
                 <!-- /.form-group -->
@@ -100,11 +100,20 @@
                     <label>Imagen: </label>
                     <div class="input-group">
                       <div class="input-group">
-                          <input type="file"  th:field="*{image}"/>
+                          <input type="file"  th:field="*{productModel.image}"/>
                       </div>
                     </div>
                 </div>
                 <!-- /.form-group -->
+
+                  <div class="form-group">
+                      <label>Descuento (%): </label>
+                      <div class="input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                          <input type="number" th:field="*{discountModel.percentage}" /> %
+                      </div>
+                  </div>
+                  <!-- /.form-group -->
 
               </div>
               <!-- ./col-md-6 -->

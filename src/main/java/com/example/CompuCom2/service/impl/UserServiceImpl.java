@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserModel> listAllUsers() {
-        LOG.info("METHOD: listAllUsers() --PARAMS: Nothing");
+        LOG.info("METHOD: listAllUsers()");
         List<UserModel> usersModel = new ArrayList<>();
         List<User> users = userRepository.findAll();
         for (User user: users) {

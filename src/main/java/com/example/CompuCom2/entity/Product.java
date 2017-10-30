@@ -26,14 +26,19 @@ public class Product {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Discount discount;
+
     public Product(){}
 
-    public Product(String name, String category, Double price, String image, String description) {
+    public Product(String name, String category, Double price, String image, String description, Discount discount) {
         this.name = name;
         this.category = category;
         this.price = price;
         this.image = image;
         this.description = description;
+        this.discount = discount;
     }
 
     public Integer getId() {
@@ -84,6 +89,14 @@ public class Product {
         this.description = description;
     }
 
+    public Discount getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Discount discount) {
+        this.discount = discount;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -91,8 +104,9 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", category='" + category + '\'' +
                 ", price=" + price +
-                ", image=" + image +
+                ", image='" + image + '\'' +
                 ", description='" + description + '\'' +
+                ", discount=" + discount +
                 '}';
     }
 }
