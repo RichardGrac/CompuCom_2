@@ -2,10 +2,10 @@ package com.example.CompuCom2.converter;
 
 import com.example.CompuCom2.entity.Product;
 import com.example.CompuCom2.model.ProductModel;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-@Service    // Por qué un Service?
+@Component    // Por qué un Service?
 public class ProductConverter {
 
     public Product modelToEntity(ProductModel productModel){

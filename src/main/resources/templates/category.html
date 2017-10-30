@@ -20,12 +20,12 @@
         <section class="content-header">
             <h1>
                 Productos /
-                <small>Todos los productos</small>
+                <small>Todas las categorias</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="#">Productos</a></li>
-                <li class="active">Todos los productos</li>
+                <li class="active">Todas las categorias</li>
             </ol>
         </section>
 
@@ -33,10 +33,16 @@
         <section class="content">
 
             <div class="row" th:if="${result == 1}">
-                <div class="col-lg-4">
+                <div  th:if="${nuevo}" class="col-lg-4">
                     <div class="alert alert-success alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        Producto añadido correctamente!
+                        Categoria añadida correctamente!
+                    </div>
+                </div>
+                <div  th:if="${update}" class="col-lg-4">
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        Categoria editada correctamente!
                     </div>
                 </div>
             </div>
@@ -44,7 +50,7 @@
                 <div class="col-lg-4">
                     <div class="alert alert-danger alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        Error al añadir producto!
+                        Error al añadir categoria!
                     </div>
                 </div>
             </div>
@@ -52,7 +58,7 @@
                 <div class="col-lg-4">
                     <div class="alert alert-success alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        Producto eliminado correctamente!
+                        Categoria eliminada correctamente!
                     </div>
                 </div>
             </div>
@@ -60,38 +66,28 @@
 
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Productos registrados en la Base de Datos</h3>
+                    <h3 class="box-title">Categorias registradas en la Base de Datos</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Nombre</th>
-                            <th>Categoria</th>
-                            <th>Precio</th>
-                            <th>Descuento</th>
-                            <th class="resize-column">Imagen</th>
-                            <th>Opciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="product : ${products}">
-                            <td>
-                                <b th:text="${product.name}"></b><br></br>
-                                <span th:text="${product.description}"></span>
-                            </td>
-                            <td th:text="${product.category}"> </td>
-                            <td>$<span th:text="${product.price}"></span></td>
-                            <td><span th:text="${product.discount.percentage}"></span> %</td>
-                            <td class="center"><img th:src="@{/products/files?id=__${product.id}__}" alt="Image not found" height="200" width="100%"/></td>
-                            <td>
-                                <a th:href="@{/products/productform?id=__${product.id}__}">
+                        <tr th:each="category : ${categories}">
+                            <th>
+                                <b th:text="${category.id}"></b><br></br>
+                            </th>
+                            <td th:text="${category.name}"> </td>
+                            <td class="center vertical-center">
+                                <a th:href="@{/category/category-form?id=__${category.id}__}">
                                     <button type="button" class="btn btn-outline btn-warning">Editar</button>
                                 </a>
-                                <br></br>
-                                <br></br>
-                                <a th:attr="data-href=@{/products/removeproduct?id=__${product.id}__}" data-toggle="modal" data-target="#confirm-delete">
+                                <a th:attr="data-href=@{/category/remove-category?id=__${category.id}__}" data-toggle="modal" data-target="#confirm-delete">
                                     <button type="button" class="btn btn-outline btn-danger">Eliminar</button>
                                 </a>
                             </td>
@@ -99,11 +95,8 @@
                         </tbody>
                         <tfoot>
                         <tr>
+                            <th>ID</th>
                             <th>Nombre</th>
-                            <th>Categoria</th>
-                            <th>Precio</th>
-                            <th>Descuento</th>
-                            <th>Imagen</th>
                             <th>Editar / Eliminar</th>
                         </tr>
                         </tfoot>
