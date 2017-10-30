@@ -36,17 +36,7 @@ public class ProductCategoryController {
         modelAndView.addObject("update", update);
 
         modelAndView.addObject("categories", productCategoryService.findAll());
-        return modelAndView;
-    }
-
-    @GetMapping("/category-form")
-    public ModelAndView categoryForm(@RequestParam(name = "id", required = false) Integer id){
-        ModelAndView modelAndView = new ModelAndView(Constants.CATEGORY_FORM);
-        if (id != 0 ){
-            modelAndView.addObject("category", productCategoryService.findOneById(id));
-        }else {
-            modelAndView.addObject("category", new ProductCategoryModel());
-        }
+        modelAndView.addObject("category", new ProductCategoryModel());
         return modelAndView;
     }
 

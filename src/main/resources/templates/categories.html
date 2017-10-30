@@ -34,7 +34,7 @@
                 <div class="col-lg-4">
                     <div class="alert alert-success alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        Usuario añadido correctamente!
+                        Categoria añadida correctamente!
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 <div class="col-lg-4">
                     <div class="alert alert-danger alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        Error al añadir usuario!
+                        Error al añadir categoria!
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                 <div class="col-lg-4">
                     <div class="alert alert-success alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        Usuario eliminado correctamente!
+                        Categoria eliminada correctamente!
                     </div>
                 </div>
             </div>
@@ -72,8 +72,8 @@
 
                 <div class="box-body">
                     <div class="row">
-                        <form class="" th:action="@{/categories/addcategory}" method="post"  id="">
-
+                        <form class="" th:action="@{/category/add-category}" method="post" th:object="${category}">
+                            <input type="hidden" th:field="*{id}" />
                             <div class="col-md-6">
                                 <input type="hidden" />
 
@@ -81,7 +81,7 @@
                                     <label>Nombre</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
-                                        <input placeholder="Nombre de la categoria" class="form-control" type="text"/>
+                                        <input placeholder="Nombre de la categoria" class="form-control" type="text" th:field="*{name}" required=""/>
                                     </div>
                                 </div>
                                 <!-- /.form-group -->
@@ -125,16 +125,16 @@
                 <div class="box-body">
                     <div class="row">
 
-                        <div class="col-md-3">
+                        <div th:each="category : ${categories}" class="col-md-3">
                             <div class="box box-success box-solid">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Discos duros</h3>
+                                    <h3 class="box-title" th:text="${category.name}">Discos duros</h3>
 
                                     <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool">
-                                            <a data-toggle="modal" data-target="#confirm-delete">
+                                        <button type="button" class="btn btn-box-tool" th:attr="data-href=@{/category/remove-category?id=__${category.id}__}" data-toggle="modal" data-target="#confirm-delete">
+                                            <!--?<a th:attr="data-href=@{/category/remove-category?id=__${category.id}__}" data-toggle="modal" data-target="#confirm-delete">-->
                                                 <i class="fa fa-times"></i>
-                                            </a>
+                                            <!--?</a>-->
                                         </button>
                                     </div>
                                     <!-- /.box-tools -->
@@ -144,47 +144,6 @@
                             <!-- /.box -->
                         </div>
                         <!-- /.col -->
-
-                        <div class="col-md-3">
-                            <div class="box box-success box-solid">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Mouses</h3>
-
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool">
-                                            <a data-toggle="modal" data-target="#confirm-delete">
-                                                <i class="fa fa-times"></i>
-                                            </a>
-                                        </button>
-                                    </div>
-                                    <!-- /.box-tools -->
-                                </div>
-                                <!-- /.box-header -->
-                            </div>
-                            <!-- /.box -->
-                        </div>
-                        <!-- /.col -->
-
-                        <div class="col-md-3">
-                            <div class="box box-success box-solid">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Monitores</h3>
-
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool">
-                                            <a data-toggle="modal" data-target="#confirm-delete">
-                                                <i class="fa fa-times"></i>
-                                            </a>
-                                        </button>
-                                    </div>
-                                    <!-- /.box-tools -->
-                                </div>
-                                <!-- /.box-header -->
-                            </div>
-                            <!-- /.box -->
-                        </div>
-                        <!-- /.col -->
-
                     </div>
                     <!-- /.row -->
                 </div>
@@ -200,7 +159,6 @@
     <div th:replace="fragments/aside::aside-right">&nbsp;</div>
     <!-- /.control-sidebar -->
     <div th:replace="fragments/footer::footer">&nbsp;</div>
-    <div th:replace="fragments/imports::js">&nbsp;</div>
     <!-- Add the sidebar's background. This div must be placed
          immediately after the control sidebar -->
 
@@ -233,6 +191,8 @@
         </div>
     </div>
 </div>
+
+<div th:replace="fragments/imports::js">&nbsp;</div>
 
 </body>
 </html>
