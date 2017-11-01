@@ -1,6 +1,5 @@
 package com.example.CompuCom2.service.impl;
 
-import com.example.CompuCom2.controller.ProductController;
 import com.example.CompuCom2.converter.DiscountConverter;
 import com.example.CompuCom2.converter.ProductConverter;
 import com.example.CompuCom2.entity.Product;
@@ -43,8 +42,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductModel saveProduct(ProductModel productModel) {
         LOG.info("METHOD: saveProduct() --PARAMS: productModel=" + productModel);
-        ProductModel aux = new ProductModel();
-        aux = productConverter.entityToModel(productRepository.save(productConverter.modelToEntity(productModel)));
+        ProductModel aux = productConverter.entityToModel(productRepository.save(productConverter.modelToEntity(productModel)));
         storageService.store(productModel.getImage());
         return aux;
     }
