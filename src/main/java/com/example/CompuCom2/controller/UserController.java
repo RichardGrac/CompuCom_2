@@ -46,9 +46,10 @@ public class UserController {
     @PostMapping("/adduser")
     //El name="userModel" se corresponde con el objeto en el HTML 'contactModel'
     // y el UserModel usermodel se corresponde con Java
-    private String addUser(@ModelAttribute(name="userModel") UserModel userModel,
+    private ModelAndView addUser(@ModelAttribute(name="userModel") UserModel userModel,
                            @ModelAttribute(name = "userAddressModel") UserAddressModel userAddressModel,
                            Model model){
+        ModelAndView modelAndView = new ModelAndView("redirect:/users/showusers");
         LOG.info("METHOD: addUser() --PARAMS: " + userModel.toString() + " --userAddressModel: " + userAddressModel);
         // Seteamos el obj. UserAddress que tenemos dentro de userModel
         userModel.setUserAdress(userAddressConverter.modelToEntity(userAddressModel));
@@ -57,29 +58,35 @@ public class UserController {
         if (userModel1 != null){
             userAddressModel.setId(userModel1.getId());
             if (userService.addAddressUser(userAddressModel) == null){
-                model.addAttribute("result", 0);
+//                model.addAttribute("result", 0);
+                modelAndView.addObject("result",0);
             }else {
-                model.addAttribute("result", 1);
+//                model.addAttribute("result", 1);
+                modelAndView.addObject("result",1);
             }
         }else{
-            model.addAttribute("result", 0);
+//            model.addAttribute("result", 0);
+            modelAndView.addObject("result",0);
         }
-        return "redirect:/users/showusers";
+        return modelAndView;
     }
 
     @GetMapping("/showusers")
-    public ModelAndView showUsers(){
+    public ModelAndView showUsers(@RequestParam(name = "result", required = false) Integer result){
         LOG.info("METHOD: showUsers()");
         ModelAndView mav = new ModelAndView(Constants.USERS);
         // El for:each que se recorre en el HTML es "users"
         mav.addObject("users", userService.listAllUsers());
+        mav.addObject("result",result);
         return mav;
     }
 
     @GetMapping("/removeUser")
     public ModelAndView removeUser(@RequestParam(name = "id", required = true) Integer id){
         LOG.info("METHOD: removeUser() --PARAMS: id=" + id);
+        ModelAndView modelAndView = new ModelAndView("redirect:/users/showusers");
         userService.removeUser(id);
-        return showUsers();
+        modelAndView.addObject("delete", true);
+        return modelAndView;
     }
 }
