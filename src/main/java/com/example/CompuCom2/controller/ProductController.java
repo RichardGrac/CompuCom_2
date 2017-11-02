@@ -95,7 +95,6 @@ public class ProductController {
     public ModelAndView showProducts(){
         LOG.info("METHOD: showProducts()");
         ModelAndView mav = new ModelAndView(Constants.PRODUCTS);
-        List<ProductModel> productModels = productService.getAllProducts();
         mav.addObject("products", productService.getAllProducts());
         return mav;
     }

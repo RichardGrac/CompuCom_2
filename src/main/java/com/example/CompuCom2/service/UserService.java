@@ -12,7 +12,7 @@ public interface UserService {
     List<UserModel> listAllUsers();
     //    public abstract void removeUser(int id);
     UserModel findUserByIdModel(int id);
-    void removeUser(int id);
+    boolean removeUser(int id);
 
     // Para la dirección de los usuarios
     UserAddressModel addAddressUser(UserAddressModel userAddressModel);

@@ -65,11 +65,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void removeUser(int id) {
+    public boolean removeUser(int id) {
         LOG.info("METHOD: removeUser() --PARAMS: id=" + id);
         User user = userRepository.findById(id);
         if (user != null){
             userRepository.delete(user);
+            return true;
+        }else {
+            return false;
         }
     }
 

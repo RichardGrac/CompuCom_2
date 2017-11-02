@@ -94,6 +94,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public DiscountModel getDiscountById(int id) {
+        LOG.info("getDiscountByID: --PARAM: id="+id);
         return discountConverter.entityToModel(discountRepository.findById(id));
     }
 

@@ -6,6 +6,7 @@ import com.example.CompuCom2.model.ProductCategoryModel;
 import com.example.CompuCom2.repository.ProductCategoryRepository;
 import com.example.CompuCom2.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class ProductCategoryImpl implements ProductCategoryService{
     @Override
     public List<ProductCategoryModel> findAll() {
         List<ProductCategoryModel> productCategoryModels = new ArrayList<>();
-        for (ProductCategory productCategory : productCategoryRepository.findAll()){
+        for (ProductCategory productCategory : productCategoryRepository.findAll(new Sort(Sort.Direction.ASC, "name"))){
             productCategoryModels.add(productCategoryConverter.entityToModel(productCategory));
         }
         return productCategoryModels;
