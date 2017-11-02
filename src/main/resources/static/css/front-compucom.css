@@ -1,0 +1,10 @@
+/* ---------------------------------------------- index.html ------------------------------------- */
+/*'Iniciar sesión' and 'Registrate' keys "{}" */
+.keys{
+    color: white;
+    margin-top: 8px;
+}
+
+.h2-letter{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
