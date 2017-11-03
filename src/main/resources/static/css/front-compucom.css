@@ -27,3 +27,9 @@
 .send-button-width{
     width: 30%;
 }
+
+/* ----------------------------------------------- questions.html --------------------------------------- */
+/* Central image */
+.center-align{
+    text-align: center;
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>CompuCom - FQ</title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/one-page-wonder.css}" />
+
+    <div th:replace="front-fragments/fimports::css">&nbsp;</div>
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="front-fragments/fheader::navigation">&nbsp;</div>
+
+<!-- Page Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <label class="col-md-3">&nbsp;</label>
+            <div class="col-md-6 center-align">
+                <img th:src="@{/img/Logotipos/logo-lema.png}" alt="CompuCom" height="100px" width="80%" />
+            </div>
+        </div>
+        <hr></hr>
+        <h2 class="h2-letter">Preguntas frecuentes</h2><br></br>
+        <div class="row">
+            <label class="col-md-1"></label>
+            <div class="col-md-10">
+                <div id="accordion" role="tablist">
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingOne">
+                            <h5 class="mb-0">
+                                <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    ¿Qué es una compra por Internet?
+                                </a>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                Adquirir productos o servicios desde tu computadora cómoda, fácil y rápidamente con
+                                sólo hacer algunos clics, puedes encontrar información más detallada sobre los
+                                artículos de tu interés y realizar comparativos sobre las características de estos.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingTwo">
+                            <h5 class="mb-0">
+                                <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    ¿Cómo me registro como Cliente?
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                Es muy sencillo, sólo da clic en el menú "Registrate" que aparece en la parte
+                                superior derecha de la página, llena la información correctamente y ya estás listo para
+                                comprar en línea. Si tienes alguna duda sobre el registro, llámanos desde Aguascalientes
+                                y alrededores <b>(044) 449-123-4567</b> y desde el interior de la república
+                                <b>(01 800) 123 45 67 de lunes a viernes de 9:00 a 20:00 horas</b>, o envíanos un
+                                correo electrónico a <ins class="link">compucom_ventas@gmail.com.mx</ins>,
+                                aquí te daremos toda la información necesaria y recibirás apoyo para agilizar tu registro.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingThree">
+                            <h5 class="mb-0">
+                                <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    ¿Para qué sirve mi nombre de usuario y contraseña?
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+                                Con estos datos tienes disponible tú Cuenta dentro de nuestros registros. Con ella podrás
+                                hacer la cantidad de compras que desees. Y de acuerdo a tú información de envío, tús podructos
+                                serán envíados hacía esa dirección.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingFour">
+                            <h5 class="mb-0">
+                                <a class="collapsed" data-toggle="collapse" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    ¿Cómo realizan la entrega de productos?
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
+                            <div class="card-body">
+                                En general nuestros productos tienen un tiempo de entrega máximo de 10 días hábiles,
+                                siempre y cuando no se presente ningún inconveniente con la forma de pago y la
+                                disponibilidad de los artículos. Dentro de Aguascalientes el envío no tiene costo
+                                alguno y la entrega se realiza por personal de CompuCom. Los envíos al interior de la
+                                Republica Mexicana se hacen por mensajería DHL con un cargo adicional (verificar costo
+                                de envío).
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingFive">
+                            <h5 class="mb-0">
+                                <a class="collapsed" data-toggle="collapse" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    ¿Cómo sé si realice correctamente mi compra?
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive" data-parent="#accordion">
+                            <div class="card-body">
+                                Se te enviará un email de confirmación con información acerca de tú pedido, éste
+                                servirá como comprobante de compra para cualquier queja o aclaración.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingSix">
+                            <h5 class="mb-0">
+                                <a class="collapsed" data-toggle="collapse" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                    ¿Cómo puedo hacer el cambio o devolución de un producto que compré?
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix" data-parent="#accordion">
+                            <div class="card-body">
+                                Es necesario mandar un email a <ins class="link">compucom_ventas@gmail.com.mx</ins> con
+                                una foto de tu ticket o comprobante de compra y con la descripción del problema con el
+                                producto.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--./#accordion-->
+            </div>
+            <!--./col-md-10-->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!--./container-->
+</section>
+
+<!-- footer & js -->
+<div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
+<div th:replace="front-fragments/fimports::js">&nbsp;</div>
+
+</body>
+</html>
