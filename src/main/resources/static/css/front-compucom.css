@@ -8,3 +8,22 @@
 .h2-letter{
     font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
+.font-bigger{
+    font-size: 14pt;
+}
+
+/* --------------------------------------------- about.html ---------------------------------------- */
+.contact-border{
+    border: solid darkgrey;
+    border-radius: 10px;
+    padding: 1.5em;
+}
+
+.send-button{
+    text-align: center;
+}
+
+.send-button-width{
+    width: 30%;
+}

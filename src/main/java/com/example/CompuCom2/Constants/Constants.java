@@ -8,4 +8,5 @@ public class Constants {
     public static final String CATEGORY_VIEW = "categories";
     public static final String LOGIN = "login";
     public static final String INDEX = "index";
+    public static final String ABOUT = "about";
 }

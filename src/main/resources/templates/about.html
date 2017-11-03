@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>CompuCom - Nosotros</title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/one-page-wonder.css}" />
+
+    <div th:replace="front-fragments/fimports::css">&nbsp;</div>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <div th:replace="front-fragments/fheader::navigation">&nbsp;</div>
+
+    <header class="masthead">
+        <div class="overlay">
+            <div class="container">
+                <h1 class="display-1 text-white">CompuCom</h1>
+                <h2 class="display-4 text-white">Especialistas en tecnología</h2>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-2">
+                    <div class="p-5">
+                        <img class="img-fluid rounded-circle" src="https://unsplash.it/500/500?image=836" alt="" />
+                    </div>
+                </div>
+                <div class="col-md-6 order-1">
+                    <div class="p-5">
+                        <h2 class="display-4">Acerca de nosotros...</h2>
+                        <p>CompuCom es una empresa nueva con localización en Aguascalientes, con apenas 2 años pero
+                            con experiencia y conocimiento en nuestra área, nos dedicamos a la venta de artículos de
+                            cómputo y tecnología. Con un catálogo en crecimiento y con marcas mundialmente reconocidas.
+                            Tenemos presencia en Av Aguascalientes Nte 503, Calicantos I, 20130 Aguascalientes, Ags.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="p-5">
+                        <img class="img-fluid rounded-circle" src="https://unsplash.it/500/500?image=452" alt="" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-5">
+                        <h2 class="display-4">Misión</h2>
+                        <p>Proporcionar a nuestros clientes los productos de más alta calidad, satisfaciendo las
+                            necesidades tecnológicas del mercado Hidrocálido, trayendo siempre las últimas novedades
+                            en Tecnología.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-2">
+                    <div class="p-5">
+                        <img class="img-fluid rounded-circle" src="https://unsplash.it/500/500?image=453" alt="" />
+                    </div>
+                </div>
+                <div class="col-md-6 order-1">
+                    <div class="p-5">
+                        <h2 class="display-4">Visión</h2>
+                        <p>Establecernos como empresa tecnológica líder en el mercado local, expandiendo nuestra
+                            comercialización en todos los mercados posibles, para situarnos como una de las mejores
+                            empresas de calidad y rápido crecimiento.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="p-5">
+                        <img class="img-fluid rounded-circle" src="https://unsplash.it/500/500?image=452" alt="" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-5">
+                        <h2 class="display-4">Objetivo general</h2>
+                        <p>Ampliar y atender la demanda de productos tecnológicos bajo criterios y estándares de
+                            calidad con las mejores y más reconocidas marcas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content section -->
+    <section class="py-5">
+        <div class="container">
+            <h2>Objetivos organizacionales</h2>
+            <p class="lead">Nuestra situación deseada:</p>
+            <p>
+                <ul>
+                    <li>Ser conocidos como una empresa de primera elección.</li>
+                    <li>Nos asociamos con los mejores proveedores del mundo, fortaleciendo la calidad de los productos.</li>
+                    <li>Demostrar continuamente nuestro compromiso hacia un trato digno y responsable con nuestros clientes.</li>
+                    <li>Asegurar la posición competitiva del mercado Mexicano.</li>
+                    <li>Establecer continuamente las normas más altas de satisfacción del cliente en nuestra industria, a través de productos innovadores.</li>
+                    <li>Estar siempre a la vanguardia tecnológica. </li>
+                </ul>
+            </p>
+        </div>
+    </section>
+
+    <!-- Content section -->
+    <section class="py-5">
+        <div class="container">
+            <h2>Contactanos</h2>
+            <p class="lead">Estamos para servirte, solo envíanos un mensaje:</p>
+            <div class="row">
+                <label class="col-md-3 control-label"></label>
+                <div class="col-md-6 contact-border">
+                    <form action="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Nombre" required="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email" required="" /><br></br>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" cols="40" placeholder="Dejanos aquí tú mensaje" required="" ></textarea>
+                        </div>
+                        <div class="form-group send-button">
+                            <button type="submit" class="btn btn-info font-bigger send-button-width">Envíar &nbsp;
+                                <i class="material-icons md-18">send</i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer & js -->
+    <div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
+    <div th:replace="front-fragments/fimports::js">&nbsp;</div>
+
+</body>
+</html>

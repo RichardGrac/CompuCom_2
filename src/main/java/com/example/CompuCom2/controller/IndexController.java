@@ -19,4 +19,10 @@ public class IndexController {
         ModelAndView mav = new ModelAndView(Constants.INDEX);
         return mav;
     }
+
+    @RequestMapping("/about")
+    public ModelAndView about(){
+        ModelAndView mav = new ModelAndView(Constants.ABOUT);
+        return mav;
+    }
 }
