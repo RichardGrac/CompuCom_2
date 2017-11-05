@@ -13,6 +13,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,10 +42,16 @@ public class UserServiceImpl implements UserService {
     @Qualifier("userAddressConverter")
     private UserAddressConverter userAddressConverter;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public UserModel addUser(UserModel userModel) {
         LOG.info("METHOD: addUser() --PARAMS: " + userModel.toString());
-        User user = userRepository.save(userConverter.modelToEntity(userModel));
+        User user = userConverter.modelToEntity(userModel);
+        LOG.info("User Entity - " + user.toString());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
         // Retornamos en forma de "Modelo" para el controlador
         return userConverter.entityToModel(user);
     }
@@ -101,5 +110,20 @@ public class UserServiceImpl implements UserService {
         if (userAddress != null){
             userAddressRepository.delete(userAddress);
         }
+    }
+
+    @Override
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    public UserModel findUserModelByUsername(String username) {
+        return userConverter.entityToModel(userRepository.findByUsername(username));
     }
 }

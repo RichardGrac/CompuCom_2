@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>CompuCom - Registro</title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/one-page-wonder.css}" />
+
+    <div th:replace="front-fragments/fimports::css">&nbsp;</div>
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="front-fragments/fheader::navigation">&nbsp;</div>
+
+<!-- Page Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <label class="col-md-3">&nbsp;</label>
+            <div class="col-md-6 center-align">
+                <img th:src="@{/img/Logotipos/logo-lema.png}" alt="CompuCom" height="100px" width="80%" />
+            </div>
+        </div>
+        <hr></hr>
+        <h2 class="h2-letter">Registro</h2><br></br>
+        <form class="" th:action="@{/users/adduser}" method="post"  id="formato-alta-usuario">
+            <div class="col-md-12">
+                <legend>Datos de la cuenta</legend>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label>Nombre de usuario</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="user.username" placeholder="Elige tú nombre de usuario" class="form-control" type="text" th:field="*{userModel.username}"/>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <!-- form-group -->
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                        <input name="user.password" placeholder="Crea una contraseña" class="form-control" type="password" th:field="*{userModel.password}" />
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <!-- form-group -->
+                <div class="form-group">
+                    <label>Repetir contraseña</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                        <input name="password2" placeholder="Confirma tú contraseña" class="form-control" type="password" />
+                    </div>
+                </div>
+                <!-- /.form-group -->
+            </div>
+            <!-- ./ col-md-6 -->
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label>Correo electrónico</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">@&nbsp;</span>
+                        <input name="user.email" placeholder="Introduce un email" class="form-control" type="email" th:field="*{userModel.email}"/>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <!-- form-group -->
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        <select name="user.role" class="form-control selectpicker" th:field="*{userModel.roles}">
+                            <option value="2">USUARIO</option>
+                            <option value="1">ADMIN</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+            </div>
+            <!-- ./ col-md-6 -->
+
+            <div class="col-md-12">
+                <legend>Datos de envío</legend>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label>Calle</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="user.userAddress.street" placeholder="Índica tú calle" class="form-control" type="text" th:field="*{userAddressModel.street}"/>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <!-- form-group -->
+                <div class="form-group">
+                    <label>Número</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">#&nbsp;</span>
+                        <input name="user.userAddress.number" placeholder="Índica tú numero" class="form-control" type="text" th:field="*{userAddressModel.number}"/>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                    <label>Colonia</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                        <input name="user.userAddress.colony" placeholder="Índica tú colonia" class="form-control" type="text" th:field="*{userAddressModel.colony}"/>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <!-- form-group -->
+                <div class="form-group">
+                    <label>Ciudad</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                        <input name="user.userAddress.city" placeholder="Índica tú ciudad" class="form-control" type="text" th:field="*{userAddressModel.city}"/>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+            </div>
+            <!-- ./ col-md-6 -->
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label>Estado</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                        <input name="user.userAddress.state" placeholder="Índica tú estado" class="form-control" type="text" th:field="*{userAddressModel.state}"/>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <!-- form-group -->
+                <div class="form-group">
+                    <label>Zip/CP</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                        <input name="user.userAddress.zip" placeholder="Índica tú zip/cp" class="form-control" type="text" th:field="*{userAddressModel.zip}"/>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                    <label>País</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                        <input name="user.userAddress.country" placeholder="Índica tú país" class="form-control" type="text" th:field="*{userAddressModel.country}"/>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+            </div>
+            <!-- ./ col-md-6 -->
+
+            <!-- form-group -->
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Referencia</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                        <textarea name="user.userAddress.reference" class="form-control" placeholder="Dejanos cualquier referencia que pueda facilitar tus envíos" id="" cols="70" rows="3" th:field="*{userAddressModel.reference}"></textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- /.form-group -->
+
+            <br></br>
+            <!-- Alta de usuario -->
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block"> Dar de alta &nbsp; <span class="fa fa-upload"></span></button>
+                    </div>
+                </div>
+            </div>
+            <!--./col-lg-12-->
+
+        </form>
+    </div>
+    <!--./container-->
+</section>
+
+<!-- footer & js -->
+<div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
+<div th:replace="front-fragments/fimports::js">&nbsp;</div>
+
+</body>
+</html>

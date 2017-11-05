@@ -1,6 +1,7 @@
 package com.example.CompuCom2.service;
 
 
+import com.example.CompuCom2.entity.User;
 import com.example.CompuCom2.model.UserAddressModel;
 import com.example.CompuCom2.model.UserModel;
 
@@ -18,4 +19,9 @@ public interface UserService {
     UserAddressModel addAddressUser(UserAddressModel userAddressModel);
     UserAddressModel findUserAddressByIdModel(int id);
     void removeUserAddress(int id);
+
+    User findUserByUsername(String username);
+    UserModel findUserModelByUsername(String username);
+
+
 }

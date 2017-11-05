@@ -15,7 +15,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-
                     <ul class="navbar-nav ml-auto">
                         <div class="dropdown">
                             <button class="dropdown-toggle categories-dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,6 +25,18 @@
                             </div>
                         </div>
                         <li class="nav-item">
+                        <li
+                                th:classappend="${#httpServletRequest.requestURI.contains('productos') || #httpServletRequest.requestURI.contains('index')} ? 'active' : ''"
+                                class="nav-item"
+                        >
+                            <a class="nav-link" th:href="@{/index}">
+                                Nuestros productos
+                            </a>
+                        </li>
+                        <li
+                                th:classappend="${#httpServletRequest.requestURI.contains('about')} ? 'active' : ''"
+                                class="nav-item"
+                        >
                             <a class="nav-link" th:href="@{/about}">Nosotros</a>
                         </li>
                         <li class="nav-item">
@@ -33,7 +44,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/login}">
-                                <span class="keys">{</span>
+                                <span class="keys">&nbsp;&nbsp;&nbsp;{</span>
                                 Iniciar sesión
                                 <span class="keys">}</span>
                             </a>
