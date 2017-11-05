@@ -2,7 +2,9 @@ package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
 import com.example.CompuCom2.model.DiscountModel;
+import com.example.CompuCom2.model.ProductCategoryModel;
 import com.example.CompuCom2.model.ProductModel;
+import com.example.CompuCom2.service.ProductCategoryService;
 import com.example.CompuCom2.service.impl.ProductServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,6 +23,9 @@ public class IndexController {
 
     @Autowired
     private ProductServiceImpl productService;
+
+    @Autowired
+    private ProductCategoryService productCategoryService;
 
     @RequestMapping("/")
     public String goIndex(){
@@ -57,5 +62,15 @@ public class IndexController {
         return mav;
     }
 
+    @RequestMapping("/fproducts")
+    public ModelAndView fproducts(){
+        LOG.info("METHOD: fproducts()");
+        ModelAndView mav = new ModelAndView(Constants.FPRODUCTS);
+        ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
+        for (ProductCategoryModel product : productCategoryModels) {
+        }
+        mav.addObject("categories", productCategoryModels);
+        return mav;
+    }
 
 }

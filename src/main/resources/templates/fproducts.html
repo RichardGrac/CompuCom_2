@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>CompuCom - Bienvenido</title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/half-slider.css}" />
+    <link rel="stylesheet" th:href="@{/css/business-frontpage.css}" />
+
+    <div th:replace="front-fragments/fimports::css">&nbsp;</div>
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="front-fragments/fheader::navigation">&nbsp;</div>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group text-center margin-bottom">
+                    <img th:src="@{/img/Logotipos/logo-lema.png}" alt="Logo-CompuCom" height="70" width="100%" />
+                </div>
+                <div class="list-group">
+                    <a th:each="category : ${categories}" href="#" class="list-group-item list-group-item-action"><span th:text="${category.name}"> </span></a>
+                    <!--classes: disabled, active-->
+                </div>
+            </div>
+            <!--./col-md-3-->
+
+            <div class="col-md-9">
+                <h2 class="text-uppercase">titulo de categoria</h2>
+                <hr></hr>
+
+            </div>
+            <!--./col-md-9-->
+        </div>
+        <!--./row-->
+    </div>
+    <!--./container-->
+</section>
+
+<!-- footer & js -->
+<div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
+<div th:replace="front-fragments/fimports::js">&nbsp;</div>
+
+</body>
+</html>
