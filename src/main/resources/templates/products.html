@@ -69,6 +69,7 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Categoria</th>
+                            <th>Disponibles</th>
                             <th>Precio</th>
                             <th>Descuento</th>
                             <th class="resize-column">Imagen</th>
@@ -82,6 +83,7 @@
                                 <span th:text="${product.description}"></span>
                             </td>
                             <td th:text="${product.category}"> </td>
+                            <td th:text="${product.productQuantityModel.quantity}"> </td>
                             <td>$<span th:text="${product.price}"></span></td>
                             <td><span th:text="${product.discount.percentage}"></span> %</td>
                             <td class="center"><img th:src="@{/products/files?id=__${product.id}__}" alt="Image not found" height="200" width="100%"/></td>

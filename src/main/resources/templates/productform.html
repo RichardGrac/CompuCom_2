@@ -59,7 +59,7 @@
                   <label>Nombre</label>
                   <div class="input-group">
                       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                      <input placeholder="Nombre del producto" class="form-control" type="text" th:field="*{productModel.name}"/>
+                      <input placeholder="Nombre del producto" class="form-control" type="text" th:field="*{productModel.name}" required="" />
                   </div>
                 </div>
                 <!-- /.form-group -->
@@ -70,7 +70,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                         <select class="form-control" th:field="*{productModel.category}">
-                            <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}">***</option>
+                            <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}" required="" >***</option>
                         </select>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                   <label>Precio</label>
                   <div class="input-group">
                       <span class="input-group-addon">&nbsp;$&nbsp;</span>
-                      <input placeholder="Precio del producto" class="form-control" type="number" min="0.0" step="any" th:field="*{productModel.price}"/>
+                      <input placeholder="Precio del producto" class="form-control" type="number" min="0.0" step="any" th:field="*{productModel.price}" required="" />
                   </div>
                 </div>
                 <!-- /.form-group -->
@@ -93,7 +93,7 @@
                     <label>Descripción: </label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                        <textarea class="form-control" placeholder="Descripción del producto" rows="5" th:field="*{productModel.description}" style="resize: none;"></textarea>
+                        <textarea class="form-control" placeholder="Descripción del producto" rows="5" th:field="*{productModel.description}" style="resize: none;" required="" ></textarea>
                     </div>
                 </div>
                 <!-- /.form-group -->
@@ -112,9 +112,20 @@
                       <label>Descuento (%): </label>
                           <div class="input-group">
                               <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                              <input type="number" th:field="*{discountModel.percentage}" /> %
+                              <input type="number" th:field="*{discountModel.percentage}" required="" min="0.0" /> %
                           </div>
                   </div>
+                  <!-- /.form-group -->
+
+                  <div class="form-group">
+                      <label>Unidades: </label>
+                      <div class="input-group">
+                          <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                          <input type="number" th:field="*{quantityModel.quantity}" required="" min="0" step="1" />
+                      </div>
+                  </div>
+                  <!-- /.form-group -->
+
               </div>
 
               <!-- ./col-md-6 -->

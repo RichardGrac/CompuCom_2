@@ -11,10 +11,11 @@ public class ProductModel {
     private MultipartFile image;
     private String description;
     private DiscountModel discount;
+    private ProductQuantityModel productQuantityModel;
 
     public ProductModel(){}
 
-    public ProductModel(Integer id, String name, String category, Double price, MultipartFile image, String description, DiscountModel discount) {
+    public ProductModel(Integer id, String name, String category, Double price, MultipartFile image, String description, DiscountModel discount, ProductQuantityModel productQuantityModel) {
         this.id = id;
         this.name = name;
         this.category = category;
@@ -22,6 +23,7 @@ public class ProductModel {
         this.image = image;
         this.description = description;
         this.discount = discount;
+        this.productQuantityModel = productQuantityModel;
     }
 
     public Integer getId() {
@@ -80,6 +82,14 @@ public class ProductModel {
         this.discount = discount;
     }
 
+    public ProductQuantityModel getProductQuantityModel() {
+        return productQuantityModel;
+    }
+
+    public void setProductQuantityModel(ProductQuantityModel productQuantityModel) {
+        this.productQuantityModel = productQuantityModel;
+    }
+
     @Override
     public String toString() {
         return "ProductModel{" +
@@ -89,7 +99,8 @@ public class ProductModel {
                 ", price=" + price +
                 ", image=" + image +
                 ", description='" + description + '\'' +
-                ", discountModel=" + discount +
+                ", discount=" + discount +
+                ", productQuantityModel=" + productQuantityModel +
                 '}';
     }
 }

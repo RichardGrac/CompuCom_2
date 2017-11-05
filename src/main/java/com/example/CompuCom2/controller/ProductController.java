@@ -5,7 +5,9 @@ import com.example.CompuCom2.converter.DiscountConverter;
 import com.example.CompuCom2.entity.Product;
 import com.example.CompuCom2.model.DiscountModel;
 import com.example.CompuCom2.model.ProductModel;
+import com.example.CompuCom2.model.ProductQuantityModel;
 import com.example.CompuCom2.service.ProductCategoryService;
+import com.example.CompuCom2.service.ProductQuantityService;
 import com.example.CompuCom2.service.ProductService;
 import com.example.CompuCom2.utils.storage.StorageService;
 import org.apache.commons.logging.Log;
@@ -37,6 +39,9 @@ public class ProductController {
     private StorageService storageService;
 
     @Autowired
+    private ProductQuantityService productQuantityService;
+
+    @Autowired
     @Qualifier("discountConverter")
     private DiscountConverter discountConverter;
 
@@ -45,29 +50,36 @@ public class ProductController {
         LOG.info("METHOD: productForm() --PARAMS: id=" + id);
         ProductModel productModel = new ProductModel();
         DiscountModel discountModel = new DiscountModel();
+        ProductQuantityModel productQuantityModel = new ProductQuantityModel();
+
         if (id != null && id != 0){
             productModel = productService.getProductById(id);
             discountModel = productService.getDiscountById(id);
         }
         model.addAttribute("productModel", productModel);
         model.addAttribute("discountModel", discountModel);
+        model.addAttribute("quantityModel", productQuantityModel);
         model.addAttribute("categories", productCategoryService.findAll());
         return Constants.PRODUCT_FORM;
     }
 
     @PostMapping("/addproduct")
     public ModelAndView addProduct(@ModelAttribute(name = "productModel") ProductModel productModel,
-                             DiscountModel discountModel, Model model){
+                             DiscountModel discountModel, ProductQuantityModel productQuantityModel,
+                                   Model model){
         ModelAndView modelAndView = new ModelAndView("redirect:/products/showproducts");
         LOG.info("METHOD: addProduct() --PARAMS: productModel=" + productModel + " \n--discountModel: " + discountModel);
         productModel.setDiscount(discountModel);
+        productModel.setProductQuantityModel(productQuantityModel);
 
         ProductModel productModel1;
 
         if(productModel.getId() != null){
             //como el producto es diferente de null, el producto se va a actualizar
             productModel1 = productService.updateProduct(productModel);
+//            ------ No se tendría que setear el id a saveDiscount()? : .saveDiscount(new DiscountModel(productModel.getId(), productModel.getDiscount().getPercentage()))
             productService.saveDiscount(productModel.getDiscount());
+            productQuantityService.saveQuantity(productModel.getProductQuantityModel());
             if (productModel1 != null){
                 modelAndView.addObject("result", 1);
             }else{
@@ -78,7 +90,8 @@ public class ProductController {
             productModel1 = productService.saveProduct(productModel);
             if (productModel1 != null){
                 discountModel.setId(productModel1.getId());
-                if (productService.saveDiscount(discountModel) == null){
+                productQuantityModel.setId(productModel.getId());
+                if (productService.saveDiscount(discountModel) == null || productQuantityService.saveQuantity(productQuantityModel) == null){
                     modelAndView.addObject("result", 0);
                 }else{
                     modelAndView.addObject("result", 1);

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 
-// Por qué no es "@Repository"?
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Serializable> {
     Product findById(Integer id);

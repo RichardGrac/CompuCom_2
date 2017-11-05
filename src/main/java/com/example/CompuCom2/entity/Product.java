@@ -30,15 +30,20 @@ public class Product {
     @PrimaryKeyJoinColumn
     private Discount discount;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private ProductQuantity productQuantity;
+
     public Product(){}
 
-    public Product(String name, String category, Double price, String image, String description, Discount discount) {
+    public Product(String name, String category, Double price, String image, String description, Discount discount, ProductQuantity productQuantity) {
         this.name = name;
         this.category = category;
         this.price = price;
         this.image = image;
         this.description = description;
         this.discount = discount;
+        this.productQuantity = productQuantity;
     }
 
     public Integer getId() {
@@ -97,6 +102,14 @@ public class Product {
         this.discount = discount;
     }
 
+    public ProductQuantity getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void setProductQuantity(ProductQuantity productQuantity) {
+        this.productQuantity = productQuantity;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -107,6 +120,7 @@ public class Product {
                 ", image='" + image + '\'' +
                 ", description='" + description + '\'' +
                 ", discount=" + discount +
+                ", productQuantity=" + productQuantity +
                 '}';
     }
 }

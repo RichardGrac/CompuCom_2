@@ -6,6 +6,7 @@ import com.example.CompuCom2.entity.Product;
 import com.example.CompuCom2.model.DiscountModel;
 import com.example.CompuCom2.model.ProductModel;
 import com.example.CompuCom2.repository.DiscountRepository;
+import com.example.CompuCom2.repository.ProductQuantityRepository;
 import com.example.CompuCom2.repository.ProductRepository;
 import com.example.CompuCom2.service.ProductService;
 import com.example.CompuCom2.utils.storage.StorageService;
@@ -38,6 +39,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private StorageService storageService;
+
+    @Autowired
+    private ProductQuantityServiceImpl productQuantityServiceImpl;
 
     @Override
     public ProductModel saveProduct(ProductModel productModel) {
@@ -72,10 +76,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductModel> getAllProducts() {
         List<ProductModel> productModels = new ArrayList<>();
+
         for (Product product : productRepository.findAll()){
             // Para cada Producto seteamos su Descuento
             ProductModel productModel = productConverter.entityToModel(product);
             productModel.setDiscount(getDiscountById(productModel.getId()));
+            productModel.setProductQuantityModel(productQuantityServiceImpl.getQuantityById(productModel.getId()));
             productModels.add(productModel);
         }
         return productModels;
@@ -102,4 +108,6 @@ public class ProductServiceImpl implements ProductService {
         LOG.info("METHOD: saveDiscount() --PARAMS: discountModel=" + discountModel);
         return discountConverter.entityToModel(discountRepository.save(discountConverter.modelToEntity(discountModel)));
     }
+
+
 }
