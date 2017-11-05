@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Index - Administrador</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <div th:replace="fragments/imports::css">&nbsp;</div>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <div th:replace="fragments/header::header">&nbsp;</div>
+    <div th:replace="fragments/aside::aside">&nbsp;</div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Pagina Principal
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <h1>Bienvenido - <span th:text="${session.userGlobal.username}"></span></h1>
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <div th:replace="fragments/aside::aside-right">&nbsp;</div>
+    <!-- /.control-sidebar -->
+    <div th:replace="fragments/footer::footer">&nbsp;</div>
+    <div th:replace="fragments/imports::js">&nbsp;</div>
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+
+    <div class="control-sidebar-bg"></div>
+
+</div><!-- ./wrapper -->
+
+
+
+</body>
+</html>

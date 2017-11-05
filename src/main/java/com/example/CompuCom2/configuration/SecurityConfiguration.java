@@ -34,14 +34,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/bower_components/**","/css/**","/dist/*","/img/**","/js/**","/plugins/**","/vendor/**").permitAll()
-                .antMatchers("/","/index","/about","/questions","/users/**").permitAll()
+                .antMatchers("/","/index","/about","/questions").permitAll()
+                .antMatchers("/users/**","/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
                 .usernameParameter("username").passwordParameter("password")
                 .defaultSuccessUrl("/loginsuccess").permitAll()
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout")
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/index?logout")
                 .permitAll();
     }
 

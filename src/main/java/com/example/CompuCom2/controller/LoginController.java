@@ -1,6 +1,7 @@
 package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
+import com.example.CompuCom2.model.UserModel;
 import jdk.internal.org.objectweb.asm.util.TraceAnnotationVisitor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.jws.WebParam;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -23,7 +25,14 @@ public class LoginController {
     }
 
     @GetMapping({"/loginsuccess", "/"})
-    public ModelAndView loginCheck(){
-        return new ModelAndView("redirect:/index");
+    public ModelAndView loginCheck(HttpSession httpSession){
+        ModelAndView modelAndView = new ModelAndView("redirect:/index");
+        UserModel userGlobal  = (UserModel) httpSession.getAttribute("userGlobal");
+        if (userGlobal != null) {
+            if (userGlobal.getRoles().toString().contains("ADMIN")) {
+                modelAndView.setViewName("redirect:/admin/index");
+            }
+        }
+        return modelAndView;
     }
 }

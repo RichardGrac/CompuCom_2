@@ -16,31 +16,61 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Nuestros productos
-                                <!--<span class="sr-only">(current)</span>-->
+                        <li
+                                th:classappend="${#httpServletRequest.requestURI.contains('productos') || #httpServletRequest.requestURI.contains('index')} ? 'active' : ''"
+                                class="nav-item"
+                        >
+                            <a class="nav-link" th:href="@{/index}">
+                                Nuestros productos
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li
+                                th:classappend="${#httpServletRequest.requestURI.contains('about')} ? 'active' : ''"
+                                class="nav-item"
+                        >
                             <a class="nav-link" th:href="@{/about}">Nosotros</a>
                         </li>
-                        <li class="nav-item">
+                        <li
+                                th:classappend="${#httpServletRequest.requestURI.contains('questions')} ? 'active' : ''"
+                                class="nav-item"
+                        >
                             <a class="nav-link" th:href="@{/questions}">Preguntas frecuentes</a>
                         </li>
-                        <li class="nav-item">
+
+                        <li th:if="${session.userGlobal == null}" class="nav-item">
                             <a class="nav-link" th:href="@{/login}">
                                 <span class="keys">&nbsp;&nbsp;&nbsp;{</span>
                                 Iniciar sesión
                                 <span class="keys">}</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li th:if="${session.userGlobal == null}" class="nav-item">
                             <a class="nav-link" href="#">
                                 <span class="keys">{</span>
                                 Registrate
                                 <span class="keys">}</span>
                             </a>
                         </li>
+
+                        <li th:if="${session.userGlobal != null}" class="nav-item">
+                            <a class="nav-link" th:href="@{/login}">
+                                <span class="keys">&nbsp;&nbsp;&nbsp;{</span>
+                                <span th:text="${session.userGlobal.username}"></span>
+                                <span class="keys">}</span>
+                            </a>
+                        </li>
+                        <li th:if="${session.userGlobal != null}" class="nav-item">
+                            <a class="nav-link" href="javascript: document.logoutForm.submit()">
+                                <span class="keys">{</span>
+                                Cerrar Sesion
+                                <span class="keys">}</span>
+                            </a>
+                            <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+                                <input type="submit" hidden="" />
+                            </form>
+                        </li>
+
+
                     </ul>
                 </div>
             </div>
