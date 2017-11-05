@@ -75,8 +75,12 @@
           <div class="card">
             <img class="card-img-top" th:src="@{/products/files?id=__${product.id}__}" alt="product-image" width="80px" height="305px"/>
             <div class="card-body">
-              <h4 class="card-title" th:text="${product.name}"></h4>
-              <p class="card-text" th:text="${product.description}"></p>
+              <h4 class="card-title font-color" th:text="${product.name}"></h4>
+              <p class="card-text">
+                <b>Disponibles:</b> <span th:text="${product.productQuantityModel.quantity}"> </span> unidades<br></br>
+                <b>Precio:</b> $<span th:text="${product.price}"></span><b> (-<span th:text="${product.discount.percentage}"></span>%)</b>
+              </p>
+              <p class="card-text"><b>Descripción: </b><span th:text="${product.description}"></span></p>
             </div>
             <div class="card-footer">
               <a href="#">

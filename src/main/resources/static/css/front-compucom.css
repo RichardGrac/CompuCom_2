@@ -24,6 +24,11 @@
     background-image: url('../img/novedades/XZ1.jpg');
 }
 
+/* Color of the Products with descount */
+.font-color{
+    color: blue;
+}
+
 /* --------------------------------------------- about.html ---------------------------------------- */
 .contact-border{
     border: solid darkgrey;
