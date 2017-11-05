@@ -86,7 +86,7 @@
                             <td th:text="${product.productQuantityModel.quantity}"> </td>
                             <td>$<span th:text="${product.price}"></span></td>
                             <td><span th:text="${product.discount.percentage}"></span> %</td>
-                            <td class="center"><img th:src="@{/products/files?id=__${product.id}__}" alt="Image not found" height="200" width="100%"/></td>
+                            <td class="center"><img th:src="@{/products/files?id=__${product.id}__}" alt="Image not found" height="180" width="100%"/></td>
                             <td>
                                 <a th:href="@{/products/productform?id=__${product.id}__}">
                                     <button type="button" class="btn btn-outline btn-warning">Editar</button>

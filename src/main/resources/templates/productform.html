@@ -69,7 +69,10 @@
                   <label>Categoria</label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <select class="form-control" th:field="*{productModel.category}">
+                        <select class="form-control" th:if="${categories.isEmpty()}">
+                            <option>No hay categorias definidas</option>
+                        </select>
+                        <select class="form-control" th:if="${!categories.isEmpty()}" th:field="*{productModel.category}">
                             <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}" required="" >***</option>
                         </select>
                     </div>
@@ -108,26 +111,25 @@
                 </div>
                 <!-- /.form-group -->
 
-                  <div class="form-group">
-                      <label>Descuento (%): </label>
-                          <div class="input-group">
-                              <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                              <input type="number" th:field="*{discountModel.percentage}" required="" min="0.0" /> %
-                          </div>
-                  </div>
-                  <!-- /.form-group -->
-
-                  <div class="form-group">
-                      <label>Unidades: </label>
+                <div class="form-group">
+                  <label>Descuento (%): </label>
                       <div class="input-group">
                           <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                          <input type="number" th:field="*{quantityModel.quantity}" required="" min="0" step="1" />
+                          <input type="number" th:field="*{discountModel.percentage}" required="" min="0.0" placeholder="Descuento"/> %
                       </div>
+                </div>
+                <!-- /.form-group -->
+
+                <div class="form-group">
+                  <label>Unidades: </label>
+                  <div class="input-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
+                      <input type="number" th:field="*{quantityModel.quantity}" required="" min="0" step="1" placeholder="Disponibles" />
                   </div>
-                  <!-- /.form-group -->
+                </div>
+                <!-- /.form-group -->
 
               </div>
-
               <!-- ./col-md-6 -->
 
               <!-- Button --> 
@@ -136,7 +138,8 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label"></label>
                     <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block"> Guardar &nbsp; <span class="fa fa-upload"></span></button>
+                        <button  th:if="${!categories.isEmpty()}" type="submit" class="btn btn-primary btn-lg btn-block"> Guardar &nbsp; <span class="fa fa-upload"></span></button>
+                        <button  th:if="${categories.isEmpty()}" disabled="" type="submit" class="btn btn-primary btn-lg btn-block"> Guardar &nbsp; <span class="fa fa-upload"></span></button>
                     </div>
                 </div>
               </div>
