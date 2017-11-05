@@ -121,4 +121,9 @@ public class UserServiceImpl implements UserService {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+    @Override
+    public UserModel findUserModelByUsername(String username) {
+        return userConverter.entityToModel(userRepository.findByUsername(username));
+    }
 }

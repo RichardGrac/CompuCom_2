@@ -20,6 +20,5 @@ nbproject/private/
 nbbuild/
 nbdist/
 .nb-gradle/
-src/main/java/com/example/CompuCom2/configuration/
 src/main/resources/static/bower_components/
 /upload-dir/
