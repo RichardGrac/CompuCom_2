@@ -90,7 +90,7 @@ public class ProductController {
             productModel1 = productService.saveProduct(productModel);
             if (productModel1 != null){
                 discountModel.setId(productModel1.getId());
-                productQuantityModel.setId(productModel.getId());
+                productQuantityModel.setId(productModel1.getId());
                 if (productService.saveDiscount(discountModel) == null || productQuantityService.saveQuantity(productQuantityModel) == null){
                     modelAndView.addObject("result", 0);
                 }else{

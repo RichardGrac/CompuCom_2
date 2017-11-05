@@ -29,6 +29,11 @@
     color: blue;
 }
 
+/* Dropdown of categories */
+.categories-dropdown{
+    background-color: transparent; border-style: none; color: white; margin-top: 0.5em;
+}
+
 /* --------------------------------------------- about.html ---------------------------------------- */
 .contact-border{
     border: solid darkgrey;
@@ -58,4 +63,8 @@
 /* ---------------------------------------------- fproducts.html --------------------------------------*/
 .margin-bottom{
     margin-bottom: 1em;
+}
+
+.image-center-align{
+    align-self: center;
 }

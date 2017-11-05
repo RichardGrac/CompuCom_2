@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -37,6 +38,11 @@ public class IndexController {
     public ModelAndView index(){
         LOG.info("METHOD: index()");
         ModelAndView mav = new ModelAndView(Constants.INDEX);
+//        Seteamos categorias:
+        ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
+
+//        Colocamos solo los que tienen descuento
+        mav.addObject("categories", productCategoryModels);
         ArrayList<ProductModel> productModels = (ArrayList<ProductModel>) productService.getAllProducts();
         ArrayList<ProductModel> productsWithDiscount = new ArrayList<>();
         for (ProductModel productModel : productModels) {
@@ -44,6 +50,7 @@ public class IndexController {
                 productsWithDiscount.add(productModel);
             }
         }
+        mav.addObject("categories", productCategoryModels);
         mav.addObject("products", productsWithDiscount);
         return mav;
     }
@@ -52,6 +59,8 @@ public class IndexController {
     public ModelAndView about(){
         LOG.info("METHOD: about()");
         ModelAndView mav = new ModelAndView(Constants.ABOUT);
+        ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
+        mav.addObject("categories", productCategoryModels);
         return mav;
     }
 
@@ -59,17 +68,21 @@ public class IndexController {
     public ModelAndView questions(){
         LOG.info("METHOD: questions()");
         ModelAndView mav = new ModelAndView(Constants.QUESTIONS);
+        ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
+        mav.addObject("categories", productCategoryModels);
         return mav;
     }
 
     @RequestMapping("/fproducts")
-    public ModelAndView fproducts(){
+    public ModelAndView fproducts(@RequestParam String category){
         LOG.info("METHOD: fproducts()");
         ModelAndView mav = new ModelAndView(Constants.FPRODUCTS);
         ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
-        for (ProductCategoryModel product : productCategoryModels) {
-        }
         mav.addObject("categories", productCategoryModels);
+
+        ArrayList<ProductModel> productModels = (ArrayList<ProductModel>) productService.getAllProductsByCategory(category);
+        mav.addObject("products", productModels);
+        mav.addObject("categorySelected", category);
         return mav;
     }
 

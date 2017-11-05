@@ -13,6 +13,8 @@ public interface ProductService {
     void deleteProductById(Integer id);
     String findImageById(Integer id);
 
+    List<ProductModel> getAllProductsByCategory(String category);
+
     DiscountModel getDiscountById(int id);
     DiscountModel saveDiscount(DiscountModel discountModel);
 }

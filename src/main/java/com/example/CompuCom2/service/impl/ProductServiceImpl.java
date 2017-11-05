@@ -75,9 +75,25 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductModel> getAllProducts() {
+        LOG.info("METHOD: getAllProducts()");
         List<ProductModel> productModels = new ArrayList<>();
 
         for (Product product : productRepository.findAll()){
+            // Para cada Producto seteamos su Descuento
+            ProductModel productModel = productConverter.entityToModel(product);
+            productModel.setDiscount(getDiscountById(productModel.getId()));
+            productModel.setProductQuantityModel(productQuantityServiceImpl.getQuantityById(productModel.getId()));
+            productModels.add(productModel);
+        }
+        return productModels;
+    }
+
+    @Override
+    public List<ProductModel> getAllProductsByCategory(String category) {
+        LOG.info("METHOD: getAllProductsByCategory() --PARAMS: category=" + category);
+        List<ProductModel> productModels = new ArrayList<>();
+
+        for(Product product : productRepository.findAllByCategory(category)){
             // Para cada Producto seteamos su Descuento
             ProductModel productModel = productConverter.entityToModel(product);
             productModel.setDiscount(getDiscountById(productModel.getId()));

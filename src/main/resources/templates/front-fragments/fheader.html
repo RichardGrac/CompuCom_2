@@ -15,12 +15,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
+
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" th:href="@{/fproducts}">Nuestros productos
-                                <!--<span class="sr-only">(current)</span>-->
-                            </a>
-                        </li>
+                        <div class="dropdown">
+                            <button class="dropdown-toggle categories-dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Nuestros productos
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a th:each="category : ${categories}" class="dropdown-item" th:href="@{/fproducts?category=__${category.name}__}"><span th:text="${category.name}"> </span></a>
+                            </div>
+                        </div>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/about}">Nosotros</a>
                         </li>
@@ -29,7 +33,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/login}">
-                                <span class="keys">&nbsp;&nbsp;&nbsp;{</span>
+                                <span class="keys">{</span>
                                 Iniciar sesión
                                 <span class="keys">}</span>
                             </a>

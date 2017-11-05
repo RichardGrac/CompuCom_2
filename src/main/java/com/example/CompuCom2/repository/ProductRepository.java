@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.io.Serializable;
+import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Serializable> {
@@ -18,4 +19,6 @@ public interface ProductRepository extends JpaRepository<Product, Serializable> 
 
     @Query("SELECT r.image FROM Product r where r.id = :id")
     String findImageById(@Param("id") Integer id);
+
+    List<Product> findAllByCategory(String category);
 }

@@ -23,19 +23,57 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="list-group text-center margin-bottom">
-                    <img th:src="@{/img/Logotipos/logo-lema.png}" alt="Logo-CompuCom" height="70" width="100%" />
+                    <img th:src="@{/img/Logotipos/logo-lema.png}" alt="Logo-CompuCom" height="70" width="95%" />
                 </div>
                 <div class="list-group">
-                    <a th:each="category : ${categories}" href="#" class="list-group-item list-group-item-action"><span th:text="${category.name}"> </span></a>
+                    <span th:each="category : ${categories}">
+                        <a th:href="@{/fproducts?category=__${category.name}__}" th:if="${category.name != categorySelected}" class="list-group-item list-group-item-action">
+                            <span th:text="${category.name}"> </span>
+                        </a>
+                        <a th:href="@{/fproducts?category=__${category.name}__}" th:if="${category.name == categorySelected}" class="list-group-item list-group-item-action active">
+                            <span th:text="${category.name}"> </span>
+                        </a>
+                    </span>
                     <!--classes: disabled, active-->
                 </div>
             </div>
             <!--./col-md-3-->
 
             <div class="col-md-9">
-                <h2 class="text-uppercase">titulo de categoria</h2>
+                <h2 class="text-uppercase"><span th:text="${categorySelected}"> </span></h2>
                 <hr></hr>
+                <div class="container" th:if="${!products.isEmpty()}">
+                    <div class="row">
+                        <div class="col-md-6 margin-bottom" th:each="product : ${products}">
+                            <div class="card">
+                                <img class="image-center-align" th:src="@{/products/files?id=__${product.id}__}" alt="product-image" width="65%" height="270px"/>
+                                <div class="card-body">
+                                    <h4 class="card-title font-color" th:text="${product.name}"></h4>
+                                    <p class="card-text">
+                                        <b>Disponibles:</b> <span th:text="${product.productQuantityModel.quantity}"> </span> unidades<br></br>
+                                        <b>Precio:</b> $<span th:text="${product.price}"></span><b> (-<span th:text="${product.discount.percentage}"></span>%)</b>
+                                    </p>
+                                    <p class="card-text"><b>Descripción: </b><span th:text="${product.description}"></span></p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="#">
+                                        <button type="button" class="btn btn-outline btn-success"><i class="material-icons">add_shopping_cart</i></button>
+                                    </a>
+                                    <a href="#">
+                                        <button type="button" class="btn btn-outline btn-primary font-bigger">Ver más</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--./col-sm-4 my-4-->
 
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!--./container-->
+                <div class="container" th:if="${products.isEmpty()}">
+                    <h3>No hay productos registrados en esta categoria</h3>
+                </div>
             </div>
             <!--./col-md-9-->
         </div>
