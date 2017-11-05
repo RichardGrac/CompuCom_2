@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -51,7 +52,7 @@ public class IndexController {
             }
         }
         mav.addObject("categories", productCategoryModels);
-        mav.addObject("products", productsWithDiscount);
+        mav.addObject("products", resize_description(productsWithDiscount));
         return mav;
     }
 
@@ -81,9 +82,20 @@ public class IndexController {
         mav.addObject("categories", productCategoryModels);
 
         ArrayList<ProductModel> productModels = (ArrayList<ProductModel>) productService.getAllProductsByCategory(category);
-        mav.addObject("products", productModels);
+        mav.addObject("products", resize_description(productModels));
         mav.addObject("categorySelected", category);
         return mav;
+    }
+
+    private ArrayList<ProductModel> resize_description(ArrayList<ProductModel> productModels){
+        for (ProductModel product : productModels) {
+            String descripcion = product.getDescription();
+            if (descripcion.length() > Constants.DESCRIPTION_SIZE){
+                descripcion = descripcion.substring(0,Constants.DESCRIPTION_SIZE) + "...";
+                product.setDescription(descripcion);
+            }
+        }
+        return productModels;
     }
 
 }
