@@ -22,7 +22,7 @@ public class LoginListener implements ApplicationListener<InteractiveAuthenticat
     @Override
     public void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {
         UserDetails userDetails = (UserDetails) event.getAuthentication().getPrincipal();
-        UserModel userModel = userService.findUserModelByUsername(userDetails.getUsername());
+        UserModel userModel = userService.findUserModelByEmail(userDetails.getUsername());
         httpSession.setAttribute("userGlobal", userModel);
     }
 }

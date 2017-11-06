@@ -21,7 +21,10 @@ public interface UserService {
     void removeUserAddress(int id);
 
     User findUserByUsername(String username);
+    User findUserByEmail(String email);
     UserModel findUserModelByUsername(String username);
+    UserModel findUserModelByEmail(String email);
+    List<String> findAllEmail();
 
 
 }

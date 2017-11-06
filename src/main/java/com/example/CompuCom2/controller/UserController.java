@@ -11,11 +11,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.jws.WebParam;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -37,17 +41,27 @@ public class UserController {
     private RoleService roleService;
 
     @GetMapping("/userform")
-    private String userForm(@RequestParam(name = "id", required = false) Integer id, Model model){
+    private ModelAndView userForm(@RequestParam(name = "id", required = false) Integer id, Model model){
         LOG.info("METHOD: userForm() --PARAMS: id=" + id);
+        ModelAndView modelAndView = new ModelAndView(Constants.USER_FORM);
+        UserModel pop = (UserModel) model.asMap().get("user");
+
         UserModel userModel = new UserModel();
         UserAddressModel userAddressModel = new UserAddressModel();
         if (id != null && id != 0){
             userModel = userService.findUserByIdModel(id);
             userAddressModel = userService.findUserAddressByIdModel(id);
         }
-        model.addAttribute("userModel", userModel);
-        model.addAttribute("userAddressModel", userAddressModel);
-        return Constants.USER_FORM;
+        if (pop != null) {
+            modelAndView.addObject("userModel", pop);
+            modelAndView.addObject("userAddressModel", model.asMap().get("address"));
+            modelAndView.addObject("repeat", true);
+        }else {
+            modelAndView.addObject("userModel", userModel);
+            modelAndView.addObject("userAddressModel", userAddressModel);
+        }
+
+        return modelAndView;
     }
 
     @PostMapping("/adduser")
@@ -55,7 +69,15 @@ public class UserController {
     // y el UserModel usermodel se corresponde con Java
     private ModelAndView addUser(@ModelAttribute(name="userModel") UserModel userModel,
                            @ModelAttribute(name = "userAddressModel") UserAddressModel userAddressModel,
+                           RedirectAttributes redirectAttributes,
                            Model model){
+
+        //Comprobacion de usuarios repetidos
+        if (userService.findAllEmail().contains(userModel.getEmail())){
+            redirectAttributes.addFlashAttribute("user", userModel);
+            redirectAttributes.addFlashAttribute("address", userAddressModel);
+            return new ModelAndView("redirect:/registro");
+        }
         ModelAndView modelAndView = new ModelAndView("redirect:/users/showusers");
         LOG.info("METHOD: addUser() --PARAMS: " + userModel.toString() + " --userAddressModel: " + userAddressModel);
         // Seteamos el obj. UserAddress que tenemos dentro de userModel
