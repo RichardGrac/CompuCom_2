@@ -34,6 +34,17 @@
     background-color: transparent; border-style: none; color: white; margin-top: 0.5em;
 }
 
+/* Search input style */
+.search-style{
+    background-color: transparent;
+    color: white;
+    border-color: dimgrey;
+}
+
+.search-style:focus{
+    background-color: transparent;
+    color: white;
+}
 /* --------------------------------------------- about.html ---------------------------------------- */
 .contact-border{
     border: solid darkgrey;

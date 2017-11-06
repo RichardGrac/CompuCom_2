@@ -2,7 +2,6 @@ package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
 import com.example.CompuCom2.converter.DiscountConverter;
-import com.example.CompuCom2.entity.Product;
 import com.example.CompuCom2.model.DiscountModel;
 import com.example.CompuCom2.model.ProductModel;
 import com.example.CompuCom2.model.ProductQuantityModel;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/products")

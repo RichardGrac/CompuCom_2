@@ -21,4 +21,8 @@ public interface ProductRepository extends JpaRepository<Product, Serializable> 
     String findImageById(@Param("id") Integer id);
 
     List<Product> findAllByCategory(String category);
+
+//    @Query("SELECT * FROM Product WHERE category like \"%:search%\" OR description like \"%raz%\" OR name like \"%raz%\"")
+//    List<Product> getAllProductsBySearch(@Param("search") String search);
+    List<Product> findAllByCategoryContaining(String search);
 }
