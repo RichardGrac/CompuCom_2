@@ -34,8 +34,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/bower_components/**","/css/**","/dist/*","/img/**","/js/**","/plugins/**","/vendor/**").permitAll()
-                .antMatchers("/","/index","/about","/questions").permitAll()
-                .antMatchers("/users/**","/admin/**").hasRole("ADMIN")
+//                .antMatchers("/","/index","/about","/questions","/users/**").permitAll()
+//                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/logincheck")

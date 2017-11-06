@@ -9,4 +9,5 @@ import java.io.Serializable;
 @Repository
 public interface RoleRepository extends JpaRepository<Role,Serializable> {
     Role findById(Integer id);
+    Role findByType(String type);
 }

@@ -2,8 +2,10 @@ package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
 import com.example.CompuCom2.converter.UserAddressConverter;
+import com.example.CompuCom2.entity.Role;
 import com.example.CompuCom2.model.UserAddressModel;
 import com.example.CompuCom2.model.UserModel;
+import com.example.CompuCom2.service.RoleService;
 import com.example.CompuCom2.service.UserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/users")
@@ -28,6 +32,9 @@ public class UserController {
     @Autowired
     @Qualifier("userAddressConverter")
     private UserAddressConverter userAddressConverter;
+
+    @Autowired
+    private RoleService roleService;
 
     @GetMapping("/userform")
     private String userForm(@RequestParam(name = "id", required = false) Integer id, Model model){
@@ -54,6 +61,13 @@ public class UserController {
         // Seteamos el obj. UserAddress que tenemos dentro de userModel
         userModel.setUserAdress(userAddressConverter.modelToEntity(userAddressModel));
         //Lo añadimos, si es correcta la adición sacamos su ID para hacer referencia al Domicilio:
+        if (userModel.getRoles() == null){
+            Set<Role> roleSet = new HashSet<>();
+            Role role = roleService.findByType("USER");
+            roleSet.add(role);
+            userModel.setRoles(roleSet);
+            modelAndView.setViewName("redirect:/index");
+        }
         UserModel userModel1 = userService.addUser(userModel);
         if (userModel1 != null){
             userAddressModel.setId(userModel1.getId());

@@ -1,6 +1,7 @@
 package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
+import com.example.CompuCom2.model.UserAddressModel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.example.CompuCom2.model.UserModel;
@@ -35,5 +36,14 @@ public class LoginController {
             }
         }
         return modelAndView;
+    }
+
+    @GetMapping("/registro")
+    public ModelAndView register(){
+        ModelAndView modelAndView = new ModelAndView(Constants.REGISTER);
+        modelAndView.addObject("userModel", new UserModel());
+        modelAndView.addObject("userAddressModel", new UserAddressModel());
+        return modelAndView;
+
     }
 }
