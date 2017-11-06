@@ -14,6 +14,7 @@ public interface ProductService {
     String findImageById(Integer id);
 
     List<ProductModel> getAllProductsByCategory(String category);
+    List<ProductModel> getAllProductsBySearch(String search);
 
     DiscountModel getDiscountById(int id);
     DiscountModel saveDiscount(DiscountModel discountModel);

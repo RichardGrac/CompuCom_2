@@ -12,4 +12,5 @@ public class Constants {
     public static final String QUESTIONS = "questions";
     public static final String FPRODUCTS = "fproducts";
     public static final String REGISTER = "front/register";
+    public static final int DESCRIPTION_SIZE = 150;
 }

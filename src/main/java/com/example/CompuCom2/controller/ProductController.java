@@ -2,7 +2,6 @@ package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
 import com.example.CompuCom2.converter.DiscountConverter;
-import com.example.CompuCom2.entity.Product;
 import com.example.CompuCom2.model.DiscountModel;
 import com.example.CompuCom2.model.ProductModel;
 import com.example.CompuCom2.model.ProductQuantityModel;
@@ -22,7 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/products")
@@ -55,6 +54,7 @@ public class ProductController {
         if (id != null && id != 0){
             productModel = productService.getProductById(id);
             discountModel = productService.getDiscountById(id);
+            productQuantityModel = productQuantityService.getQuantityById(id);
         }
         model.addAttribute("productModel", productModel);
         model.addAttribute("discountModel", discountModel);
@@ -108,7 +108,7 @@ public class ProductController {
     public ModelAndView showProducts(){
         LOG.info("METHOD: showProducts()");
         ModelAndView mav = new ModelAndView(Constants.PRODUCTS);
-        mav.addObject("products", productService.getAllProducts());
+        mav.addObject("products", resize_description((ArrayList<ProductModel>) productService.getAllProducts()));
         return mav;
     }
 
@@ -128,5 +128,16 @@ public class ProductController {
     public String deleteProduct(@RequestParam(name = "id") Integer id){
         productService.deleteProductById(id);
         return "redirect:/products/showproducts";
+    }
+
+    private ArrayList<ProductModel> resize_description(ArrayList<ProductModel> productModels){
+        for (ProductModel product : productModels) {
+            String descripcion = product.getDescription();
+            if (descripcion.length() > Constants.DESCRIPTION_SIZE){
+                descripcion = descripcion.substring(0,Constants.DESCRIPTION_SIZE) + " ...";
+                product.setDescription(descripcion);
+            }
+        }
+        return productModels;
     }
 }
