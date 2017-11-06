@@ -73,7 +73,7 @@
       <div class="row">
         <div class="col-sm-4 my-4" th:each="product : ${products}">
           <div class="card">
-            <img class="image-center-top" th:src="@{/products/files?id=__${product.id}__}" alt="product-image" width="85%" height="305px"/>
+            <img class="image-center-align" th:src="@{/products/files?id=__${product.id}__}" alt="product-image" width="85%" height="305px"/>
             <div class="card-body">
               <h4 class="card-title font-color" th:text="${product.name}"></h4>
               <p class="card-text">
