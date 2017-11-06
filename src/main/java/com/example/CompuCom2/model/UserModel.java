@@ -1,13 +1,16 @@
 package com.example.CompuCom2.model;
 
+import com.example.CompuCom2.entity.Role;
 import com.example.CompuCom2.entity.UserAddress;
+
+import java.util.Set;
 
 public class UserModel {
     private int id;
     private String username;
     private String password;
     private String email;
-    private String role;
+    private Set<Role> roles;
     private UserAddress userAdress;
 
     public UserModel(){
@@ -19,7 +22,6 @@ public class UserModel {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.role = role;
         this.userAdress = userAdress;
     }
 
@@ -55,12 +57,12 @@ public class UserModel {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public UserAddress getUserAdress() {
@@ -78,7 +80,6 @@ public class UserModel {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
                 ", userAdress=" + userAdress +
                 '}';
     }

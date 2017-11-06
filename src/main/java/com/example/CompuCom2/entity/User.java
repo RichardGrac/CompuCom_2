@@ -1,13 +1,14 @@
 package com.example.CompuCom2.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name="users")
 public class User {
     @Id
     @GeneratedValue
-    @Column(name = "iduser", unique = true, nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     private int id;
 
     @Column(name = "username", nullable = false)
@@ -19,20 +20,20 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "role", nullable = false)
-    private String role;
-
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private UserAddress userAdress;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",joinColumns = { @JoinColumn(name = "user_id") },inverseJoinColumns = { @JoinColumn(name = "role_id") })
+    private Set<Role> role = new HashSet<>();
+
     public User(){}
 
-    public User(String username, String password, String email, String role, UserAddress userAdress) {
+    public User(String username, String password, String email, UserAddress userAdress) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.role = role;
         this.userAdress = userAdress;
     }
 
@@ -68,11 +69,11 @@ public class User {
         this.email = email;
     }
 
-    public String getRole() {
+    public Set<Role> getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Set<Role> role) {
         this.role = role;
     }
 
@@ -91,8 +92,8 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
                 ", userAdress=" + userAdress +
+                ", role=" + role.toString() +
                 '}';
     }
 }

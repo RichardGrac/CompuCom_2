@@ -53,7 +53,7 @@
                                         <b>Disponibles:</b> <span th:text="${product.productQuantityModel.quantity}"> </span> unidades<br></br>
                                         <b>Precio:</b> $<span th:text="${product.price}"></span><b> (-<span th:text="${product.discount.percentage}"></span>%)</b>
                                     </p>
-                                    <p class="card-text"><b>Descripción: </b><span th:text="${product.description}" th:id="${product.id}"></span></p>
+                                    <p class="card-text"><b>Descripción: </b><span th:text="${product.description}"></span></p>
                                 </div>
                                 <div class="card-footer">
                                     <a href="#">
@@ -81,7 +81,6 @@
     </div>
     <!--./container-->
 </section>
-
 
 <!-- footer & js -->
 <div th:replace="front-fragments/ffooter::footer">&nbsp;</div>

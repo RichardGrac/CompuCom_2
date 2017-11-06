@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/")
 public class IndexController {
 
     private static final Log LOG = LogFactory.getLog(IndexController.class);

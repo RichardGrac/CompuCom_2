@@ -15,7 +15,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-
                     <ul class="navbar-nav ml-auto">
                         <form class="form-inline" method="post" th:action="@{/search}">
                             <div class="input-group">
@@ -34,25 +33,44 @@
                                 <a th:each="category : ${categories}" class="dropdown-item" th:href="@{/fproducts?category=__${category.name}__}"><span th:text="${category.name}"> </span></a>
                             </div>
                         </div>
-                        <li class="nav-item">
+                        <li th:classappend="${#httpServletRequest.requestURI.contains('about')} ? 'active' : ''" class="nav-item">
                             <a class="nav-link" th:href="@{/about}">Nosotros</a>
                         </li>
-                        <li class="nav-item">
+                        <li th:classappend="${#httpServletRequest.requestURI.contains('questions')} ? 'active' : ''" class="nav-item" >
                             <a class="nav-link" th:href="@{/questions}">Preguntas frecuentes</a>
                         </li>
-                        <li class="nav-item">
+
+                        <li th:if="${session.userGlobal == null}" class="nav-item">
                             <a class="nav-link" th:href="@{/login}">
-                                <span class="keys">{</span>
+                                <span class="keys">&nbsp;&nbsp;&nbsp;{</span>
                                 Iniciar sesión
                                 <span class="keys">}</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
+                        <li th:if="${session.userGlobal == null}" class="nav-item" th:classappend="${#httpServletRequest.requestURI.contains('registro')} ? 'active' : ''">
+                            <a class="nav-link" th:href="@{/registro}">
                                 <span class="keys">{</span>
                                 Registrate
                                 <span class="keys">}</span>
                             </a>
+                        </li>
+
+                        <li th:if="${session.userGlobal != null}" class="nav-item">
+                            <a class="nav-link" th:href="@{/login}">
+                                <span class="keys">&nbsp;&nbsp;&nbsp;{</span>
+                                <span th:text="${session.userGlobal.username}"></span>
+                                <span class="keys">}</span>
+                            </a>
+                        </li>
+                        <li th:if="${session.userGlobal != null}" class="nav-item">
+                            <a class="nav-link" href="javascript: document.logoutForm.submit()">
+                                <span class="keys">{</span>
+                                Cerrar Sesion
+                                <span class="keys">}</span>
+                            </a>
+                            <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+                                <input type="submit" hidden="" />
+                            </form>
                         </li>
                     </ul>
                 </div>
