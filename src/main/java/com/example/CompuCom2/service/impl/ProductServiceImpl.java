@@ -108,7 +108,7 @@ public class ProductServiceImpl implements ProductService {
         LOG.info("METHOD: getAllProductsBySearch() --PARAMS: search=" + search);
         List<ProductModel> productModels = new ArrayList<>();
 
-        for(Product product : productRepository.findAllByCategoryContaining(search)){
+        for(Product product : productRepository.getAllProductsBySearch(search)){
             // Para cada Producto seteamos su Descuento
             ProductModel productModel = productConverter.entityToModel(product);
             productModel.setDiscount(getDiscountById(productModel.getId()));

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,7 +42,6 @@ public class IndexController {
         ModelAndView mav = new ModelAndView(Constants.INDEX);
 //        Seteamos categorias:
         ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
-        String search = "";
 
 //        Colocamos solo los que tienen descuento
         mav.addObject("categories", productCategoryModels);
@@ -54,7 +54,6 @@ public class IndexController {
         }
         mav.addObject("categories", productCategoryModels);
         mav.addObject("products", resize_description(productsWithDiscount));
-        mav.addObject("search", search);
         return mav;
     }
 
@@ -62,10 +61,8 @@ public class IndexController {
     public ModelAndView about(){
         LOG.info("METHOD: about()");
         ModelAndView mav = new ModelAndView(Constants.ABOUT);
-        String search = "";
         ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
         mav.addObject("categories", productCategoryModels);
-        mav.addObject("search", search);
         return mav;
     }
 
@@ -73,10 +70,8 @@ public class IndexController {
     public ModelAndView questions(){
         LOG.info("METHOD: questions()");
         ModelAndView mav = new ModelAndView(Constants.QUESTIONS);
-        String search = "";
         ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
         mav.addObject("categories", productCategoryModels);
-        mav.addObject("search", search);
         return mav;
     }
 
@@ -84,28 +79,24 @@ public class IndexController {
     public ModelAndView fproducts(@RequestParam String category){
         LOG.info("METHOD: fproducts() --PARAMS: category="+category);
         ModelAndView mav = new ModelAndView(Constants.FPRODUCTS);
-        String search = "";
         ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
         mav.addObject("categories", productCategoryModels);
 
         ArrayList<ProductModel> productModels = (ArrayList<ProductModel>) productService.getAllProductsByCategory(category);
         mav.addObject("products", resize_description(productModels));
         mav.addObject("categorySelected", category);
-        mav.addObject("search", search);
         return mav;
     }
 
-    @GetMapping("/search")
-    public String search(@RequestParam(name = "search", required = true) String search, Model model){
-        LOG.info("METHOD: search() --PARAMS: search="+search);
-        String search1 = "";
+    @PostMapping("/search")
+    public String search(String search, Model model){
+        LOG.info("METHOD: search() --PARAMS: search=" + search);
         ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
         model.addAttribute("categories", productCategoryModels);
 
         ArrayList<ProductModel> productModels = (ArrayList<ProductModel>) productService.getAllProductsBySearch(search);
         model.addAttribute("products", resize_description(productModels));
         model.addAttribute("categorySelected", (productModels.size() + " productos encontrados ('" + search + "')"));
-        model.addAttribute("search", search1);
         return Constants.FPRODUCTS;
     }
 
