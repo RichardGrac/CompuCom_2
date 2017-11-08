@@ -105,7 +105,28 @@ public class IndexController {
         ModelAndView mav = new ModelAndView(Constants.MORE);
         ProductModel productModel = productService.getProductById(id);
         mav.addObject("product", productModel);
+        ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
+        mav.addObject("categories", productCategoryModels);
+        //Buscamos productos relacionados para hacer Recomendaciones
+        ArrayList<ProductModel> recommendations = get_recommendations(((ArrayList<ProductModel>) productService.getAllProducts()), productModel);
+        recommendations = resize_description(recommendations);
+        mav.addObject("products", recommendations);
+        mav.addObject("pageTitle", ("CompuCom - " + productModel.getName()));
         return mav;
+    }
+
+    private ArrayList<ProductModel> get_recommendations(ArrayList<ProductModel> productModels, ProductModel product){
+            ArrayList<ProductModel> recommendations = new ArrayList<>();
+            String relation = product.getCategory();
+        for (ProductModel productModel: productModels) {
+            if (product.getId().equals(productModel.getId())) continue;
+            if (productModel.getCategory().equals(relation) || productModel.getDescription().equals(relation)
+                    || productModel.getName().contains(relation)){
+                recommendations.add(productModel);
+            }
+            if (recommendations.size() == 3) break;
+        }
+        return recommendations;
     }
 
 //    @GetMapping("/more")

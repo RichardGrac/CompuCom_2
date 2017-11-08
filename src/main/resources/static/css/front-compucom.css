@@ -45,6 +45,20 @@
     background-color: transparent;
     color: white;
 }
+
+/* Name of the user online */
+.user,
+.arrow{
+    color: darkgrey;
+    text-decoration: none;
+}
+
+.user:hover,
+.arrow:hover{
+    color: lightgrey;
+    text-decoration: none;
+}
+
 /* --------------------------------------------- about.html ---------------------------------------- */
 .contact-border{
     border: solid darkgrey;

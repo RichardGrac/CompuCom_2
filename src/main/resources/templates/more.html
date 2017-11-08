@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>CompuCom - <span th:text="${product.name}"></span></title>
+    <title th:text="${pageTitle}">&nbsp;</title>
 
     <div th:replace="front-fragments/fimports::css">&nbsp;</div>
 
@@ -53,7 +53,7 @@
     <!-- /.row -->
 
     <!-- Call to Action Well -->
-    <div class="card text-white bg-secondary my-4 text-center">
+    <div class="card text-white bg-secondary my-4 text-center" th:if="${!products.isEmpty()}">
         <div class="card-body bg-dark">
             <p class="text-white m-0">Tambien te recomendamos algunos otros productos relacionados:</p>
         </div>
@@ -61,38 +61,15 @@
 
     <!-- Content Row -->
     <div class="row">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4" th:each="product : ${products}">
             <div class="card h-100">
                 <div class="card-body">
-                    <h2 class="card-title">Product One</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                    <h4 class="card-title" th:text="${product.name}"> </h4>
+                    <p class="center-align"><img class="image-center-align" th:src="@{/products/files?id=__${product.id}__}" alt="product-image" width="65%" height="220px"/></p>
+                    <p class="card-text" th:text="${product.description}"> </p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Ver más</a>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-md-4 -->
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Product Two</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Ver más</a>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-md-4 -->
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h2 class="card-title">Product Three</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
-                </div>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Ver más</a>
+                    <a th:href="@{/more?id=__${product.id}__}" class="btn btn-primary">Ver más</a>
                 </div>
             </div>
         </div>
