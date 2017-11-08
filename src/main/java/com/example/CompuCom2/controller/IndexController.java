@@ -99,6 +99,23 @@ public class IndexController {
         return Constants.FPRODUCTS;
     }
 
+    @RequestMapping("/more")
+    public ModelAndView more(Integer id){
+        LOG.info("METHOD: more() --PARAM: id="+id);
+        ModelAndView mav = new ModelAndView(Constants.MORE);
+        ProductModel productModel = productService.getProductById(id);
+        mav.addObject("product", productModel);
+        return mav;
+    }
+
+//    @GetMapping("/more")
+//    public String more(@RequestParam(name = "id") Integer id, Model model){
+//        LOG.info("METHOD: more() --PARAM: id="+id);
+//        ProductModel productModel = productService.getProductById(id);
+//        model.addAttribute("product", productModel);
+//        return Constants.MORE;
+//    }
+
     private ArrayList<ProductModel> resize_description(ArrayList<ProductModel> productModels){
         for (ProductModel product : productModels) {
             String descripcion = product.getDescription();

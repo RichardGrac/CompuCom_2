@@ -79,3 +79,12 @@
 .image-center-align{
     align-self: center;
 }
+
+/* ------------------------------------------------- more.html ------------------------------------------- */
+.font-color2{
+    color: darkblue;
+}
+
+.font-letter{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}

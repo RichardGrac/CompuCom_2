@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>CompuCom - <span th:text="${product.name}"></span></title>
+
+    <div th:replace="front-fragments/fimports::css">&nbsp;</div>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/small-business.css}" />
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="front-fragments/fheader::navigation">&nbsp;</div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Heading Row -->
+    <div class="row my-4">
+        <div class="col-lg-6">
+            <img class="img-fluid rounded" th:src="@{/products/files?id=__${product.id}__}" alt="product-image" width="85%" height="300px" />
+        </div>
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-6">
+            <h1 class="font-color font-letter" th:text="${product.name}"></h1>
+            <p>
+                <h5 class="font-color2">DISPONIBILIDAD: </h5>
+                <span th:text="${product.productQuantityModel.quantity}"> </span> unidades
+            </p>
+            <p>
+                <h5 class="font-color2">PRECIO: </h5>
+                $<span th:text="${product.price}"><b> (-<span th:text="${product.discount.percentage}"> </span>%)</b></span>
+            </p>
+            <p>
+                <h5 class="font-color2">CATEGORIA: </h5>
+                <span th:text="${product.category}"></span>
+            </p>
+            <p>
+                <h5 class="font-color2">DESCRIPCIÓN: </h5>
+                <span th:text="${product.description}"></span>
+            </p>
+            <p>
+                <a class="btn btn-primary btn-lg" href="#">¡Agregar al carrito!</a>
+            </p>
+        </div>
+        <!-- /.col-md-6 -->
+    </div>
+    <!-- /.row -->
+
+    <!-- Call to Action Well -->
+    <div class="card text-white bg-secondary my-4 text-center">
+        <div class="card-body bg-dark">
+            <p class="text-white m-0">Tambien te recomendamos algunos otros productos relacionados:</p>
+        </div>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Product One</h2>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-md-4 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Product Two</h2>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-md-4 -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">Product Three</h2>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-md-4 -->
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+
+<!-- footer & js -->
+<div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
+<div th:replace="front-fragments/fimports::js">&nbsp;</div>
+
+</body>
+</html>

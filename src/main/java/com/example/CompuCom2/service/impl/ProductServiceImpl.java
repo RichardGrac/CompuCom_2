@@ -53,7 +53,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductModel getProductById(Integer id) {
-        return productConverter.entityToModel(productRepository.findById(id));
+        LOG.info("METHOD: getProductById() --PARAMS: id=" + id);
+        ProductModel productModel = productConverter.entityToModel(productRepository.findById(id));
+        productModel.setDiscount(discountConverter.entityToModel(discountRepository.findById(id)));
+        productModel.setProductQuantityModel(productQuantityServiceImpl.getQuantityById(productModel.getId()));
+        return productModel;
     }
 
     @Override
