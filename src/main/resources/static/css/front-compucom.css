@@ -48,7 +48,8 @@
 
 /* Name of the user online */
 .user,
-.arrow{
+.arrow,
+.selection{
     color: darkgrey;
     text-decoration: none;
 }
@@ -101,4 +102,34 @@
 
 .font-letter{
     font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* ---------------------------------------- shopping-cart.html ------------------------------------------- */
+.text-darkgrey{
+    color:grey;
+}
+.text-limegreen{
+    color: #28a428;
+}
+
+.text-justify{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.text-smaller{
+    font-size: 11pt;
+}
+
+.green-area{
+    background-color: #eafaf1;
+    border-radius: 6px 6px 6px 6px;
+    width: 100%;
+    margin-left: 0.06em;
+}
+
+.shopping-table{
+    margin-top: 0.5em;
+    background-color: white;
+    border: solid grey;
 }

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>CompuCom - Carrito</title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/one-page-wonder.css}" />
+
+    <div th:replace="front-fragments/fimports::css">&nbsp;</div>
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="front-fragments/fheader::navigation">&nbsp;</div>
+
+<!-- Page Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <nav aria-label="breadcrumb" role="navigation">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a class="text-limegreen font-letter" th:href="@{/index}">SELECCIÓN</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a class="text-limegreen font-letter" href="#"><b>VERIFICACIÓN</b></a></li>
+                        <li class="breadcrumb-item text-darkgrey">MÉTODO DE PAGO</li>
+                    </ul>
+                </nav>
+            </div>
+            <!--./col-lg-12-->
+        </div>
+        <!--./row-->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="list-group margin-bottom text-justify font-letter text-smaller text-darkgrey">
+                        <div class="text-center">
+                            <img th:src="@{/img/shopping-cart.png}" alt="shopping-cart-image" height="25%" width="85%"/>
+                        </div>
+                        <p>Para asegurarnos de que tengas una experiencia de compra agradable con nosotros, te pedimos
+                            que por favor verifiques los productos escogidos.</p>
+                        <p>Para agregar o quitar productos de un mismo tipo basta con que índiques la cantidad deseable
+                            y continues con tú proceso de pago.</p>
+                        <p>Para añadir más productos diferentes, puedes ir a escojerlos sin ningun problema, tú carrito
+                            de compra se mantendrá aquí <i class="material-icons md-18">insert_emoticon</i></p>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <table class="table table-hover table-responsive">
+                        <caption>Listado de los productos en el carrito.</caption>
+                        <thead>
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Descuento</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" class="col-sm-8 col-md-6">
+                                <span style="color:blue;" class="font-letter">RAZER - INALÁMBRICO AMBIDIESTRO OUROBOROS</span>
+                            </th>
+                            <td class="col-sm-1 col-md-1" style="text-align: center">
+                                <input type="number" class="form-control" min="1" max="12" value="1" size="2" onkeydown="return false"/>
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center">$<span>2990.0</span></td>
+                            <td class="col-sm-1 col-md-1 text-center"><span>50.0</span>%</td>
+                            <td class="col-sm-1 col-md-1 text-center"><span>2990.0</span></td>
+                            <td class="col-sm-1 col-md-1 text-center"><button type="button" class="btn btn-danger"><i class="material-icons">delete_forever</i></button></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="col-sm-8 col-md-6">
+                                <span style="color:blue;" class="font-letter">RAZER - MOUSE GAMING MULTI-COLOR DEATHADD – NEGRO</span>
+                            </th>
+                            <td class="col-sm-1 col-md-1" style="text-align: center">
+                                <input type="number" class="form-control" min="1" max="12" value="1" size="2" onkeydown="return false"/>
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center">$<span>2990.0</span></td>
+                            <td class="col-sm-1 col-md-1 text-center"><span>50.0</span>%</td>
+                            <td class="col-sm-1 col-md-1 text-center"><span>2990.0</span></td>
+                            <td class="col-sm-1 col-md-1 text-center"><button type="button" class="btn btn-danger"><i class="material-icons">delete_forever</i></button></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="col-sm-8 col-md-6">
+                                <span style="color:blue;" class="font-letter">SEAGATE - DISCO DURO PORTÁTIL ULTRASLIM - 2TB - DORADO</span>
+                            </th>
+                            <td class="col-sm-1 col-md-1" style="text-align: center">
+                                <input type="number" class="form-control" min="1" max="12" value="1" size="2" onkeydown="return false"/>
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center">$<span>2990.0</span></td>
+                            <td class="col-sm-1 col-md-1 text-center"><span>50.0</span>%</td>
+                            <td class="col-sm-1 col-md-1 text-center"><span>2990.0</span></td>
+                            <td class="col-sm-1 col-md-1 text-center"><button type="button" class="btn btn-danger"><i class="material-icons">delete_forever</i></button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--./row green-area-->
+        <!--./content of the div centered -->
+    </div>
+    <!--./container-->
+</section>
+
+<!-- footer & js -->
+<div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
+<div th:replace="front-fragments/fimports::js">&nbsp;</div>
+
+</body>
+</html>
