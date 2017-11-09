@@ -34,7 +34,8 @@
             </p>
             <p>
                 <h5 class="font-color2">PRECIO: </h5>
-                $<span th:text="${product.price}"><b> (-<span th:text="${product.discount.percentage}"> </span>%)</b></span>
+                $<span th:text="${product.price}">
+                <b th:if="${product.discount.percentage != 0.0}"> (-<span th:text="${product.discount.percentage}"> </span>%)</b></span>
             </p>
             <p>
                 <h5 class="font-color2">CATEGORIA: </h5>
