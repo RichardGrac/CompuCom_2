@@ -13,7 +13,7 @@
     <div th:replace="front-fragments/fimports::css">&nbsp;</div>
 </head>
 
-<body>
+<body onload="calc_total(3);">
 <!-- Navigation -->
 <div th:replace="front-fragments/fheader::navigation">&nbsp;</div>
 
@@ -38,7 +38,7 @@
                 <div class="col-md-3">
                     <div class="list-group margin-bottom text-justify font-letter text-smaller text-darkgrey">
                         <div class="text-center">
-                            <img th:src="@{/img/shopping-cart.png}" alt="shopping-cart-image" height="25%" width="85%"/>
+                            <img th:src="@{/img/shopping-cart.png}" alt="shopping-cart-image" height="100%" width="85%"/>
                         </div>
                         <p>Para asegurarnos de que tengas una experiencia de compra agradable con nosotros, te pedimos
                             que por favor verifiques los productos escogidos.</p>
@@ -51,12 +51,12 @@
 
                 <div class="col-md-9">
                     <table class="table table-hover table-responsive">
-                        <caption>Listado de los productos en el carrito.</caption>
+                        <caption>*El Precio es sin IVA incluído.</caption>
                         <thead>
                         <tr>
                             <th scope="col">Producto</th>
                             <th scope="col">Cantidad</th>
-                            <th scope="col">Precio</th>
+                            <th scope="col">Precio*</th>
                             <th scope="col">Descuento</th>
                             <th scope="col" class="text-center">Subtotal</th>
                             <th scope="col">Eliminar</th>
@@ -68,11 +68,11 @@
                                 <span style="color:blue;" class="font-letter">RAZER - INALÁMBRICO AMBIDIESTRO OUROBOROS</span>
                             </th>
                             <td class="col-sm-1 col-md-1" style="text-align: center">
-                                <input type="number" class="form-control" min="1" max="12" value="1" size="2" id="cantidad1" onload="calc_total(3);" onclick="verify(1); calc_total(3);" onkeydown="return false"/>
+                                <input type="number" class="form-control" min="1" max="12" value="1" size="2" id="cantidad1" onclick="verify(1); calc_total(3);" onkeydown="return false"/>
                             </td>
                             <td class="col-sm-1 col-md-1 text-center">$<span id="precio1">2511.6</span></td>
                             <td class="col-sm-1 col-md-1 text-center"><span id="descuento1">50.0</span>%</td>
-                            <td class="col-sm-1 col-md-1 text-center">$<span id="subtotal1">1,255.8</span></td>
+                            <td class="col-sm-1 col-md-1 text-center">$<span id="subtotal1">1,255.80</span></td>
                             <td class="col-sm-1 col-md-1 text-center"><button type="button" class="btn btn-danger"><i class="material-icons">delete_forever</i></button></td>
                         </tr>
                         <tr>
@@ -84,7 +84,7 @@
                             </td>
                             <td class="col-sm-1 col-md-1 text-center">$<span id="precio2">2511.6</span></td>
                             <td class="col-sm-1 col-md-1 text-center"><span id="descuento2">50.0</span>%</td>
-                            <td class="col-sm-1 col-md-1 text-center">$<span id="subtotal2">1255.8</span></td>
+                            <td class="col-sm-1 col-md-1 text-center">$<span id="subtotal2">1255.80</span></td>
                             <td class="col-sm-1 col-md-1 text-center"><button type="button" class="btn btn-danger"><i class="material-icons">delete_forever</i></button></td>
                         </tr>
                         <tr>
@@ -96,7 +96,7 @@
                             </td>
                             <td class="col-sm-1 col-md-1 text-center">$<span id="precio3">2511.6</span></td>
                             <td class="col-sm-1 col-md-1 text-center"><span id="descuento3">50.0</span>%</td>
-                            <td class="col-sm-1 col-md-1 text-center">$<span id="subtotal3">1255.8</span></td>
+                            <td class="col-sm-1 col-md-1 text-center">$<span id="subtotal3">1255.80</span></td>
                             <td class="col-sm-1 col-md-1 text-center"><button type="button" class="btn btn-danger"><i class="material-icons">delete_forever</i></button></td>
                         </tr>
                         <tr>
@@ -128,7 +128,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><button type="button" class="btn btn-secondary">Seguir comprando</button></td>
+                            <td><a th:href="@{/index}"><button type="button" class="btn btn-secondary">Seguir comprando</button></a></td>
                             <td><button type="button" class="btn btn-success" id="btn_continue">Continuar</button></td>
                         </tr>
                         </tbody>
