@@ -95,7 +95,8 @@
                             <td class="col-sm-2 col-md-2 text-center">
                                 <!--<a th:href="@{/shopping_cart/updatequantity(sc_id=${sc.idSc},quantity=${document.getElementById('cantidad'+iterStat.index).value})}">-->
                                 <!--<a th:href="" th:onclick="'this.href=/shopping_cart/updatequantity?sc_id=' + ${sc.idSc} + '&x=' + document.getElementById('cantidad'+${iterStat.index}).value">-->
-                                <a th:href="@{/shopping_cart/updatequantity(sc_id=${sc.idSc}, quantity=3)}">
+                                <!--<a th:href="@{/shopping_cart/updatequantity(sc_id=${sc.idSc}, quantity=3)}">-->
+                                <a id="incremet" th:onclick="${'javascript:testing(' + sc.idSc + ',' + iterStat.index + ')'}" >
                                 <!--<a href="#">-->
                                     <button type="button" class="btn btn-primary"><i class="material-icons">save</i></button>
                                 </a>
@@ -150,6 +151,10 @@
 <div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
 <div th:replace="front-fragments/fimports::js">&nbsp;</div>
 <script th:src="@{/js/shopping-cart.js}"></script>
+
+<script>
+
+</script>
 
 </body>
 </html>

@@ -56,3 +56,9 @@ function calc_price(quantity){
         verify(quantity);
     }
 }
+
+function testing(id_sc, iter) {
+    var quantity = document.getElementById('cantidad' + iter).value;
+    var url = '/shopping_cart/updatequantity?sc_id=' + id_sc + '&quantity=' + quantity;
+    $.get(url);
+}
