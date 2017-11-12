@@ -28,6 +28,10 @@ public class User {
     @JoinTable(name = "user_role",joinColumns = { @JoinColumn(name = "user_id") },inverseJoinColumns = { @JoinColumn(name = "role_id") })
     private Set<Role> role = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private ShoppingCart shoppingCart;
+
+
     public User(){}
 
     public User(String username, String password, String email, UserAddress userAdress) {
@@ -83,6 +87,14 @@ public class User {
 
     public void setUserAdress(UserAddress userAdress) {
         this.userAdress = userAdress;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 
     @Override

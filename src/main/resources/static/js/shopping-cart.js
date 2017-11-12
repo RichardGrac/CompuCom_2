@@ -1,30 +1,33 @@
-function verify(id_prod) {
+function verify(quantity) {
     //Security:
     document.getElementById("btn_continue").disabled = true;
-    id_prod = id_prod.toString();
-    //Strings:
-    var s_precio = "precio" + id_prod;
-    var s_cantidad = "cantidad" + id_prod;
-    var s_descuento = "descuento" + id_prod;
-    var s_subtotal = "subtotal" + id_prod;
+    for(var id_prod = 0; id_prod < quantity; id_prod++){
+        id_prod = id_prod.toString();
+        //Strings:
+        var s_precio = "precio" + id_prod;
+        var s_cantidad = "cantidad" + id_prod;
+        var s_descuento = "descuento" + id_prod;
+        var s_subtotal = "subtotal" + id_prod;
 
-    //Valores:
-    var precio, descuento, cantidad, total;
+        //Valores:
+        var precio, descuento, cantidad, total;
 
-    precio = parseFloat(document.getElementById(s_precio).innerText);
-    cantidad = parseFloat(document.getElementById(s_cantidad).value);
-    descuento = "0." + document.getElementById(s_descuento).innerText;
-    descuento = parseFloat(descuento);
+        precio = parseFloat(document.getElementById(s_precio).innerText);
+        cantidad = parseFloat(document.getElementById(s_cantidad).value);
+        descuento = "0." + document.getElementById(s_descuento).innerText;
+        descuento = parseFloat(descuento);
 
-    precio = (precio * cantidad * descuento).toFixed(2);
-    document.getElementById(s_subtotal).innerText = precio;
-
+        precio = (precio * cantidad) - (precio * cantidad * descuento);
+        precio = precio.toFixed(2);
+        document.getElementById(s_subtotal).innerText = precio;
+    }
+    calc_total(quantity);
 }
 
 function calc_total(quantity) {
     var s_subtotal = "subtotal";
     var subtotal = 0.0;
-    for(var i = 1; i <= quantity; i++){
+    for(var i = 0; i < quantity; i++){
         var element = s_subtotal+(i.toString());
         subtotal += parseFloat(document.getElementById(element).innerText);
     }
@@ -36,4 +39,14 @@ function calc_total(quantity) {
     document.getElementById("total").innerText = total.toFixed(2);
 
     document.getElementById("btn_continue").disabled = false;
+}
+
+function calc_price(quantity){
+    for (var i = 0; i < quantity; i++){
+        var s_price = ("precio" + i.toString());
+        var price = parseFloat(document.getElementById(s_price).innerText);
+        price = (price - (price * 0.16));
+        price = price.toFixed(2);
+        document.getElementById(s_price).innerText = price;
+    }
 }

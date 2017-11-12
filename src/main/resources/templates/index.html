@@ -84,8 +84,11 @@
               <p class="card-text"><b>Descripción: </b><span th:text="${product.description}"></span></p>
             </div>
             <div class="card-footer">
-              <a href="#">
+              <a th:if="${session.userGlobal != null}" th:href="@{/shopping_cart/addtoshoppingcart(id_user=${session.userGlobal.id},id_prod=${product.id})}">
                 <button type="button" class="btn btn-outline btn-success"><i class="material-icons">add_shopping_cart</i></button>
+              </a>
+              <a th:if="${session.userGlobal == null}" href="#">
+                  <button type="button" class="btn btn-outline btn-success"><i class="material-icons">add_shopping_cart</i></button>
               </a>
               <a th:href="@{/more?id=__${product.id}__}">
                 <button type="button" class="btn btn-outline btn-primary font-bigger">Ver más</button>

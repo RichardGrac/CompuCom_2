@@ -12,6 +12,7 @@ public class UserModel {
     private String email;
     private Set<Role> roles;
     private UserAddress userAdress;
+    private ShoppingCartModel shoppingCartModel;
 
     public UserModel(){
         userAdress = new UserAddress();
@@ -71,6 +72,14 @@ public class UserModel {
 
     public void setUserAdress(UserAddress userAdress) {
         this.userAdress = userAdress;
+    }
+
+    public ShoppingCartModel getShoppingCartModel() {
+        return shoppingCartModel;
+    }
+
+    public void setShoppingCartModel(ShoppingCartModel shoppingCartModel) {
+        this.shoppingCartModel = shoppingCartModel;
     }
 
     @Override

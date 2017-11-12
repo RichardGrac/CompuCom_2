@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("productServiceImpl")
 public class ProductServiceImpl implements ProductService {
 
     public static final Log LOG = LogFactory.getLog(ProductServiceImpl.class);

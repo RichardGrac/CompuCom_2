@@ -58,7 +58,7 @@
                         </li>
 
                         <li th:if="${session.userGlobal != null}" class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" th:href="@{/shopping_cart/showcart?id_user=__${session.userGlobal.id}__}">
                             <div>
                                 <i class="material-icons">shopping_cart</i>
                                 <span class="badge badge-secondary">0</span>
