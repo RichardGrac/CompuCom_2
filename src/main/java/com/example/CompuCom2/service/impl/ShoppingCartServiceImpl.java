@@ -59,10 +59,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
             ShoppingCart SC1 = shoppingCartRepository.save(new ShoppingCart(id_user, id_prod, 1));
             return SC1 != null;
         }else{
-            // The product exists, then We only modify the quantity:
-            shoppingCart.setQuantity((shoppingCart.getQuantity()+1));
-            ShoppingCart SC1 = shoppingCartRepository.save(shoppingCart);
-            return SC1 != null;
+            // The product exists, then We only modify the quantity.
+//            But first We check if the Quantity is available:
+            ProductModel productModel = productService.getProductById(id_prod);
+            if(productModel.getProductQuantityModel().getQuantity() > shoppingCart.getQuantity()){
+                shoppingCart.setQuantity((shoppingCart.getQuantity()+1));
+                ShoppingCart SC1 = shoppingCartRepository.save(shoppingCart);
+                return true;
+            }
+//            The Quantity available is the same as that ShoppingCart of his/her S.Cart
+            return false;
         }
     }
 

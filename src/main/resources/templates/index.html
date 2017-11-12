@@ -87,7 +87,7 @@
               <a th:if="${session.userGlobal != null}" th:href="@{/shopping_cart/addtoshoppingcart(id_user=${session.userGlobal.id},id_prod=${product.id})}">
                 <button type="button" class="btn btn-outline btn-success"><i class="material-icons">add_shopping_cart</i></button>
               </a>
-              <a th:if="${session.userGlobal == null}" href="#">
+              <a th:if="${session.userGlobal == null}" th:href="@{/login}">
                   <button type="button" class="btn btn-outline btn-success"><i class="material-icons">add_shopping_cart</i></button>
               </a>
               <a th:href="@{/more?id=__${product.id}__}">

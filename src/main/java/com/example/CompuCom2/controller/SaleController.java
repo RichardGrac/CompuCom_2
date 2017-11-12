@@ -2,7 +2,9 @@ package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
 import com.example.CompuCom2.entity.ShoppingCart;
+import com.example.CompuCom2.model.ProductCategoryModel;
 import com.example.CompuCom2.model.ShoppingCartModel;
+import com.example.CompuCom2.service.ProductCategoryService;
 import com.example.CompuCom2.service.impl.ProductServiceImpl;
 import com.example.CompuCom2.service.impl.ShoppingCartServiceImpl;
 import org.apache.commons.logging.Log;
@@ -30,11 +32,16 @@ public class SaleController {
     @Qualifier("productServiceImpl")
     private ProductServiceImpl productService;
 
+    @Autowired
+    private ProductCategoryService productCategoryService;
+
     @RequestMapping("/showcart")
     public ModelAndView showTheShoppingCart(Integer id_user){
         ModelAndView mav = new ModelAndView(Constants.SHOPPING_CART);
         ArrayList<ShoppingCartModel> shopping_cart = shoppingCartService.findAllProductsByUser(id_user);
         mav.addObject("shopping_cart", shopping_cart);
+        ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
+        mav.addObject("categories", productCategoryModels);
         return mav;
     }
 
