@@ -22,6 +22,7 @@ public class LoginController {
     @GetMapping("/login")
     public ModelAndView showLoginForm(@RequestParam(name = "error", required = false) String error,
                                       @RequestParam(name = "logout", required = false) String logout){
+        LOG.info("METHOD: showLoginForm()");
         ModelAndView modelAndView = new ModelAndView(Constants.LOGIN);
         modelAndView.addObject("error", error);
         modelAndView.addObject("logout", logout);
@@ -42,6 +43,7 @@ public class LoginController {
 
     @GetMapping("/registro")
     public ModelAndView register(Model model){
+        LOG.info("METHOD: register()");
         ModelAndView modelAndView = new ModelAndView(Constants.REGISTER);
         UserModel pop = (UserModel) model.asMap().get("user");
         if (pop != null){

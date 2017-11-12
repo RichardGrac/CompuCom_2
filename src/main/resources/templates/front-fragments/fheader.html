@@ -56,12 +56,12 @@
                                 <span class="keys">}</span>
                             </a>
                         </li>
-
+                        <input th:if="${session.userGlobal != null}" id="id_user" type="number" th:value="${session.userGlobal.id}" hidden=""/>
                         <li th:if="${session.userGlobal != null}" class="nav-item">
                             <a class="nav-link" th:href="@{/shopping_cart/showcart?id_user=__${session.userGlobal.id}__}">
                             <div>
                                 <i class="material-icons">shopping_cart</i>
-                                <span class="badge badge-secondary">0</span>
+                                <span class="badge badge-secondary" th:id="numberOfProducts">&nbsp;</span>
                             </div>
                             </a>
                         </li>
@@ -91,6 +91,7 @@
             </div>
         </nav>
         <script th:src="@{https://use.fontawesome.com/86f0b2995e.js}"></script>
+
     </div>
     <!--./navigation-->
 </body>

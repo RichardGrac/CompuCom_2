@@ -13,13 +13,32 @@
     <div th:replace="front-fragments/fimports::css">&nbsp;</div>
 </head>
 
-<body th:onload="'calc_price(' + ${shopping_cart.size()} + '); verify(' + ${shopping_cart.size()} + ');'">
+<body th:onload="'calc_price(' + ${shopping_cart.size()} + ');'">
 <!-- Navigation -->
 <div th:replace="front-fragments/fheader::navigation">&nbsp;</div>
 
 <!-- Page Content -->
 <section class="py-5">
     <div class="container">
+
+        <div class="row" th:if="${deleted == 1}">
+            <div class="col-lg-4">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    Producto eliminado correctamente!
+                </div>
+            </div>
+        </div>
+
+        <div class="row" th:if="${result == 1}">
+            <div class="col-lg-4">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    Producto agregado correctamente!
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-12 text-center">
                 <nav aria-label="breadcrumb" role="navigation">
@@ -42,8 +61,8 @@
                         </div>
                         <p>Para asegurarnos de que tengas una experiencia de compra agradable con nosotros, te pedimos
                             que por favor verifiques los productos escogidos.</p>
-                        <p>Para agregar o quitar productos de un mismo tipo basta con que índiques la cantidad deseable
-                            y continues con tú proceso de pago.</p>
+                        <p>Para agregar o quitar productos de un mismo tipo por favor índique la cantidad deseable
+                            y guarde los cambios.</p>
                         <p>Para añadir más productos diferentes, puedes ir a escojerlos sin ningun problema, tú carrito
                             de compra se mantendrá aquí <i class="material-icons md-18">insert_emoticon</i></p>
                     </div>
@@ -68,12 +87,22 @@
                                 <span style="color:blue;" class="font-letter" th:text="${sc.product.name}"></span>
                             </th>
                             <td class="col-sm-1 col-md-1" style="text-align: center">
-                                <input type="number" th:value="${sc.quantity}" class="form-control" min="1" th:max="${sc.product.productQuantityModel.quantity}" size="2" th:id="'cantidad' + ${iterStat.index}" th:onclick="'verify(' + ${shopping_cart.size()} + ');'" onkeydown="return false"/>
+                                <input type="number" th:value="${sc.quantity}" class="form-control" min="1" th:max="${sc.product.productQuantityModel.quantity}" size="2" th:id="'cantidad' + ${iterStat.index}" th:name="'cantidad' + ${iterStat.index}" th:onclick="'verify(' + ${shopping_cart.size()} + ');'" onkeydown="return false"/>
                             </td>
                             <td class="col-sm-1 col-md-1 text-center">$<span th:id="'precio' + ${iterStat.index}" th:text="${sc.product.price}"> </span></td>
                             <td class="col-sm-1 col-md-1 text-center"><span th:id="'descuento' + ${iterStat.index}" th:text="${sc.product.discount.percentage}"> </span>%</td>
                             <td class="col-sm-1 col-md-1 text-center">$<span th:id="'subtotal' + ${iterStat.index}"> </span></td>
-                            <td class="col-sm-1 col-md-1 text-center"><button type="button" class="btn btn-danger"><i class="material-icons">delete_forever</i></button></td>
+                            <td class="col-sm-2 col-md-2 text-center">
+                                <!--<a th:href="@{/shopping_cart/updatequantity(sc_id=${sc.idSc},quantity=${document.getElementById('cantidad'+iterStat.index).value})}">-->
+                                <!--<a th:href="" th:onclick="'this.href=/shopping_cart/updatequantity?sc_id=' + ${sc.idSc} + '&x=' + document.getElementById('cantidad'+${iterStat.index}).value">-->
+                                <a th:href="@{/shopping_cart/updatequantity(sc_id=${sc.idSc}, quantity=3)}">
+                                <!--<a href="#">-->
+                                    <button type="button" class="btn btn-primary"><i class="material-icons">save</i></button>
+                                </a>
+                                <a th:href="@{/shopping_cart/deletefromshoppingcart(id_user=${session.userGlobal.id},id_prod=${sc.product.id})}">
+                                    <button type="button" class="btn btn-danger"><i class="material-icons">delete_forever</i></button>
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td></td>
@@ -81,7 +110,7 @@
                             <td></td>
                             <td></td>
                             <td><b>Subtotal:</b></td>
-                            <td>$<span id="subtotal"></span></td>
+                            <td>$ <span id="subtotal">0.00</span></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -89,7 +118,7 @@
                             <td></td>
                             <td></td>
                             <td><b>IVA (16%):</b></td>
-                            <td>$ <span id="iva"></span></td>
+                            <td>$ <span id="iva">0.00</span></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -97,7 +126,7 @@
                             <td></td>
                             <td></td>
                             <td><b>Total:</b></td>
-                            <td>$ <span id="total"></span></td>
+                            <td>$ <span id="total">0.00</span></td>
                         </tr>
                         <tr>
                             <td></td>

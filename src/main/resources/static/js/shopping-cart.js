@@ -42,11 +42,17 @@ function calc_total(quantity) {
 }
 
 function calc_price(quantity){
-    for (var i = 0; i < quantity; i++){
-        var s_price = ("precio" + i.toString());
-        var price = parseFloat(document.getElementById(s_price).innerText);
-        price = (price - (price * 0.16));
-        price = price.toFixed(2);
-        document.getElementById(s_price).innerText = price;
+    /* Doesn't exists products in the cart */
+    if (quantity == "0"){
+        document.getElementById("btn_continue").setAttribute("disabled", "disabled");
+    }else{
+        for (var i = 0; i < quantity; i++){
+            var s_price = ("precio" + i.toString());
+            var price = parseFloat(document.getElementById(s_price).innerText);
+            price = (price - (price * 0.16));
+            price = price.toFixed(2);
+            document.getElementById(s_price).innerText = price;
+        }
+        verify(quantity);
     }
 }

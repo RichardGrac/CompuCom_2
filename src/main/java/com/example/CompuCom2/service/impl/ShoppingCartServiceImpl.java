@@ -6,6 +6,8 @@ import com.example.CompuCom2.model.ProductModel;
 import com.example.CompuCom2.model.ShoppingCartModel;
 import com.example.CompuCom2.repository.ShoppingCartRepository;
 import com.example.CompuCom2.service.ShoppingCartService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.util.List;
 
 @Service("shoppingCartServiceImpl")
 public class ShoppingCartServiceImpl implements ShoppingCartService{
+    private static final Log LOG = LogFactory.getLog(ShoppingCartServiceImpl.class);
 
     @Autowired
     @Qualifier("shoppingCartConverter")
@@ -65,12 +68,31 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 
 
     @Override
-    public boolean removeProductFromSC(int id_user, int id_prod) {
-        return false;
+    public int removeProductFromSC(int id_user, int id_prod) {
+        LOG.info("METHOD: removeProductFromSC() --PARAM: id_user="+id_user+", id_prod="+id_prod);
+        return shoppingCartRepository.removeByIdUserAndIdProd(id_user, id_prod);
     }
 
     @Override
     public ShoppingCart findByUserAndProduct(int id_user, int id_prod) {
         return shoppingCartRepository.findByIdUserAndIdProd(id_user, id_prod);
+    }
+
+    @Override
+    public int numberOfProducts(int id_user) {
+        ArrayList<ShoppingCart> cart = (ArrayList<ShoppingCart>) shoppingCartRepository.findAllByIdUser(id_user);
+        int number = 0;
+        for (ShoppingCart sc : cart) {
+            number += sc.getQuantity();
+        }
+        return number;
+    }
+
+    @Override
+    public ShoppingCart modifyQuantity(int id_sc, int quantity) {
+        ShoppingCart sc = shoppingCartRepository.findByIdSc(id_sc);
+        sc.setQuantity(quantity);
+        sc = shoppingCartRepository.save(sc);
+        return sc;
     }
 }

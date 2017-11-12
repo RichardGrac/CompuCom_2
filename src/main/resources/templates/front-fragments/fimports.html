@@ -25,6 +25,13 @@
         <!-- Bootstrap core JavaScript -->
         <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
         <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+        <script>
+            var id_user = parseInt(document.getElementById("id_user").value);
+            $.get("/shopping_cart/getnumberofproducts/?id_user="+ id_user, function (response) {
+                $("#numberOfProducts").text(response)
+            });
+        </script>
     </div>
 </body>
 </html>

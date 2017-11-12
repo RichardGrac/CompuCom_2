@@ -1,6 +1,7 @@
 package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
+import com.example.CompuCom2.entity.ShoppingCart;
 import com.example.CompuCom2.model.ShoppingCartModel;
 import com.example.CompuCom2.service.impl.ProductServiceImpl;
 import com.example.CompuCom2.service.impl.ShoppingCartServiceImpl;
@@ -9,7 +10,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -36,14 +39,41 @@ public class SaleController {
     }
 
     @RequestMapping("/addtoshoppingcart")
-    public String addProductToShoppingCart(Integer id_user, Integer id_prod){
+    public ModelAndView addProductToShoppingCart(Integer id_user, Integer id_prod){
         LOG.info("METHOD: addProductToShoppingCart() --PARAM: id_user="+id_user+", id_prod="+id_prod);
-        if(shoppingCartService.addProductToSC(id_user, id_prod)){
-            System.out.println("Producto="+id_prod + " agregado a user="+id_user);
+        ModelAndView mav = new ModelAndView("redirect:/shopping_cart/showcart?id_user=" + id_user);
+        boolean result = shoppingCartService.addProductToSC(id_user, id_prod);
+        if(result){
+            mav.addObject("result", 1);
         }else{
-            System.out.println("NO se agrego el Producto="+id_prod + " a user="+id_user);
+            mav.addObject("result", 0);
         }
-        return "redirect:/index";
+        return mav;
     }
 
+    @RequestMapping("/deletefromshoppingcart")
+    public ModelAndView deleteFromShoppingCart(Integer id_user, Integer id_prod){
+        LOG.info("METHOD: deleteFromShoppingCart() --PARAM: id_user="+id_user+", id_prod="+id_prod);
+        ModelAndView mav = new ModelAndView("redirect:/shopping_cart/showcart?id_user=" + id_user);
+        int deleted = shoppingCartService.removeProductFromSC(id_user, id_prod);
+        System.out.println("deleted="+deleted);
+        mav.addObject("deleted", deleted);
+        return mav;
+    }
+
+    @ResponseBody
+    @GetMapping("/getnumberofproducts")
+    public int getNumberOfProducts(Integer id_user){
+        LOG.info("METHOD: getNumberOfProducts() --PARAM: id_user="+id_user);
+        return shoppingCartService.numberOfProducts(id_user);
+    }
+
+    @GetMapping("/updatequantity")
+    public ModelAndView updateQuantity(int sc_id, int quantity){
+        LOG.info("METHOD: updateQuantity() --PARAM: id_sc="+sc_id+", quantity="+quantity);
+        ShoppingCart sc = shoppingCartService.modifyQuantity(sc_id, quantity);
+        System.out.println(sc);
+        ModelAndView mav = new ModelAndView("redirect:/shopping_cart/showcart?id_user=" + sc.getIdUser());
+        return mav;
+    }
 }
