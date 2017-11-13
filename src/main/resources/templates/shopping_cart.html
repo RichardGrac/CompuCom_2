@@ -128,7 +128,14 @@
                             <td></td>
                             <td></td>
                             <td><a th:href="@{/index}"><button type="button" class="btn btn-secondary">Seguir comprando</button></a></td>
-                            <td><button type="button" class="btn btn-success" id="btn_continue">Continuar</button></td>
+                            <td>
+                                <a th:href="@{/shopping_cart/shipping_method?id_user=__${session.userGlobal.id}__}">
+                                <button type="button" class="btn btn-success" id="btn_continue">
+                                    <i class="material-icons md-18">arrow_forward</i>
+                                    Continuar
+                                </button>
+                                </a>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

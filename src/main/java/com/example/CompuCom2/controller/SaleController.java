@@ -1,12 +1,17 @@
 package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
+import com.example.CompuCom2.converter.UserAddressConverter;
 import com.example.CompuCom2.entity.ShoppingCart;
 import com.example.CompuCom2.model.ProductCategoryModel;
 import com.example.CompuCom2.model.ShoppingCartModel;
+import com.example.CompuCom2.model.UserAddressModel;
+import com.example.CompuCom2.model.UserModel;
 import com.example.CompuCom2.service.ProductCategoryService;
+import com.example.CompuCom2.service.UserService;
 import com.example.CompuCom2.service.impl.ProductServiceImpl;
 import com.example.CompuCom2.service.impl.ShoppingCartServiceImpl;
+import com.example.CompuCom2.service.impl.UserServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +39,15 @@ public class SaleController {
 
     @Autowired
     private ProductCategoryService productCategoryService;
+
+    @Autowired
+    @Qualifier("userServiceImpl")
+    private UserServiceImpl userService;
+
+    @Autowired
+    @Qualifier("userAddressConverter")
+    private UserAddressConverter userAddressConverter;
+
 
     @RequestMapping("/showcart")
     public ModelAndView showTheShoppingCart(Integer id_user){
@@ -80,5 +94,17 @@ public class SaleController {
         LOG.info("METHOD: updateQuantity() --PARAM: id_sc="+sc_id+", quantity="+quantity);
         ShoppingCart sc = shoppingCartService.modifyQuantity(sc_id, quantity);
         return new ModelAndView("redirect:/shopping_cart/showcart?id_user=" + sc.getIdUser());
+    }
+
+    @RequestMapping("/shipping_method")
+    public ModelAndView shippingMethod(Integer id_user){
+        LOG.info("METHOD: updateQuantity() --PARAM: id_sc="+id_user);
+        ModelAndView mav = new ModelAndView(Constants.SHIPPING_METHOD);
+        UserAddressModel userAddressModel = userService.findUserAddressByIdModel(id_user);
+        System.out.println("userAdModel="+ userAddressModel);
+        mav.addObject("address", userAddressModel);
+        ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
+        mav.addObject("categories", productCategoryModels);
+        return mav;
     }
 }

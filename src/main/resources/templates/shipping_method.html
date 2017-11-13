@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>CompuCom - Dirección de envío</title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/one-page-wonder.css}" />
+
+    <div th:replace="front-fragments/fimports::css">&nbsp;</div>
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="front-fragments/fheader::navigation">&nbsp;</div>
+
+<!-- Page Content -->
+<section class="py-5">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <nav aria-label="breadcrumb" role="navigation">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a class="text-limegreen font-letter" th:href="@{/index}">SELECCIÓN</a></li>
+                        <li class="breadcrumb-item"><a class="text-limegreen font-letter" th:href="@{/shopping_cart/showcart?id_user=__${session.userGlobal.id}__}">VERIFICACIÓN DE PRODUCTOS</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a class="text-limegreen font-letter" href="#"><b>VERIFICACIÓN DE ENVÍO</b></a></li>
+                        <li class="breadcrumb-item text-darkgrey">MÉTODO DE PAGO</li>
+                    </ul>
+                </nav>
+            </div>
+            <!--./col-lg-12-->
+        </div>
+        <!--./row-->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group margin-bottom text-justify font-letter text-smaller text-darkgrey">
+                    <div class="text-center margin-bottom">
+                        <img th:src="@{/img/shipping.png}" alt="shopping-cart-image" height="85%" width="75%"/>
+                    </div>
+                    <p>Para asegurarnos de que tengas una experiencia de compra agradable con nosotros, te pedimos
+                        que por favor verifiques la dirección a donde los productos serán envíados.</p>
+                    <h3><a href="#" title="Si deseas cambiar tú dirección de envío, solo dá clic aquí">Cambiar dirección</a></h3>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="street">Calle</label>
+                    <input type="text" class="form-control" id="street" name="street" th:value="${address.street}" readonly="" />
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="number">Número</label>
+                        <input type="text" class="form-control" id="number" name="number" th:value="${address.number}" readonly="" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="colony">Colonia</label>
+                        <input type="text" class="form-control" id="colony" name="colony" th:value="${address.colony}" readonly="" />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="zip">Zip/CP</label>
+                        <input type="text" class="form-control" id="zip" name="zip" th:value="${address.zip}" readonly="" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="state">Estado</label>
+                        <input type="text" class="form-control" id="state" name="state" th:value="${address.state}" readonly="" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="city">Ciudad</label>
+                        <input type="text" class="form-control" id="city" name="city" th:value="${address.city}" readonly="" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="country">País</label>
+                        <input type="text" class="form-control" id="country" name="country" th:value="${address.country}" readonly="" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reference">Referencia</label>
+                    <textarea class="form-control" id="reference" name="reference" th:text="${address.reference}" readonly="" ></textarea>
+                </div>
+
+                <div class="row">
+                    <label class="col-md-7" >&nbsp;</label>
+                    <div class="col-md-5">
+                        <a th:href="@{/shopping_cart/showcart?id_user=__${session.userGlobal.id}__}">
+                            <button type="button" class="btn btn-secondary">
+                                <i class="material-icons md-18">arrow_back</i>
+                                Verificar productos
+                            </button>
+                        </a>
+                        <a href="#">
+                            <button type="button" class="btn btn-success" id="btn_continue">
+                                <i class="material-icons md-18">arrow_forward</i>
+                                Continuar
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--./row -->
+    </div>
+    <!--./container-->
+</section>
+
+<!-- footer & js -->
+<div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
+<div th:replace="front-fragments/fimports::js">&nbsp;</div>
+<script th:src="@{/js/shopping-cart.js}"></script>
+
+</body>
+</html>
