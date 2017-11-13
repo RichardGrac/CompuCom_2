@@ -57,10 +57,12 @@ function calc_price(quantity){
     }
 }
 
-function testing(id_sc, iter) {
+function testing(id_sc, iter, id_user) {
     var quantity = document.getElementById('cantidad' + iter).value;
     var url = '/shopping_cart/updatequantity?sc_id=' + id_sc + '&quantity=' + quantity;
-    $.get(url);
+    $.get(url, function () {
+        window.location.href = "/shopping_cart/showcart?id_user=" + id_user;
+    });
 }
 
 function enableSave(numberOfButton) {

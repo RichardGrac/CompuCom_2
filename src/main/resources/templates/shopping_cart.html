@@ -87,7 +87,7 @@
                                 <a th:href="@{/more?id=__${sc.product.id}__}"><span style="color:blue;" class="font-letter" th:text="${sc.product.name}"></span></a>
                             </th>
                             <td class="col-sm-1 col-md-1" style="text-align: center">
-                                <input type="number" th:value="${sc.quantity}" class="form-control" min="1" th:max="${sc.product.productQuantityModel.quantity}" size="2" th:id="'cantidad' + ${iterStat.index}" th:name="'cantidad' + ${iterStat.index}" th:onclick="'verify(' + ${shopping_cart.size()} + '); enableSave(' + ${iterStat.index} + ')'" onkeydown="return false"/>
+                                <input type="number" th:value="${sc.quantity}" class="form-control" min="1" th:max="${sc.product.productQuantityModel.quantity}" size="2" th:id="'cantidad' + ${iterStat.index}" th:name="'cantidad' + ${iterStat.index}" th:onclick="'verify(' + ${shopping_cart.size()} + '); enableSave(' + ${iterStat.index} + ')'" onkeydown="return false" th:onchange="${'javascript:testing(' + sc.idSc + ',' + iterStat.index + ',' + session.userGlobal.id + ')'}"/>
                             </td>
                             <td class="col-sm-1 col-md-1 text-center">$<span th:id="'precio' + ${iterStat.index}" th:text="${sc.product.price}"> </span></td>
                             <td class="col-sm-1 col-md-1 text-center"><span th:id="'descuento' + ${iterStat.index}" th:text="${sc.product.discount.percentage}"> </span>%</td>
@@ -96,7 +96,7 @@
                                 <!--<a th:href="@{/shopping_cart/updatequantity(sc_id=${sc.idSc},quantity=${document.getElementById('cantidad'+iterStat.index).value})}">-->
                                 <!--<a th:href="" th:onclick="'this.href=/shopping_cart/updatequantity?sc_id=' + ${sc.idSc} + '&x=' + document.getElementById('cantidad'+${iterStat.index}).value">-->
                                 <!--<a th:href="@{/shopping_cart/updatequantity(sc_id=${sc.idSc}, quantity=3)}">-->
-                                <a id="incremet" th:onclick="${'javascript:testing(' + sc.idSc + ',' + iterStat.index + ')'}" >
+                                <a id="incremet" th:onclick="${'javascript:testing(' + sc.idSc + ',' + iterStat.index + ',' + session.userGlobal.id + ')'}" >
                                 <!--<a href="#">-->
                                     <button type="button" class="btn btn-secondary" th:id="'save' + ${iterStat.index}" th:onclick="'disableSave(' + ${iterStat.index} + ');'" disabled="disabled" title="Guardar cambios"><i class="material-icons">save</i></button>
                                 </a>
