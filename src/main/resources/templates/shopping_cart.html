@@ -84,10 +84,10 @@
                         <tbody>
                         <tr th:each="sc, iterStat : ${shopping_cart}">
                             <th scope="row" class="col-sm-8 col-md-6">
-                                <span style="color:blue;" class="font-letter" th:text="${sc.product.name}"></span>
+                                <a th:href="@{/more?id=__${sc.product.id}__}"><span style="color:blue;" class="font-letter" th:text="${sc.product.name}"></span></a>
                             </th>
                             <td class="col-sm-1 col-md-1" style="text-align: center">
-                                <input type="number" th:value="${sc.quantity}" class="form-control" min="1" th:max="${sc.product.productQuantityModel.quantity}" size="2" th:id="'cantidad' + ${iterStat.index}" th:name="'cantidad' + ${iterStat.index}" th:onclick="'verify(' + ${shopping_cart.size()} + ');'" onkeydown="return false" th:onchange="${'javascript:testing(' + sc.idSc + ',' + iterStat.index + ',' + session.userGlobal.id + ')'}"/>
+                                <input type="number" th:value="${sc.quantity}" class="form-control" min="1" th:max="${sc.product.productQuantityModel.quantity}" size="2" th:id="'cantidad' + ${iterStat.index}" th:name="'cantidad' + ${iterStat.index}" th:onclick="'verify(' + ${shopping_cart.size()} + '); enableSave(' + ${iterStat.index} + ')'" onkeydown="return false" th:onchange="${'javascript:testing(' + sc.idSc + ',' + iterStat.index + ',' + session.userGlobal.id + ')'}"/>
                             </td>
                             <td class="col-sm-1 col-md-1 text-center">$<span th:id="'precio' + ${iterStat.index}" th:text="${sc.product.price}"> </span></td>
                             <td class="col-sm-1 col-md-1 text-center"><span th:id="'descuento' + ${iterStat.index}" th:text="${sc.product.discount.percentage}"> </span>%</td>
@@ -98,10 +98,10 @@
                                 <!--<a th:href="@{/shopping_cart/updatequantity(sc_id=${sc.idSc}, quantity=3)}">-->
                                 <a id="incremet" th:onclick="${'javascript:testing(' + sc.idSc + ',' + iterStat.index + ',' + session.userGlobal.id + ')'}" >
                                 <!--<a href="#">-->
-                                    <button type="button" class="btn btn-primary"><i class="material-icons">save</i></button>
+                                    <button type="button" class="btn btn-secondary" th:id="'save' + ${iterStat.index}" th:onclick="'disableSave(' + ${iterStat.index} + ');'" disabled="disabled" title="Guardar cambios"><i class="material-icons">save</i></button>
                                 </a>
                                 <a th:href="@{/shopping_cart/deletefromshoppingcart(id_user=${session.userGlobal.id},id_prod=${sc.product.id})}">
-                                    <button type="button" class="btn btn-danger"><i class="material-icons">delete_forever</i></button>
+                                    <button type="button" class="btn btn-danger" title="Eliminar este producto del carrito"><i class="material-icons">delete_forever</i></button>
                                 </a>
                             </td>
                         </tr>
@@ -151,10 +151,6 @@
 <div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
 <div th:replace="front-fragments/fimports::js">&nbsp;</div>
 <script th:src="@{/js/shopping-cart.js}"></script>
-
-<script>
-
-</script>
 
 </body>
 </html>

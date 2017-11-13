@@ -46,7 +46,8 @@
                 <span th:text="${product.description}"></span>
             </p>
             <p>
-                <a class="btn btn-primary btn-lg" href="#">¡Agregar al carrito!</a>
+                <a th:if="${session.userGlobal != null}" class="btn btn-primary btn-lg" th:href="@{/shopping_cart/addtoshoppingcart(id_user=${session.userGlobal.id},id_prod=${product.id})}">¡Agregar al carrito!</a>
+                <a th:if="${session.userGlobal == null}" class="btn btn-primary btn-lg" th:href="@{/login}">¡Agregar al carrito!</a>
             </p>
         </div>
         <!-- /.col-md-6 -->
