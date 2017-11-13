@@ -93,13 +93,6 @@
                             <td class="col-sm-1 col-md-1 text-center"><span th:id="'descuento' + ${iterStat.index}" th:text="${sc.product.discount.percentage}"> </span>%</td>
                             <td class="col-sm-1 col-md-1 text-center">$<span th:id="'subtotal' + ${iterStat.index}"> </span></td>
                             <td class="col-sm-2 col-md-2 text-center">
-                                <!--<a th:href="@{/shopping_cart/updatequantity(sc_id=${sc.idSc},quantity=${document.getElementById('cantidad'+iterStat.index).value})}">-->
-                                <!--<a th:href="" th:onclick="'this.href=/shopping_cart/updatequantity?sc_id=' + ${sc.idSc} + '&x=' + document.getElementById('cantidad'+${iterStat.index}).value">-->
-                                <!--<a th:href="@{/shopping_cart/updatequantity(sc_id=${sc.idSc}, quantity=3)}">-->
-                                <a id="incremet" th:onclick="${'javascript:testing(' + sc.idSc + ',' + iterStat.index + ',' + session.userGlobal.id + ')'}" >
-                                <!--<a href="#">-->
-                                    <button type="button" class="btn btn-secondary" th:id="'save' + ${iterStat.index}" th:onclick="'disableSave(' + ${iterStat.index} + ');'" disabled="disabled" title="Guardar cambios"><i class="material-icons">save</i></button>
-                                </a>
                                 <a th:href="@{/shopping_cart/deletefromshoppingcart(id_user=${session.userGlobal.id},id_prod=${sc.product.id})}">
                                     <button type="button" class="btn btn-danger" title="Eliminar este producto del carrito"><i class="material-icons">delete_forever</i></button>
                                 </a>

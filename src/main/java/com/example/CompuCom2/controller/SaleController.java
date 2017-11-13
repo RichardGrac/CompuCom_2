@@ -79,8 +79,6 @@ public class SaleController {
     public ModelAndView updateQuantity(int sc_id, int quantity){
         LOG.info("METHOD: updateQuantity() --PARAM: id_sc="+sc_id+", quantity="+quantity);
         ShoppingCart sc = shoppingCartService.modifyQuantity(sc_id, quantity);
-        System.out.println(sc);
-        ModelAndView mav = new ModelAndView("redirect:/shopping_cart/showcart?id_user=" + sc.getIdUser());
-        return mav;
+        return new ModelAndView("redirect:/shopping_cart/showcart?id_user=" + sc.getIdUser());
     }
 }

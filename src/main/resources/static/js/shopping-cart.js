@@ -64,17 +64,3 @@ function testing(id_sc, iter, id_user) {
         window.location.href = "/shopping_cart/showcart?id_user=" + id_user;
     });
 }
-
-function enableSave(numberOfButton) {
-    var button = "save" + numberOfButton.toString();
-    var btn = document.getElementById(button);
-    btn.disabled = false;
-    btn.className = "btn btn-primary";
-}
-
-function disableSave(numberOfButton) {
-    var button = "save" + numberOfButton.toString();
-    var btn = document.getElementById(button);
-    btn.disabled = true;
-    btn.className = "btn btn-secondary";
-}
