@@ -64,3 +64,17 @@ function testing(id_sc, iter, id_user) {
         window.location.href = "/shopping_cart/showcart?id_user=" + id_user;
     });
 }
+
+/*---------------------------------------------- payment-method ------------------------------------------------*/
+function activate_radioBtn(number) {
+    var radio_button1 = document.getElementById("radio1");
+    var radio_button2 = document.getElementById("radio2");
+
+    if (number == "1"){
+        radio_button1.checked = true;
+        radio_button2.checked = false;
+    }else{
+        radio_button2.checked = true;
+        radio_button1.checked = false;
+    }
+}

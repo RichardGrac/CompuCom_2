@@ -27,8 +27,8 @@
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a class="text-limegreen font-letter" th:href="@{/index}">SELECCIÓN</a></li>
                         <li class="breadcrumb-item"><a class="text-limegreen font-letter" th:href="@{/shopping_cart/showcart?id_user=__${session.userGlobal.id}__}">VERIFICACIÓN DE PRODUCTOS</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a class="text-limegreen font-letter" href="#"><b>VERIFICACIÓN DE ENVÍO</b></a></li>
-                        <li class="breadcrumb-item text-darkgrey">MÉTODO DE PAGO</li>
+                        <li class="breadcrumb-item active" aria-current="page"><a class="text-limegreen font-letter" th:href="@{/shopping_cart/shipping_method?id_user=__${session.userGlobal.id}__}"><b>VERIFICACIÓN DE ENVÍO</b></a></li>
+                        <li class="breadcrumb-item text-darkgrey" href="#">MÉTODO DE PAGO</li>
                     </ul>
                 </nav>
             </div>
@@ -97,7 +97,7 @@
                                 Verificar productos
                             </button>
                         </a>
-                        <a href="#">
+                        <a th:href="@{/shopping_cart/payment_method}">
                             <button type="button" class="btn btn-success" id="btn_continue">
                                 <i class="material-icons md-18">arrow_forward</i>
                                 Continuar

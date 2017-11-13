@@ -133,3 +133,23 @@
     background-color: white;
     border: solid grey;
 }
+
+/*------------------------------------------------ payment_method.html --------------------------------------*/
+.pay-method{
+    text-decoration: none;
+    color: black;
+}
+
+.pay-method:hover{
+    color: #0d3349;
+    text-decoration: none;
+}
+
+.sans-letter-b{
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+}
+
+.grey-background{
+    background-color: #f2f2f2;
+}

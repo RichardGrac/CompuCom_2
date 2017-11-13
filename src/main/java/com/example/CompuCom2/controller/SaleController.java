@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,12 +51,16 @@ public class SaleController {
 
 
     @RequestMapping("/showcart")
-    public ModelAndView showTheShoppingCart(Integer id_user){
+    public ModelAndView showTheShoppingCart(Integer id_user, @RequestParam(name = "result", required = false)
+                                            Integer result, @RequestParam(name = "deleted", required = false)
+                                            Integer deleted){
         ModelAndView mav = new ModelAndView(Constants.SHOPPING_CART);
         ArrayList<ShoppingCartModel> shopping_cart = shoppingCartService.findAllProductsByUser(id_user);
         mav.addObject("shopping_cart", shopping_cart);
         ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
         mav.addObject("categories", productCategoryModels);
+        mav.addObject("result", result);
+        mav.addObject("deleted", deleted);
         return mav;
     }
 
@@ -101,10 +106,14 @@ public class SaleController {
         LOG.info("METHOD: updateQuantity() --PARAM: id_sc="+id_user);
         ModelAndView mav = new ModelAndView(Constants.SHIPPING_METHOD);
         UserAddressModel userAddressModel = userService.findUserAddressByIdModel(id_user);
-        System.out.println("userAdModel="+ userAddressModel);
         mav.addObject("address", userAddressModel);
         ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
         mav.addObject("categories", productCategoryModels);
         return mav;
+    }
+
+    @RequestMapping("/payment_method")
+    public ModelAndView paymentMethod(){
+        return new ModelAndView(Constants.PAYMENT_METHOD);
     }
 }

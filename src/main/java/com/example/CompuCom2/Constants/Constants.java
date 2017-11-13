@@ -16,4 +16,5 @@ public class Constants {
     public static final int DESCRIPTION_SIZE = 150;
     public static final String SHOPPING_CART = "shopping_cart";
     public static final String SHIPPING_METHOD = "shipping_method";
+    public static final String PAYMENT_METHOD = "payment_method";
 }

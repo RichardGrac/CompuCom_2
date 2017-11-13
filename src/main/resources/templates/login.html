@@ -9,7 +9,9 @@
     <link rel="stylesheet" th:href="@{/plugins/iCheck/square/blue.css}" />
 </head>
 <body class="hold-transition login-page">
+
     <div class="login-box">
+
         <div class="login-logo">
             <a th:href="@{/index}">
                 <img th:src="@{/img/Logotipos/logo-lema.png}" alt="CompuCom" height="100px" width="110%" />
@@ -21,7 +23,7 @@
 
             <form th:action="@{/logincheck}" method="post" >
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="Correo electrónico" name="username" id="username"/>
+                    <input type="email" class="form-control" placeholder="Correo electrónico" name="username" id="username" autofocus="" />
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
@@ -50,11 +52,22 @@
             <p>
                 <br></br>
                 <a href="#">¿Olvidaste tú contraseña?</a><br></br>
-                <a href="#" class="text-center">Registrarse como nuevo usuario</a>
+                <a th:href="@{/registro}" class="text-center">Registrarse como nuevo usuario</a>
             </p>
 
         </div>
         <!-- /.login-box-body -->
+
+        <br></br>
+        <div class="row" th:if="${loggin == 1}">
+            <div class="col-lg-12">
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    Por favor, registrese para poder agregar productos.
+                </div>
+            </div>
+        </div>
+
     </div>
     <!-- /.login-box -->
 

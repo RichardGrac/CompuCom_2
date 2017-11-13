@@ -21,11 +21,16 @@ public class LoginController {
 
     @GetMapping("/login")
     public ModelAndView showLoginForm(@RequestParam(name = "error", required = false) String error,
-                                      @RequestParam(name = "logout", required = false) String logout){
+                                      @RequestParam(name = "logout", required = false) String logout,
+                                      Integer logged){
         LOG.info("METHOD: showLoginForm()");
         ModelAndView modelAndView = new ModelAndView(Constants.LOGIN);
         modelAndView.addObject("error", error);
         modelAndView.addObject("logout", logout);
+//        If the Client clicked to 'Add Product' without stayed logged
+        if (logged != null){
+            modelAndView.addObject("loggin", 1);
+        }
         return modelAndView;
     }
 
