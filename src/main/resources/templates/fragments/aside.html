@@ -62,6 +62,7 @@
                     </li>
 
                     <li th:classappend="${#httpServletRequest.requestURI.contains('category')} ? 'active' : ' '"><a href="#" th:href="@{/category/show-categories}"><i class="fa fa-reorder"></i> <span>Categorias</span></a></li>
+                    <li th:classappend="${#httpServletRequest.requestURI.contains('banner')} ? 'active' : ' '"><a href="#" th:href="@{/banner/show-deals}"><i class="fa fa-file-image-o"></i> <span>Banners</span></a></li>
 
                     <li class="treeview">
                         <a href="#">

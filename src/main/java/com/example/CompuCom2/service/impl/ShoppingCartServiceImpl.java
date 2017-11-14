@@ -36,15 +36,17 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
         ArrayList<ShoppingCart> SC = (ArrayList<ShoppingCart>) shoppingCartRepository.findAllByIdUser(id);
         ArrayList<ShoppingCartModel> SCModels = new ArrayList<>();
         for (ShoppingCart sc : SC) {
-            ProductModel productModel = productService.getProductById(sc.getIdProd());
-//            Due to the idProd is not linked by JPSQL, We remove manually the id_products from his/her SC
-            if (productModel == null){
-                removeProductFromSC(id, sc.getIdProd());
-            }else{
-//                We added the SCModel and the ProductModel to the ArrayList<ShoppingCartModel>
+//            Can ocurr that the product doesn't exists more, so the next function call will throw an exception:
+            try{
+                ProductModel productModel = productService.getProductById(sc.getIdProd());
+
+                // We added the SCModel and the ProductModel to the ArrayList<ShoppingCartModel>
                 ShoppingCartModel shoppingCartModel = shoppingCartConverter.entityToModel(sc);
                 shoppingCartModel.setProduct(productModel);
                 SCModels.add(shoppingCartModel);
+            }catch (Exception e){
+//              Due to the idProd is not linked by JPSQL, We remove manually the id_products from his/her SC
+                removeProductFromSC(id, sc.getIdProd());
             }
         }
         return SCModels;
