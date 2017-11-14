@@ -6,9 +6,7 @@ import com.example.CompuCom2.entity.ShoppingCart;
 import com.example.CompuCom2.model.ProductCategoryModel;
 import com.example.CompuCom2.model.ShoppingCartModel;
 import com.example.CompuCom2.model.UserAddressModel;
-import com.example.CompuCom2.model.UserModel;
 import com.example.CompuCom2.service.ProductCategoryService;
-import com.example.CompuCom2.service.UserService;
 import com.example.CompuCom2.service.impl.ProductServiceImpl;
 import com.example.CompuCom2.service.impl.ShoppingCartServiceImpl;
 import com.example.CompuCom2.service.impl.UserServiceImpl;
@@ -56,12 +54,38 @@ public class SaleController {
                                             Integer deleted){
         ModelAndView mav = new ModelAndView(Constants.SHOPPING_CART);
         ArrayList<ShoppingCartModel> shopping_cart = shoppingCartService.findAllProductsByUser(id_user);
+
+//        We verify if the availability of each product corresponds to the quantity of the S.Cart of the customer:
+        ArrayList<String> messages = check_availability(id_user, shopping_cart);
+        if (messages.size() != 0){
+            mav.addObject("messages", messages);
+//            With the changes occurred, We update the shopping_cart
+            shopping_cart = shoppingCartService.findAllProductsByUser(id_user);
+        }
+
         mav.addObject("shopping_cart", shopping_cart);
         ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
         mav.addObject("categories", productCategoryModels);
         mav.addObject("result", result);
         mav.addObject("deleted", deleted);
         return mav;
+    }
+
+    private ArrayList<String> check_availability(int id_user, ArrayList<ShoppingCartModel> shopping_cart) {
+        ArrayList<String> messages = new ArrayList<>();
+        for (ShoppingCartModel sc : shopping_cart) {
+            int customer_quantity = sc.getQuantity();
+            int products_in_stock = sc.getProduct().getProductQuantityModel().getQuantity();
+            if (products_in_stock == 0){
+                messages.add("'" + sc.getProduct().getName() + "' eliminado del carrito. Disponibles actualmente en stock: 0 unidades.");
+                deleteFromShoppingCart(id_user, sc.getProduct().getId());
+            }else if (products_in_stock < customer_quantity){
+                messages.add("'" + sc.getProduct().getName() + "' cantidad de productos modificada. Disponibles actualmente en stock: " + products_in_stock + " unidades.");
+                // We establish the maximum amount of products available in Stock
+                updateQuantity(sc.getIdSc(), products_in_stock);
+            }
+        }
+        return messages;
     }
 
     @RequestMapping("/addtoshoppingcart")
