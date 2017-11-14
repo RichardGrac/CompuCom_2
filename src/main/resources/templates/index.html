@@ -21,30 +21,14 @@
   <header>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li th:each="deal,iter : ${deals}" data-target="#carouselExampleIndicators" th:attr="data-slide-to=${iter.index}"></li>
       </ol>
       <div class="carousel-inner" role="listbox">
         <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item active first-slide">
+        <div th:each="deal, iter : ${deals}" class="carousel-item" th:classappend="${iter.index == 0 ? 'active' : ''}" th:style="'background-image: url(' + @{/banner/image(id=${deal.id})} + ');'" >
           <div class="carousel-caption d-none d-md-block">
-            <h3>¡Nuevo!</h3>
-            <p>Razer Blackwidow CHROMA</p>
-          </div>
-        </div>
-        <!-- Slide Two - Set the background image for this slide in the line below -->
-        <div class="carousel-item second-slide">
-          <div class="carousel-caption d-none d-md-block">
-            <h3 class="black-font"></h3>
-            <p class="black-font"></p>
-          </div>
-        </div>
-        <!-- Slide Three - Set the background image for this slide in the line below -->
-        <div class="carousel-item third-slide">
-          <div class="carousel-caption d-none d-md-block">
-            <h3 class="black-font">XZ</h3>
-            <p class="black-font">Se un ganador con una curva rápida y atrevida.</p>
+            <h3 th:text="${deal.title}" th:classappend="${deal.color == 'black'} ? 'black-font' : ''">¡Nuevo!</h3>
+            <p th:text="${deal.content}" th:classappend="${deal.color == 'black'} ? 'black-font'">Razer Blackwidow CHROMA</p>
           </div>
         </div>
       </div>

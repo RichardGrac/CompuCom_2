@@ -1,6 +1,5 @@
 package com.example.CompuCom2.model;
 
-import com.example.CompuCom2.entity.Discount;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProductModel {
