@@ -15,4 +15,5 @@ public class DealsBannerModel {
     private String content;
     private MultipartFile image;
     private Boolean active;
+    private String color;
 }

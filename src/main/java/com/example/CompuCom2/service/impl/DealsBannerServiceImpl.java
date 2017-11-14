@@ -71,4 +71,9 @@ public class DealsBannerServiceImpl implements DealsBannerService {
         dealsBanner.setActive(!dealsBanner.getActive());
         dealsBannerRepository.save(dealsBanner);
     }
+
+    @Override
+    public List<DealsBanner> findActive() {
+        return dealsBannerRepository.findActives();
+    }
 }

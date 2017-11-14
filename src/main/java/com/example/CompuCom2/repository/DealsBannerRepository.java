@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
 import java.io.Serializable;
+import java.util.List;
 
 public interface DealsBannerRepository extends JpaRepository<DealsBanner , Serializable> {
     DealsBanner findById(Integer id);
@@ -15,4 +16,7 @@ public interface DealsBannerRepository extends JpaRepository<DealsBanner , Seria
 
     @Query("select d.image from DealsBanner d where d.id = :id")
     String findImageById(@Param("id") Integer id);
+
+    @Query("select d from DealsBanner d where active = true ")
+    List<DealsBanner> findActives();
 }

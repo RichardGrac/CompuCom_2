@@ -1,23 +1,24 @@
 package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
-import com.example.CompuCom2.entity.DealsBanner;
 import com.example.CompuCom2.model.DealsBannerModel;
 import com.example.CompuCom2.service.DealsBannerService;
 import com.example.CompuCom2.utils.storage.StorageService;
-import jdk.nashorn.internal.runtime.logging.Logger;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.IOException;
+import java.nio.file.Files;
 
 @Controller
 @RequestMapping("/banner")
@@ -65,8 +66,24 @@ public class DealsBannerController {
         String filename = dealsBannerService.findImageById(id);
         if (filename != null){
             Resource file = storageService.loadAsResource(filename);
-            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                    "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"" + file.getFilename() + "\"")
+                    .contentType(MediaType.IMAGE_JPEG)
+                    .body(file);
+        }
+        return null;
+    }
+
+    @GetMapping("/image")
+    public ResponseEntity<byte[]> getImage(@RequestParam(name = "id") Integer id){
+        String filename = dealsBannerService.findImageById(id);
+        if (filename != null) {
+            try {
+                byte [] file1 = Files.readAllBytes(storageService.load(filename));
+                return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(file1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }

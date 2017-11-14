@@ -23,4 +23,5 @@ public class DealsBanner {
     private String image;
     @Column(nullable = false, columnDefinition = "bit default 0")
     private Boolean active;
+    private String color;
 }
