@@ -27,8 +27,8 @@
         <!-- Slide One - Set the background image for this slide in the line below -->
         <div th:each="deal, iter : ${deals}" class="carousel-item" th:classappend="${iter.index == 0 ? 'active' : ''}" th:style="'background-image: url(' + @{/banner/image(id=${deal.id})} + ');'" >
           <div class="carousel-caption d-none d-md-block">
-            <h3 th:text="${deal.title}">¡Nuevo!</h3>
-            <p th:text="${deal.content}">Razer Blackwidow CHROMA</p>
+            <h3 th:text="${deal.title}" th:classappend="${deal.color == 'black'} ? 'black-font' : ''">¡Nuevo!</h3>
+            <p th:text="${deal.content}" th:classappend="${deal.color == 'black'} ? 'black-font'">Razer Blackwidow CHROMA</p>
           </div>
         </div>
       </div>

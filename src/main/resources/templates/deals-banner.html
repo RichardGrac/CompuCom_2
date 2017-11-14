@@ -72,7 +72,7 @@
                                     <label>Titulo</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
-                                        <input placeholder="Titulo" class="form-control" type="text" th:field="*{title}" required="" />
+                                        <input placeholder="Titulo" class="form-control" type="text" th:field="*{title}" />
                                     </div>
                                 </div>
 
@@ -80,7 +80,7 @@
                                     <label>Contenido</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
-                                        <input placeholder="Contenido" class="form-control" type="text" th:field="*{content}" required="" />
+                                        <input placeholder="Contenido" class="form-control" type="text" th:field="*{content}" />
                                     </div>
                                 </div>
                             </div>
@@ -92,12 +92,15 @@
                                         <input class="form-control" type="file" th:field="*{image}" required="" />
                                     </div>
                                 </div>
-                                <br></br>
+
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" th:field="*{active}"/> Activo
+                                        <input type="checkbox" th:field="*{active}" required=""/> Activo
                                     </label>
                                 </div>
+                                <label class="radio-inline"><input type="radio" th:field="*{color}" th:value="black"/>Black Font</label>
+                                <label class="radio-inline"><input type="radio" th:field="*{color}" th:value="white"/>White Font</label>
+
                             </div>
 
                             <!-- ./ col-md-6 -->

@@ -15,6 +15,7 @@ public class DealsBannerConverter {
                 .content(dealsBannerModel.getContent())
                 .active(dealsBannerModel.getActive())
                 .image(StringUtils.cleanPath(dealsBannerModel.getImage().getOriginalFilename()))
+                .color(dealsBannerModel.getColor())
                 .build();
     }
 
@@ -24,6 +25,7 @@ public class DealsBannerConverter {
                 .title(dealsBanner.getTitle())
                 .content(dealsBanner.getContent())
                 .active(dealsBanner.getActive())
+                .color(dealsBanner.getColor())
                 .build();
     }
 }
