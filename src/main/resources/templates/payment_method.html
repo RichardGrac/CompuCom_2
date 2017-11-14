@@ -95,7 +95,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-md-6 col-form-label">MES DE VENCIMIENTO<br/></label>
                                                     <div class="col-md-4">
-                                                        <select name="mes" class="form-control">
+                                                        <select name="month" class="form-control">
                                                             <option value=" ">MM</option>
                                                             <option>01</option>
                                                             <option>02</option>
@@ -118,7 +118,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-md-6 col-form-label">AÑO DE VENCIMIENTO<br/></label>
                                                     <div class="col-md-4">
-                                                        <select name="año" class="form-control">
+                                                        <select name="year" class="form-control">
                                                             <option value=" ">AAAA</option>
                                                             <option>2017</option>
                                                             <option>2018</option>
@@ -142,7 +142,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-md-6 col-form-label">TITULAR DE LA TARJETA</label>
                                                     <div class="col-md-6">
-                                                        <input name="titular" class="form-control" type="text"  placeholder="Nombre del titular"/>
+                                                        <input name="name" class="form-control" type="text"  placeholder="Nombre del titular"/>
                                                     </div>
                                                 </div>
 
@@ -150,7 +150,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-md-6 col-form-label">CÓDIGO DE SEGURIDAD</label>
                                                     <div class="col-md-4">
-                                                        <input name="codigo" class="form-control" type="text" placeholder="XYZ"/>
+                                                        <input name="cvc" class="form-control" type="text" placeholder="XYZ"/>
                                                     </div>
 
                                                     <div class="row"></div>
@@ -162,7 +162,7 @@
 
                                                 <div class="row">
                                                     <label class="col-md-4"></label>
-                                                    <button type="button" class="btn btn-secondary btn-lg">VERIFICAR</button>
+                                                    <button type="button" class="btn btn-secondary btn-lg" id="verify1">VERIFICAR</button>
                                                 </div>
 
 
@@ -172,6 +172,7 @@
                                         <!--./row-->
                                     </div>
                                 </div>
+                                <!--./collapse grey-background-->
                             </div>
                             <!--./card-->
                             <div class="card">
@@ -256,6 +257,7 @@
 <div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
 <div th:replace="front-fragments/fimports::js">&nbsp;</div>
 <script th:src="@{/js/shopping-cart.js}"></script>
+<script th:src="@{/js/payment_method.js}"></script>
 
 </body>
 </html>
