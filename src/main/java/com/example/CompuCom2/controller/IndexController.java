@@ -41,7 +41,9 @@ public class IndexController {
     }
 
     @RequestMapping("/index")
-    public ModelAndView index(){
+    public ModelAndView index(@RequestParam(name = "update", required = false) boolean update,
+                              @RequestParam(name = "result", required = false) Integer result,
+                              @RequestParam(name = "autherr", required = false) boolean autherr){
         LOG.info("METHOD: index()");
         ModelAndView mav = new ModelAndView(Constants.INDEX);
 //        Seteamos categorias:
@@ -59,6 +61,9 @@ public class IndexController {
         mav.addObject("categories", productCategoryModels);
         mav.addObject("products", resize_description(productsWithDiscount));
         mav.addObject("deals", dealsBannerService.findActive());
+        mav.addObject("update", update);
+        mav.addObject("result", result);
+        mav.addObject("autherr", autherr);
         return mav;
     }
 

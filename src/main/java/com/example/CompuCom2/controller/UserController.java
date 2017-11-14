@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -123,6 +124,35 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("redirect:/users/showusers");
         userService.removeUser(id);
         modelAndView.addObject("delete", true);
+        return modelAndView;
+    }
+
+    @GetMapping("/edit-user")
+    public ModelAndView editUser(@RequestParam(name = "id") Integer id,
+                                 HttpSession httpSession){
+        UserModel userGlobal = (UserModel) httpSession.getAttribute("userGlobal");
+        ModelAndView modelAndView = new ModelAndView(Constants.REGISTER);
+        if (!id.equals(userGlobal.getId())){
+            modelAndView.setViewName("redirect:/index");
+            modelAndView.addObject("autherr", true);
+            return modelAndView;
+        }
+        modelAndView.addObject("userModel", userService.findUserByIdModel(id));
+        modelAndView.addObject("userAddressModel", userService.findUserAddressByIdModel(id));
+        return modelAndView;
+    }
+
+    @PostMapping("/save-user")
+    public ModelAndView saveUser(@ModelAttribute(name = "userModel") UserModel userModel,
+                                 @ModelAttribute(name = "userAddressModel") UserAddressModel userAddressModel){
+        LOG.info("METHOD: saveUser(), --PARAMS: " + userAddressModel.toString() + "," + userModel.toString());
+        ModelAndView modelAndView = new ModelAndView("redirect:/index");
+        userModel.setUserAdress(userAddressConverter.modelToEntity(userAddressModel));
+        if (userService.addUser(userModel) != null){
+            modelAndView.addObject("update", true);
+        }else {
+            modelAndView.addObject("update", false);
+        }
         return modelAndView;
     }
 }
