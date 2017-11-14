@@ -9,5 +9,7 @@ public interface DealsBannerService {
     DealsBannerModel updateDealBanner(DealsBannerModel dealsBannerModel);
     List<DealsBannerModel> findAll();
     DealsBannerModel findOne(Integer id);
-    void deleteDealBanner(DealsBannerModel dealsBannerModel);
+    void deleteDealBannerById(Integer id);
+    String findImageById(Integer id);
+    void changeStatusById(Integer id);
 }

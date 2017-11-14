@@ -56,7 +56,19 @@ public class DealsBannerServiceImpl implements DealsBannerService {
     }
 
     @Override
-    public void deleteDealBanner(DealsBannerModel dealsBannerModel) {
-        dealsBannerRepository.deleteById(dealsBannerModel.getId());
+    public void deleteDealBannerById(Integer id) {
+        dealsBannerRepository.deleteById(id);
+    }
+
+    @Override
+    public String findImageById(Integer id) {
+        return dealsBannerRepository.findImageById(id);
+    }
+
+    @Override
+    public void changeStatusById(Integer id) {
+        DealsBanner dealsBanner = dealsBannerRepository.findById(id);
+        dealsBanner.setActive(!dealsBanner.getActive());
+        dealsBannerRepository.save(dealsBanner);
     }
 }

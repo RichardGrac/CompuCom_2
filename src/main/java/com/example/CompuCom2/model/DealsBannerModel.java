@@ -6,6 +6,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Builder
 public class DealsBannerModel {
     private Integer id;
     private String title;

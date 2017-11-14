@@ -9,6 +9,8 @@ import javax.persistence.*;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class DealsBanner {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

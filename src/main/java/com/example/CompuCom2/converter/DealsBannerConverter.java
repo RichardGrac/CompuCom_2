@@ -9,21 +9,21 @@ import org.springframework.util.StringUtils;
 public class DealsBannerConverter {
 
     public DealsBanner modelToEntity(DealsBannerModel dealsBannerModel){
-        DealsBanner dealsBanner = new DealsBanner();
-        dealsBanner.setId(dealsBannerModel.getId());
-        dealsBanner.setActive(dealsBannerModel.getActive());
-        dealsBanner.setContent(dealsBannerModel.getContent());
-        dealsBanner.setTitle(dealsBannerModel.getTitle());
-        dealsBanner.setImage(StringUtils.cleanPath(dealsBannerModel.getImage().getOriginalFilename()));
-        return dealsBanner;
+        return DealsBanner.builder()
+                .id(dealsBannerModel.getId())
+                .title(dealsBannerModel.getTitle())
+                .content(dealsBannerModel.getContent())
+                .active(dealsBannerModel.getActive())
+                .image(StringUtils.cleanPath(dealsBannerModel.getImage().getOriginalFilename()))
+                .build();
     }
 
     public DealsBannerModel entityToModel(DealsBanner dealsBanner){
-        DealsBannerModel dealsBannerModel = new DealsBannerModel();
-        dealsBannerModel.setId(dealsBanner.getId());
-        dealsBannerModel.setActive(dealsBanner.getActive());
-        dealsBannerModel.setContent(dealsBanner.getContent());
-        dealsBannerModel.setTitle(dealsBanner.getTitle());
-        return dealsBannerModel;
+        return DealsBannerModel.builder()
+                .id(dealsBanner.getId())
+                .title(dealsBanner.getTitle())
+                .content(dealsBanner.getContent())
+                .active(dealsBanner.getActive())
+                .build();
     }
 }
