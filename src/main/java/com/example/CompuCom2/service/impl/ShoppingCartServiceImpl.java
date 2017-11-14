@@ -88,9 +88,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 
     @Override
     public int numberOfProducts(int id_user) {
-        ArrayList<ShoppingCart> cart = (ArrayList<ShoppingCart>) shoppingCartRepository.findAllByIdUser(id_user);
+        ArrayList<ShoppingCartModel> cart = findAllProductsByUser(id_user);
         int number = 0;
-        for (ShoppingCart sc : cart) {
+        for (ShoppingCartModel sc : cart) {
             number += sc.getQuantity();
         }
         return number;
