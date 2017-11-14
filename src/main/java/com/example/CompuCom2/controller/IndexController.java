@@ -1,8 +1,10 @@
 package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
+import com.example.CompuCom2.entity.DealsBanner;
 import com.example.CompuCom2.model.ProductCategoryModel;
 import com.example.CompuCom2.model.ProductModel;
+import com.example.CompuCom2.service.DealsBannerService;
 import com.example.CompuCom2.service.ProductCategoryService;
 import com.example.CompuCom2.service.impl.ProductServiceImpl;
 import org.apache.commons.logging.Log;
@@ -29,6 +31,9 @@ public class IndexController {
     @Autowired
     private ProductCategoryService productCategoryService;
 
+    @Autowired
+    private DealsBannerService dealsBannerService;
+
     @RequestMapping("/")
     public String goIndex(){
         LOG.info("METHOD: goIndex()");
@@ -53,6 +58,7 @@ public class IndexController {
         }
         mav.addObject("categories", productCategoryModels);
         mav.addObject("products", resize_description(productsWithDiscount));
+        mav.addObject("deals", dealsBannerService.findActive());
         return mav;
     }
 
