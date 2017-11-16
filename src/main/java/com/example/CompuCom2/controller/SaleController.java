@@ -2,14 +2,16 @@ package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
 import com.example.CompuCom2.converter.UserAddressConverter;
-import com.example.CompuCom2.entity.ShoppingCart;
+import com.example.CompuCom2.entity.*;
 import com.example.CompuCom2.model.ProductCategoryModel;
 import com.example.CompuCom2.model.ShoppingCartModel;
 import com.example.CompuCom2.model.UserAddressModel;
+import com.example.CompuCom2.repository.UserRepository;
 import com.example.CompuCom2.service.ProductCategoryService;
 import com.example.CompuCom2.service.impl.ProductServiceImpl;
 import com.example.CompuCom2.service.impl.ShoppingCartServiceImpl;
 import com.example.CompuCom2.service.impl.UserServiceImpl;
+import lombok.Builder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Controller
@@ -47,6 +50,9 @@ public class SaleController {
     @Qualifier("userAddressConverter")
     private UserAddressConverter userAddressConverter;
 
+    @Autowired
+    @Qualifier("userRepository")
+    private UserRepository userRepository;
 
     @RequestMapping("/showcart")
     public ModelAndView showTheShoppingCart(Integer id_user, @RequestParam(name = "result", required = false)
@@ -139,5 +145,29 @@ public class SaleController {
     @RequestMapping("/payment_method")
     public ModelAndView paymentMethod(){
         return new ModelAndView(Constants.PAYMENT_METHOD);
+    }
+
+
+    @GetMapping("/test")
+    public ModelAndView test(){
+        Details details = new Details(1,"PC",123d,40d,2);
+        Details details1 = new Details(2,"DD",1234d,39d,1);
+        Status_shipping status_shipping = new Status_shipping("Pendiente", LocalDate.now());
+
+        ArrayList<Details> bill_details = new ArrayList<>();
+        bill_details.add(details);
+        bill_details.add(details1);
+
+        Shipping shipping = new Shipping("street", "12", "colony", "Ags", "Ags", "20000", "Mexico", "reference", status_shipping);
+        Bill bill = new Bill(100d, 900d, 1000d, bill_details, shipping);
+
+        User user = userService.findUserByUsername("user1");
+        ArrayList<Bill> bills = new ArrayList<>();
+        bills.add(bill);
+
+        user.setBills(bills);
+        userRepository.save(user);
+
+        return new ModelAndView("redirect:/index");
     }
 }
