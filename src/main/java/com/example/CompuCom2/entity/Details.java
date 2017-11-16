@@ -1,9 +1,14 @@
 package com.example.CompuCom2.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Details")
+@Builder
+@AllArgsConstructor
 public class Details {
 
     @Id

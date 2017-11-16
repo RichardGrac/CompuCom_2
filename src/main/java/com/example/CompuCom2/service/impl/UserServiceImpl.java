@@ -141,4 +141,9 @@ public class UserServiceImpl implements UserService {
     public UserModel findUserModelByEmail(String email) {
         return userConverter.entityToModel(userRepository.findByEmail(email));
     }
+
+    @Override
+    public UserModel updateUser(UserModel userModel) {
+        return null;
+    }
 }

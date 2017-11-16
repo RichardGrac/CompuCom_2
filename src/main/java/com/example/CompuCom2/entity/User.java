@@ -35,7 +35,7 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_bills", joinColumns =
         @JoinColumn(name = "user_id", referencedColumnName = "id"),
         inverseJoinColumns =
@@ -133,7 +133,9 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", userAdress=" + userAdress +
-                ", role=" + role.toString() +
+                ", role=" + role +
+                ", shoppingCart=" + shoppingCart +
+                ", bills=" + bills +
                 '}';
     }
 }

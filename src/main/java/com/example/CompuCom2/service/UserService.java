@@ -25,6 +25,7 @@ public interface UserService {
     UserModel findUserModelByUsername(String username);
     UserModel findUserModelByEmail(String email);
     List<String> findAllEmail();
+    UserModel updateUser(UserModel userModel);
 
 
 }
