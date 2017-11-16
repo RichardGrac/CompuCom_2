@@ -65,6 +65,11 @@ function testing(id_sc, iter, id_user) {
     });
 }
 
+function disable_continueBtn() {
+    //When the product.quantity of the S.Cart of a customer is > than the products in the Stock: You can't continue with the sale.
+    document.getElementById("btn_continue").disabled = true;
+}
+
 /*---------------------------------------------- payment-method ------------------------------------------------*/
 function activate_radioBtn(number) {
     var radio_button1 = document.getElementById("radio1");

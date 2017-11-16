@@ -2,6 +2,7 @@ package com.example.CompuCom2.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,12 +26,21 @@ public class User {
     private UserAddress userAdress;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role",joinColumns = { @JoinColumn(name = "user_id") },inverseJoinColumns = { @JoinColumn(name = "role_id") })
+    @JoinTable(name = "user_role",joinColumns =
+            { @JoinColumn(name = "user_id") },
+            inverseJoinColumns =
+            { @JoinColumn(name = "role_id") })
     private Set<Role> role = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_bills", joinColumns =
+        @JoinColumn(name = "user_id", referencedColumnName = "id"),
+        inverseJoinColumns =
+        @JoinColumn(name = "bill_id", referencedColumnName = "id"))
+    private List<Bill> bills;
 
     public User(){}
 
@@ -39,6 +49,16 @@ public class User {
         this.password = password;
         this.email = email;
         this.userAdress = userAdress;
+    }
+
+    public User(String username, String password, String email, UserAddress userAdress, Set<Role> role, ShoppingCart shoppingCart, List<Bill> bills) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.userAdress = userAdress;
+        this.role = role;
+        this.shoppingCart = shoppingCart;
+        this.bills = bills;
     }
 
     public int getId() {
@@ -95,6 +115,14 @@ public class User {
 
     public void setShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCart = shoppingCart;
+    }
+
+    public List<Bill> getBills() {
+        return bills;
+    }
+
+    public void setBills(List<Bill> bills) {
+        this.bills = bills;
     }
 
     @Override
