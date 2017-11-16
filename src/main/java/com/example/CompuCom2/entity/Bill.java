@@ -1,5 +1,6 @@
 package com.example.CompuCom2.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 import javax.persistence.*;
@@ -7,6 +8,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "Bill")
+@Builder
+@AllArgsConstructor
 public class Bill {
 
     @Id

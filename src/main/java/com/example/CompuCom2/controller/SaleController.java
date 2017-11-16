@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.OverridesAttribute;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/shopping_cart")
@@ -168,6 +170,55 @@ public class SaleController {
         user.setBills(bills);
         userRepository.save(user);
 
+        return new ModelAndView("redirect:/index");
+    }
+
+    @GetMapping("/testing")
+    public ModelAndView testing(){
+        User user = userRepository.findById(5);
+        Details details = new Details();
+        details.setDiscount(123.3);
+        details.setId_prod(4);
+        details.setName("nombre");
+        details.setPrice(123.3);
+        details.setQuantity(1);
+
+        Details details1 = new Details();
+        details1.setDiscount(123.3);
+        details1.setId_prod(4);
+        details1.setName("nombre");
+        details1.setPrice(123.3);
+        details1.setQuantity(1);
+        List<Details> detailsList = new ArrayList<>();
+        detailsList.add(details);
+        detailsList.add(details1);
+
+        Shipping shipping = new Shipping();
+        shipping.setCity("city");
+        shipping.setColony("colony");
+        shipping.setCountry("country");
+        shipping.setNumber("number");
+        shipping.setReference("referenced");
+        shipping.setState("state");
+        shipping.setStreet("street");
+        shipping.setZip("1212");
+        shipping.setStatus_shipping(new Status_shipping("status", LocalDate.now()));
+
+        Bill bill = new Bill();
+        bill.setDetails_bill(detailsList);
+        bill.setShipping_price(123.3);
+        bill.setSubtotal(123.3);
+        bill.setTotal(123.3);
+        bill.setShipping(shipping);
+
+        List<Bill> billList1 = user.getBills();
+        billList1.add(bill);
+        user.setBills(billList1);
+
+        User user1 = userRepository.save(user);
+        LOG.info("METHOD testting() -- " + user.toString());
+
+        LOG.info(user1.getBills().toString());
         return new ModelAndView("redirect:/index");
     }
 }
