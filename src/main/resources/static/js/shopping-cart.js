@@ -1,11 +1,11 @@
 function shipping_p(ciudad, country) {
-    var shipping_price = 0.0;
+    var shipping_price = "0.00";
     if (ciudad.toUpperCase() == "AGUASCALIENTES"){
-        shipping_price = 0.0;
+        shipping_price = "0.00";
     }else if(country.toUpperCase() == "MEXICO" || country.toUpperCase() == "MÉXICO"){
-        shipping_price = 150.0;
+        shipping_price = "150.00";
     }else{
-        shipping_price = 350.0;
+        shipping_price = "350.00";
     }
     document.getElementById("envio").innerText = shipping_price;
 }
