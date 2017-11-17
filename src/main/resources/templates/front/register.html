@@ -102,7 +102,9 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="country">País</label>
-                    <input type="text" class="form-control" th:field="*{userAddressModel.country}" placeholder="Índica tú país" />
+                    <select class="form-control" th:field="*{userAddressModel.country}">
+                        <option value="Mexico">Mexico</option>
+                    </select>
                 </div>
             </div>
 
