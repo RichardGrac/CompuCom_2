@@ -4,14 +4,15 @@ import com.example.CompuCom2.Constants.Constants;
 import com.example.CompuCom2.converter.UserAddressConverter;
 import com.example.CompuCom2.entity.*;
 import com.example.CompuCom2.model.ProductCategoryModel;
+import com.example.CompuCom2.model.ProductModel;
 import com.example.CompuCom2.model.ShoppingCartModel;
 import com.example.CompuCom2.model.UserAddressModel;
 import com.example.CompuCom2.repository.UserRepository;
 import com.example.CompuCom2.service.ProductCategoryService;
+import com.example.CompuCom2.service.impl.ProductQuantityServiceImpl;
 import com.example.CompuCom2.service.impl.ProductServiceImpl;
 import com.example.CompuCom2.service.impl.ShoppingCartServiceImpl;
 import com.example.CompuCom2.service.impl.UserServiceImpl;
-import lombok.Builder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.OverridesAttribute;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,10 @@ public class SaleController {
     @Autowired
     @Qualifier("userRepository")
     private UserRepository userRepository;
+
+    @Autowired
+    @Qualifier("productQuantityServiceImpl")
+    private ProductQuantityServiceImpl productQuantityService;
 
     @RequestMapping("/showcart")
     public ModelAndView showTheShoppingCart(Integer id_user, @RequestParam(name = "result", required = false)
@@ -149,76 +154,104 @@ public class SaleController {
         return new ModelAndView(Constants.PAYMENT_METHOD);
     }
 
+    @GetMapping("/finish_sale")
+    public ModelAndView finishTheSale(@RequestParam(name = "id_user") Integer id_user){
+        LOG.info("METHOD: saveBill() --PARAMS: id_user="+id_user);
+        User user = userRepository.findById(id_user);
 
-    @GetMapping("/test")
-    public ModelAndView test(){
-        Details details = new Details(1,"PC",123d,40d,2);
-        Details details1 = new Details(2,"DD",1234d,39d,1);
-        Status_shipping status_shipping = new Status_shipping("Pendiente", LocalDate.now());
+        List<Details> details = getDetails(user);
+        Shipping shipping = getShippingInfo(user);
+        Bill bill = getBillInfo(user, details, shipping);
 
-        ArrayList<Details> bill_details = new ArrayList<>();
-        bill_details.add(details);
-        bill_details.add(details1);
-
-        Shipping shipping = new Shipping("street", "12", "colony", "Ags", "Ags", "20000", "Mexico", "reference", status_shipping);
-        Bill bill = new Bill(100d, 900d, 1000d, bill_details, shipping);
-
-        User user = userService.findUserByUsername("user1");
-        ArrayList<Bill> bills = new ArrayList<>();
-        bills.add(bill);
-
-        user.setBills(bills);
-        userRepository.save(user);
-
+        saveBill(user, bill);
+        cleanShoppingCart(user);
         return new ModelAndView("redirect:/index");
     }
 
-    @GetMapping("/testing")
-    public ModelAndView testing(){
-        User user = userRepository.findById(5);
-        Details details = new Details();
-        details.setDiscount(123.3);
-        details.setId_prod(4);
-        details.setName("nombre");
-        details.setPrice(123.3);
-        details.setQuantity(1);
+    private void cleanShoppingCart(User user) {
+        LOG.info("METHOD: cleanShoppingCart() --PARAMS: user="+user);
+        int result = shoppingCartService.removeAllProductsByUser(user.getId());
+        if (result == 1){
+            System.out.println("Carrito limpio para el usuario: " + user.getUsername());
+        }else{
+            System.out.println("Carrito no se logró limpiar para el usuario: " + user.getUsername());
+        }
+    }
 
-        Details details1 = new Details();
-        details1.setDiscount(123.3);
-        details1.setId_prod(4);
-        details1.setName("nombre");
-        details1.setPrice(123.3);
-        details1.setQuantity(1);
-        List<Details> detailsList = new ArrayList<>();
-        detailsList.add(details);
-        detailsList.add(details1);
+    private void saveBill(User user, Bill bill) {
+        LOG.info("METHOD: saveBill() --PARAMS: user="+user+", bill="+bill);
+        List<Bill> bills_of_user = user.getBills();
+        bills_of_user.add(bill);
+        user.setBills(bills_of_user);
+        userRepository.save(user);
+    }
 
-        Shipping shipping = new Shipping();
-        shipping.setCity("city");
-        shipping.setColony("colony");
-        shipping.setCountry("country");
-        shipping.setNumber("number");
-        shipping.setReference("referenced");
-        shipping.setState("state");
-        shipping.setStreet("street");
-        shipping.setZip("1212");
-        shipping.setStatus_shipping(new Status_shipping("status", LocalDate.now()));
+    // We get the information of each product as the 'Details of the Bill':
+    public List<Details> getDetails(User user) {
+        LOG.info("METHOD: getDetails() ---PARAMS: UserModel="+user);
+        ArrayList<Details> details = new ArrayList<>();
+        // We search all the products from that User in his/her S.Cart:
+        ArrayList<ShoppingCartModel> SCUser = shoppingCartService.findAllProductsByUser(user.getId());
+        // For each one, We added to a Details' Arraylist and subtract the inventory:
+        for (ShoppingCartModel sc : SCUser) {
+            details.add(new Details(sc.getProduct().getId(), sc.getProduct().getName(), sc.getProduct().getPrice(),
+                    sc.getProduct().getDiscount().getPercentage(), sc.getQuantity()));
+            subtract_products(sc.getProduct().getId(), sc.getQuantity());
+        }
+        return details;
+    }
 
-        Bill bill = new Bill();
-        bill.setDetails_bill(detailsList);
-        bill.setShipping_price(123.3);
-        bill.setSubtotal(123.3);
-        bill.setTotal(123.3);
-        bill.setShipping(shipping);
+    // We update the inventory of products:
+    private void subtract_products(Integer id_prod, int quantity) {
+        LOG.info("METHOD: subtract_products() --PARAMS: id_prod="+id_prod+", quantity="+quantity);
+        ProductModel product = productService.getProductById(id_prod);
+        int available = product.getProductQuantityModel().getQuantity();
+        product.getProductQuantityModel().setQuantity((available-quantity));
+        productQuantityService.saveQuantity(product.getProductQuantityModel());
+    }
 
-        List<Bill> billList1 = user.getBills();
-        billList1.add(bill);
-        user.setBills(billList1);
 
-        User user1 = userRepository.save(user);
-        LOG.info("METHOD testting() -- " + user.toString());
+    // We get the information of the Shipping:
+    private Shipping getShippingInfo(User user) {
+        LOG.info("METHOD: getShippingInfo() --PARAMS: UserModel="+user);
+        UserAddress address = user.getUserAdress();
+        return new Shipping(
+                address.getStreet(), address.getNumber(),
+                address.getColony(), address.getCity(),
+                address.getState(), address.getZip(),
+                address.getCountry(), address.getReference(),
+                new Status_shipping("Pendiente", LocalDate.now()));
+    }
 
-        LOG.info(user1.getBills().toString());
-        return new ModelAndView("redirect:/index");
+    private Bill getBillInfo(User user, List<Details> details, Shipping shipping) {
+        Double shipping_cost;
+        // To set the Shipping Price We need to know from Where is the user, if he/she is from Ags the cost is $0
+        // else if he/she is from any other city from Mexico, the cost is $150
+        if(user.getUserAdress().getCity().toUpperCase().contains("AGUASCALIENTES")){
+            shipping_cost = 0.0d;
+        }else if(user.getUserAdress().getCountry().toUpperCase().contains("MEXICO")){
+            shipping_cost = 150d;
+        }else{
+            shipping_cost = 350d;
+        }
+
+        // Now We calculate the Subtotal and Total of all the products purchased:
+        Double total = 0.0d;
+        Double iva = 0.0d;
+        Double subtotal = 0.0d;
+
+        for (Details product : details){
+            Double sub = (product.getPrice() - (product.getPrice() * 0.16)) * product.getQuantity();
+            subtotal += sub - (sub * (product.getDiscount() / 100));
+        }
+        DecimalFormat formatter = new DecimalFormat("#0.00");
+        subtotal = Double.parseDouble(formatter.format(subtotal));
+        iva = subtotal * 0.16;
+        iva = Double.parseDouble(formatter.format(iva));
+        total = (subtotal + iva + shipping_cost);
+        total = Double.parseDouble(formatter.format(total));
+        // ends the calculatios
+
+        return new Bill(shipping_cost, iva, subtotal, total, details, shipping);
     }
 }

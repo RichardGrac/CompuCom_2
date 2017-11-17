@@ -20,6 +20,9 @@ public class Bill {
     @Column(name = "shipping_prince")
     private Double shipping_price;
 
+    @Column(name = "iva")
+    private Double iva;
+
     @Column(name = "subtotal")
     private Double subtotal;
 
@@ -39,8 +42,9 @@ public class Bill {
 
     public Bill(){}
 
-    public Bill(Double shipping_price, Double subtotal, Double total, List<Details> details_bill, Shipping shipping) {
+    public Bill(Double shipping_price, Double iva, Double subtotal, Double total, List<Details> details_bill, Shipping shipping) {
         this.shipping_price = shipping_price;
+        this.iva = iva;
         this.subtotal = subtotal;
         this.total = total;
         this.details_bill = details_bill;
@@ -95,11 +99,20 @@ public class Bill {
         this.shipping = shipping;
     }
 
+    public Double getIva() {
+        return iva;
+    }
+
+    public void setIva(Double iva) {
+        this.iva = iva;
+    }
+
     @Override
     public String toString() {
         return "Bill{" +
                 "id=" + id +
                 ", shipping_price=" + shipping_price +
+                ", iva=" + iva +
                 ", subtotal=" + subtotal +
                 ", total=" + total +
                 ", details_bill=" + details_bill +

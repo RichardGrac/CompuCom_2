@@ -240,7 +240,7 @@
                         Verificar envío
                     </button>
                 </a>
-                <a href="#">
+                <a th:href="@{/shopping_cart/finish_sale?id_user=__${session.userGlobal.id}__}">
                     <button type="button" class="btn btn-success" id="btn_continue">
                         <i class="material-icons md-18">payment</i>
                         Finalizar compra

@@ -15,4 +15,6 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Seri
     @Transactional
     int removeByIdUserAndIdProd(int id_user, int id_prod);
     ShoppingCart findByIdSc(int id_sc);
+    @Transactional
+    int removeAllByIdUser(int id_user);
 }

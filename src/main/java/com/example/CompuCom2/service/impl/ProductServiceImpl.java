@@ -62,17 +62,22 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductModel updateProduct(ProductModel productModel) {
-        if (!productModel.getImage().isEmpty()){
+        LOG.info("METHOD: updateProduct --PARAM: ProductModel="+productModel);
+        System.out.println("image="+productModel.getImage());
+        if ((productModel.getImage() != null) && (!productModel.getImage().isEmpty())){
+            System.out.println("Entro a if");
             //se hizo una modificacion a la imagen
             storageService.deleteOne(productRepository.findImageById(productModel.getId()));
             return saveProduct(productModel);
         }else {
+            System.out.println("Entro a else");
             //no se modifico la imagen
             Product updatedProduct = productRepository.findById(productModel.getId());
             updatedProduct.setCategory(productModel.getCategory());
             updatedProduct.setDescription(productModel.getDescription());
             updatedProduct.setName(productModel.getName());
             updatedProduct.setPrice(productModel.getPrice());
+            System.out.println("Casi termina else");
             return productConverter.entityToModel(productRepository.save(updatedProduct));
         }
     }

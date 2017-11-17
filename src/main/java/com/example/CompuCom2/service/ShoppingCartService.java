@@ -15,4 +15,5 @@ public interface ShoppingCartService {
     ShoppingCart findByUserAndProduct(int id_user, int id_prod);
     int numberOfProducts(int id_user);
     ShoppingCart modifyQuantity(int id_sc, int quantity);
+    int removeAllProductsByUser(int id_user);
 }

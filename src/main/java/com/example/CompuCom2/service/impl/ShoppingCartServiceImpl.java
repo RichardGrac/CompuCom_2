@@ -103,4 +103,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
         sc = shoppingCartRepository.save(sc);
         return sc;
     }
+
+    @Override
+    public int removeAllProductsByUser(int id_user) {
+        return shoppingCartRepository.removeAllByIdUser(id_user);
+    }
 }

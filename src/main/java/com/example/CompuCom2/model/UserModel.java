@@ -14,6 +14,7 @@ public class UserModel {
     private UserAddress userAdress;
     private ShoppingCartModel shoppingCartModel;
 
+
     public UserModel(){
         userAdress = new UserAddress();
     }
