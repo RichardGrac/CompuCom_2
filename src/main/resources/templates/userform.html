@@ -184,7 +184,10 @@
                                     <label>País</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                                        <input name="user.userAddress.country" placeholder="Índica tú país" class="form-control" type="text" th:field="*{userAddressModel.country}"/>
+                                        <!--?<input name="user.userAddress.country" placeholder="Índica tú país" class="form-control" type="text" th:field="*{userAddressModel.country}"/>-->
+                                        <select class="form-control" th:field="*{userAddressModel.country}">
+                                            <option value="Mexico">Mexico</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <!-- /.form-group -->
