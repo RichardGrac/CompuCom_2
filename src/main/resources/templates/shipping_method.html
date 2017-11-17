@@ -43,7 +43,7 @@
                     </div>
                     <p>Para asegurarnos de que tengas una experiencia de compra agradable con nosotros, te pedimos
                         que por favor verifiques la dirección a donde los productos serán envíados.</p>
-                    <h3><a href="#" title="Si deseas cambiar tú dirección de envío, solo dá clic aquí">Cambiar dirección</a></h3>
+                    <h3><a th:href="@{/users/edit-user(id=${session.userGlobal.id})}" title="Si deseas cambiar tú dirección de envío, solo dá clic aquí">Cambiar dirección</a></h3>
                 </div>
             </div>
 

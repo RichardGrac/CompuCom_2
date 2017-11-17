@@ -18,4 +18,5 @@ public class Constants {
     public static final String SHIPPING_METHOD = "shipping_method";
     public static final String PAYMENT_METHOD = "payment_method";
     public static final String DEALS_BANNER = "deals-banner";
+    public static final String GRATITUDE = "gratitude";
 }

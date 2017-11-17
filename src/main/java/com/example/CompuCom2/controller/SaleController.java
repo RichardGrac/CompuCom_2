@@ -160,25 +160,23 @@ public class SaleController {
     @GetMapping("/finish_sale")
     public ModelAndView finishTheSale(@RequestParam(name = "id_user") Integer id_user){
         LOG.info("METHOD: saveBill() --PARAMS: id_user="+id_user);
+        ModelAndView mav = new ModelAndView(Constants.GRATITUDE);
         User user = userRepository.findById(id_user);
 
         List<Details> details = getDetails(user);
         Shipping shipping = getShippingInfo(user);
         Bill bill = getBillInfo(user, details, shipping);
-
         saveBill(user, bill);
         cleanShoppingCart(user);
-        return new ModelAndView("redirect:/index");
+
+        ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
+        mav.addObject("categories", productCategoryModels);
+        return mav;
     }
 
     private void cleanShoppingCart(User user) {
         LOG.info("METHOD: cleanShoppingCart() --PARAMS: user="+user);
         int result = shoppingCartService.removeAllProductsByUser(user.getId());
-        if (result == 1){
-            System.out.println("Carrito limpio para el usuario: " + user.getUsername());
-        }else{
-            System.out.println("Carrito no se logró limpiar para el usuario: " + user.getUsername());
-        }
     }
 
     private void saveBill(User user, Bill bill) {
