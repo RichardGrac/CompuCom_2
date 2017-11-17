@@ -1,3 +1,15 @@
+function shipping_p(ciudad, country) {
+    var shipping_price = 0.0;
+    if (ciudad.toUpperCase() == "AGUASCALIENTES"){
+        shipping_price = 0.0;
+    }else if(country.toUpperCase() == "MEXICO" || country.toUpperCase() == "MÉXICO"){
+        shipping_price = 150.0;
+    }else{
+        shipping_price = 350.0;
+    }
+    document.getElementById("envio").innerText = shipping_price;
+}
+
 function verify(quantity) {
     //Security:
     document.getElementById("btn_continue").disabled = true;
@@ -32,7 +44,8 @@ function calc_total(quantity) {
         subtotal += parseFloat(document.getElementById(element).innerText);
     }
     var iva = subtotal * 0.16;
-    var total = subtotal + iva;
+    var shipping_cost = parseFloat(document.getElementById("envio").innerText);
+    var total = subtotal + iva + shipping_cost;
 
     document.getElementById("subtotal").innerText = subtotal.toFixed(2);
     document.getElementById("iva").innerText = iva.toFixed(2);
@@ -69,6 +82,7 @@ function disable_continueBtn() {
     //When the product.quantity of the S.Cart of a customer is > than the products in the Stock: You can't continue with the sale.
     document.getElementById("btn_continue").disabled = true;
 }
+
 
 /*---------------------------------------------- payment-method ------------------------------------------------*/
 function activate_radioBtn(number) {

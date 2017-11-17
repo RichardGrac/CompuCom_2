@@ -76,8 +76,11 @@ public class SaleController {
             shopping_cart = shoppingCartService.findAllProductsByUser(id_user);
         }
 
+        UserAddressModel address = userService.findUserAddressByIdModel(id_user);
+
         mav.addObject("shopping_cart", shopping_cart);
         ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
+        mav.addObject("address", userService.findUserAddressByIdModel(id_user));
         mav.addObject("categories", productCategoryModels);
         mav.addObject("result", result);
         mav.addObject("deleted", deleted);

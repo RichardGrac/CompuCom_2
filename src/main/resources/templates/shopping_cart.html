@@ -13,7 +13,7 @@
     <div th:replace="front-fragments/fimports::css">&nbsp;</div>
 </head>
 
-<body th:onload="'calc_price(' + ${shopping_cart.size()} + ');'">
+<body th:onload="'shipping_p(\'' + ${address.city} + '\', \'' + ${address.country} + '\'); calc_price(' + ${shopping_cart.size()} + ');'">
 <!-- Navigation -->
 <div th:replace="front-fragments/fheader::navigation">&nbsp;</div>
 
@@ -70,12 +70,15 @@
                         <div class="text-center">
                             <img class="margin-bottom" th:src="@{/img/shopping-cart.png}" alt="shopping-cart-image" height="100%" width="85%"/>
                         </div>
+                        <p><b>Costos de envío: </b></p>
+                        <p>
+                            <u>Local (Aguascalientes)</u>: $0.00 <br></br>
+                            <u>Nacional (México)</u>: $150.00 <br></br>
+                            <u>Internacional</u>: $350.00
+                        </p>
                         <p>Para asegurarnos de que tengas una experiencia de compra agradable con nosotros, te pedimos
                             que por favor verifiques los productos escogidos.</p>
-                        <p>Para agregar o quitar productos de un mismo tipo por favor índique la cantidad deseable
-                            y guarde los cambios.</p>
-                        <p>Para añadir más productos diferentes, puedes ir a escojerlos sin ningun problema, tú carrito
-                            de compra se mantendrá aquí <i class="material-icons md-18">insert_emoticon</i></p>
+                        <p>Para agregar o quitar productos de un mismo tipo por favor índique la cantidad.</p>
                     </div>
                 </div>
 
@@ -98,7 +101,11 @@
                                 <a th:href="@{/more?id=__${sc.product.id}__}"><span style="color:blue;" class="font-letter" th:text="${sc.product.name}"></span></a>
                             </th>
                             <td class="col-sm-1 col-md-1" style="text-align: center">
-                                <input type="number" th:value="${sc.quantity}" class="form-control" min="1" th:max="${sc.product.productQuantityModel.quantity}" size="2" th:id="'cantidad' + ${iterStat.index}" th:name="'cantidad' + ${iterStat.index}" th:onclick="'verify(' + ${shopping_cart.size()} + '); enableSave(' + ${iterStat.index} + ')'" onkeydown="return false" th:onchange="${'javascript:testing(' + sc.idSc + ',' + iterStat.index + ',' + session.userGlobal.id + ')'}"/>
+                                <input type="number" th:value="${sc.quantity}" class="form-control" min="1"
+                                       th:max="${sc.product.productQuantityModel.quantity}" size="2"
+                                       th:id="'cantidad' + ${iterStat.index}" th:name="'cantidad' + ${iterStat.index}"
+                                       th:onclick="'verify(' + ${shopping_cart.size()} + '); enableSave(' + ${iterStat.index} + ')'" onkeydown="return false"
+                                       th:onchange="${'javascript:testing(' + sc.idSc + ',' + iterStat.index + ',' + session.userGlobal.id + ')'}"/>
                             </td>
                             <td class="col-sm-1 col-md-1 text-center">$<span th:id="'precio' + ${iterStat.index}" th:text="${sc.product.price}"> </span></td>
                             <td class="col-sm-1 col-md-1 text-center"><span th:id="'descuento' + ${iterStat.index}" th:text="${sc.product.discount.percentage}"> </span>%</td>
@@ -124,6 +131,14 @@
                             <td></td>
                             <td><b>IVA (16%):</b></td>
                             <td>$ <span id="iva">0.00</span></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><b>Costo de envío:</b></td>
+                            <td>$ <span id="envio">0.00</span></td>
                         </tr>
                         <tr>
                             <td></td>
