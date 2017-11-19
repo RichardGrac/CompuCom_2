@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -221,7 +222,7 @@ public class SaleController {
                 address.getColony(), address.getCity(),
                 address.getState(), address.getZip(),
                 address.getCountry(), address.getReference(),
-                new Status_shipping("Pendiente", LocalDate.now()));
+                new Status_shipping("Pendiente", LocalDateTime.now()));
     }
 
     private Bill getBillInfo(User user, List<Details> details, Shipping shipping) {
@@ -253,6 +254,6 @@ public class SaleController {
         total = Double.parseDouble(formatter.format(total));
         // ends the calculatios
 
-        return new Bill(shipping_cost, iva, subtotal, total, details, shipping);
+        return new Bill(shipping_cost, iva, subtotal, total, LocalDateTime.now(), details, shipping);
     }
 }

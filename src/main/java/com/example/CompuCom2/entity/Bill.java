@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -29,6 +30,9 @@ public class Bill {
     @Column(name = "total")
     private Double total;
 
+    @Column(name = "date")
+    LocalDateTime date;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "bill_details", joinColumns =
         @JoinColumn(name = "bill_id", referencedColumnName = "id"),
@@ -42,11 +46,13 @@ public class Bill {
 
     public Bill(){}
 
-    public Bill(Double shipping_price, Double iva, Double subtotal, Double total, List<Details> details_bill, Shipping shipping) {
+    public Bill(Double shipping_price, Double iva, Double subtotal, Double total, LocalDateTime date, List<Details> details_bill, Shipping shipping) {
+
         this.shipping_price = shipping_price;
         this.iva = iva;
         this.subtotal = subtotal;
         this.total = total;
+        this.date = date;
         this.details_bill = details_bill;
         this.shipping = shipping;
     }
@@ -107,6 +113,15 @@ public class Bill {
         this.iva = iva;
     }
 
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "Bill{" +
@@ -115,6 +130,7 @@ public class Bill {
                 ", iva=" + iva +
                 ", subtotal=" + subtotal +
                 ", total=" + total +
+                ", date=" + date +
                 ", details_bill=" + details_bill +
                 ", shipping=" + shipping +
                 '}';

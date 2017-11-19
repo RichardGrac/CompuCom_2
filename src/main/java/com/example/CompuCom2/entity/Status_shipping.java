@@ -1,7 +1,7 @@
 package com.example.CompuCom2.entity;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Status_shipping")
@@ -15,11 +15,11 @@ public class Status_shipping {
     private String status;
 
     @Column(name = "last_update")
-    private LocalDate last_update;
+    private LocalDateTime last_update;
 
     public Status_shipping(){}
 
-    public Status_shipping(String status, LocalDate last_update) {
+    public Status_shipping(String status, LocalDateTime last_update) {
         this.status = status;
         this.last_update = last_update;
     }
@@ -40,11 +40,11 @@ public class Status_shipping {
         this.status = status;
     }
 
-    public LocalDate getLast_update() {
+    public LocalDateTime getLast_update() {
         return last_update;
     }
 
-    public void setLast_update(LocalDate last_update) {
+    public void setLast_update(LocalDateTime last_update) {
         this.last_update = last_update;
     }
 
