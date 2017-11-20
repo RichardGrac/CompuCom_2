@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -43,6 +44,9 @@ public class Bill {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_id")
     private Shipping shipping;
+
+    @Column(name = "bill_id")
+    private int bill_id;
 
     public Bill(){}
 
@@ -122,6 +126,14 @@ public class Bill {
         this.date = date;
     }
 
+    public int getUserPropietary_id() {
+        return bill_id;
+    }
+
+    public void setUserPropietary_id(int user_id) {
+        this.bill_id = user_id;
+    }
+
     @Override
     public String toString() {
         return "Bill{" +
@@ -133,6 +145,7 @@ public class Bill {
                 ", date=" + date +
                 ", details_bill=" + details_bill +
                 ", shipping=" + shipping +
+                ", bill_id=" + bill_id +
                 '}';
     }
 }

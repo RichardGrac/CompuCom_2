@@ -1,7 +1,6 @@
 package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
-import com.example.CompuCom2.converter.UserAddressConverter;
 import com.example.CompuCom2.entity.*;
 import com.example.CompuCom2.model.ProductCategoryModel;
 import com.example.CompuCom2.model.ProductModel;
@@ -25,15 +24,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DecimalFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/shopping_cart")
-public class SaleController {
-    private static final Log LOG = LogFactory.getLog(SaleController.class);
+public class ShoppingController {
+    private static final Log LOG = LogFactory.getLog(ShoppingController.class);
 
     @Autowired
     @Qualifier("shoppingCartServiceImpl")
@@ -49,10 +47,6 @@ public class SaleController {
     @Autowired
     @Qualifier("userServiceImpl")
     private UserServiceImpl userService;
-
-    @Autowired
-    @Qualifier("userAddressConverter")
-    private UserAddressConverter userAddressConverter;
 
     @Autowired
     @Qualifier("userRepository")
@@ -222,7 +216,7 @@ public class SaleController {
                 address.getColony(), address.getCity(),
                 address.getState(), address.getZip(),
                 address.getCountry(), address.getReference(),
-                new Status_shipping("Pendiente", LocalDateTime.now()));
+                new StatusShipping("Pendiente", LocalDateTime.now()));
     }
 
     private Bill getBillInfo(User user, List<Details> details, Shipping shipping) {

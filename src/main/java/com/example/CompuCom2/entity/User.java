@@ -37,10 +37,12 @@ public class User {
     private ShoppingCart shoppingCart;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_bills", joinColumns =
-        @JoinColumn(name = "user_id", referencedColumnName = "id"),
-        inverseJoinColumns =
-        @JoinColumn(name = "bill_id", referencedColumnName = "id"))
+//    This JPA Annotation creates a intermediate table:
+//    @JoinTable(name = "user_bills", joinColumns =
+//        @JoinColumn(name = "user_id", referencedColumnName = "id"),
+//        inverseJoinColumns =
+//        @JoinColumn(name = "bill_id", referencedColumnName = "id"))
+    @JoinColumn(name = "bill_id") // It creates the id_user propietary in 'Bill' entity, but it's named like "bill_id"
     private List<Bill> bills;
 
     public User(){}

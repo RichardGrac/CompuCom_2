@@ -1,25 +1,17 @@
-package com.example.CompuCom2.entity;
+package com.example.CompuCom2.model;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "Status_shipping")
-public class Status_shipping {
+public class StatusShippingModel {
 
-    @Id
-    @GeneratedValue
     private int id;
-
-    @Column(name = "status")
     private String status;
-
-    @Column(name = "last_update")
     private LocalDateTime last_update;
 
-    public Status_shipping(){}
+    public StatusShippingModel(){}
 
-    public Status_shipping(String status, LocalDateTime last_update) {
+    public StatusShippingModel(int id, String status, LocalDateTime last_update) {
+        this.id = id;
         this.status = status;
         this.last_update = last_update;
     }
@@ -50,7 +42,7 @@ public class Status_shipping {
 
     @Override
     public String toString() {
-        return "Status_shipping{" +
+        return "StatusShippingModel{" +
                 "id=" + id +
                 ", status='" + status + '\'' +
                 ", last_update=" + last_update +

@@ -1,47 +1,22 @@
-package com.example.CompuCom2.entity;
+package com.example.CompuCom2.model;
 
-import javax.persistence.*;
+public class ShippingModel {
 
-@Entity
-@Table(name = "Shipping")
-public class Shipping {
-
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
     private int id;
-
-    @Column(name = "street")
     private String street;
-
-    @Column(name = "number")
     private String number;
-
-    @Column(name = "colony")
     private String colony;
-
-    @Column(name = "city")
     private String city;
-
-    @Column(name = "state")
     private String state;
-
-    @Column(name = "zip")
     private String zip;
-
-    @Column(name = "country")
     private String country;
-
-    @Column(name = "reference")
     private String reference;
+    private StatusShippingModel statusShippingModel;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "status_shipping_id")
-    private StatusShipping status_shipping;
+    public ShippingModel(){}
 
-    public Shipping(){}
-
-    public Shipping(String street, String number, String colony, String city, String state, String zip, String country, String reference, StatusShipping status_shipping) {
+    public ShippingModel(int id, String street, String number, String colony, String city, String state, String zip, String country, String reference, StatusShippingModel statusShippingModel) {
+        this.id = id;
         this.street = street;
         this.number = number;
         this.colony = colony;
@@ -50,7 +25,7 @@ public class Shipping {
         this.zip = zip;
         this.country = country;
         this.reference = reference;
-        this.status_shipping = status_shipping;
+        this.statusShippingModel = statusShippingModel;
     }
 
     public int getId() {
@@ -125,17 +100,17 @@ public class Shipping {
         this.reference = reference;
     }
 
-    public StatusShipping getStatus_shipping() {
-        return status_shipping;
+    public StatusShippingModel getStatusShippingModel() {
+        return statusShippingModel;
     }
 
-    public void setStatus_shipping(StatusShipping status_shipping) {
-        this.status_shipping = status_shipping;
+    public void setStatusShippingModel(StatusShippingModel statusShippingModel) {
+        this.statusShippingModel = statusShippingModel;
     }
 
     @Override
     public String toString() {
-        return "Shipping{" +
+        return "ShippingModel{" +
                 "id=" + id +
                 ", street='" + street + '\'' +
                 ", number='" + number + '\'' +
@@ -145,7 +120,7 @@ public class Shipping {
                 ", zip='" + zip + '\'' +
                 ", country='" + country + '\'' +
                 ", reference='" + reference + '\'' +
-                ", status_shipping=" + status_shipping +
+                ", statusShippingModel=" + statusShippingModel +
                 '}';
     }
 }
