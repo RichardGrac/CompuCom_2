@@ -11,4 +11,5 @@ import java.util.List;
 public interface BillRepository extends JpaRepository<Bill, Serializable>{
 
     List<Bill> findAll();
+    Bill findById(int bill_id);
 }

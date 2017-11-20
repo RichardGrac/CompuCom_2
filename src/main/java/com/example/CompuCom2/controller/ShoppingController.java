@@ -157,6 +157,7 @@ public class ShoppingController {
         LOG.info("METHOD: saveBill() --PARAMS: id_user="+id_user);
         ModelAndView mav = new ModelAndView(Constants.GRATITUDE);
         User user = userRepository.findById(id_user);
+        System.out.println("USER=" + user);
 
         List<Details> details = getDetails(user);
         Shipping shipping = getShippingInfo(user);
@@ -177,6 +178,8 @@ public class ShoppingController {
     private void saveBill(User user, Bill bill) {
         LOG.info("METHOD: saveBill() --PARAMS: user="+user+", bill="+bill);
         List<Bill> bills_of_user = user.getBills();
+//       We set manually the 'id' of the User propietary of this Bill:
+        bill.setUserPropietary_id(user.getId());
         bills_of_user.add(bill);
         user.setBills(bills_of_user);
         userRepository.save(user);

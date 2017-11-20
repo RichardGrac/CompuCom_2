@@ -27,12 +27,13 @@ public class BillServiceImpl implements BillService {
         ArrayList<BillModel> billModels = new ArrayList<>();
         for (Bill bill : billRepository.findAll()) {
             BillModel billModel = billConverter.entityToModel(bill);
-
-//            int user_id = billRepository.getUserIdOfBillId(billModel.getId());
-//            System.out.println("user_id="+user_id);
-//            billModel.setId_user(user_id);
             billModels.add(billModel);
         }
         return billModels;
+    }
+
+    @Override
+    public BillModel findBill(Integer bill_id) {
+        return billConverter.entityToModel(billRepository.findById(bill_id));
     }
 }

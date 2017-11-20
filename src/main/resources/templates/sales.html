@@ -15,12 +15,11 @@
     <div th:replace="fragments/aside::aside">&nbsp;</div>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper margin-top">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                VENTAS /
-                <small>Todas las ventas</small>
+                Ventas
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -31,40 +30,6 @@
 
         <!-- Main content -->
         <section class="content">
-
-            <div class="row" th:if="${result == 1}">
-                <div class="col-lg-4">
-                    <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        Usuario añadido correctamente!
-                    </div>
-                </div>
-            </div>
-            <div class="row" th:if="${result == 0}">
-                <div class="col-lg-4">
-                    <div class="alert alert-danger alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        Error al añadir usuario!
-                    </div>
-                </div>
-            </div>
-            <div class="row" th:if="${delete}">
-                <div class="col-lg-4">
-                    <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        Usuario eliminado correctamente!
-                    </div>
-                </div>
-            </div>
-            <div class="row" th:if="${delete == false}">
-                <div class="col-lg-4">
-                    <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        Usuario no eliminado correctamente!
-                    </div>
-                </div>
-            </div>
-
 
             <!-- Default box -->
             <div class="box">
@@ -89,16 +54,16 @@
                         </thead>
                         <tbody>
                         <tr th:each="bill : ${bills}">
-                            <td><a th:href="@{/sales/search?id=__${bill.id}__}"><span th:text="${bill.id}"></span></a></td>
+                            <td><a th:href="@{/sales/searchsale?id=__${bill.id}__}"><span th:text="${bill.id}"></span></a></td>
                             <td><a th:href="@{/users/searchuser?id=__${bill.id_user}__}"><span th:text="${bill.id_user}"></span></a></td>
-                            <td><a th:href="@{/shippings/searchshipping}"><span th:text="${bill.shipping.id}"></span></a></td>
+                            <td><a th:href="@{/shippings/searchshipping?id=__${bill.shipping.id}__}"><span th:text="${bill.shipping.id}"></span></a></td>
                             <td th:text="${bill.date}"></td>
                             <td>$ <span th:text="${bill.shipping_price}"></span></td>
                             <td>$ <span th:text="${bill.subtotal}"></span></td>
                             <td>$ <span th:text="${bill.iva}"></span></td>
                             <td>$ <span th:text="${bill.total}"></span></td>
                             <td class="center">
-                                <a th:href="@{/sales/search?id=__${bill.id}__}"><i class="fa fa-search fa-fw"></i></a>
+                                <a th:href="@{/sales/searchsale?id=__${bill.id}__}"><i class="fa fa-search fa-fw"></i></a>
                             </td>
                         </tr>
                         </tbody>

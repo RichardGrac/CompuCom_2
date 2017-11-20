@@ -20,4 +20,5 @@ public class Constants {
     public static final String DEALS_BANNER = "deals-banner";
     public static final String GRATITUDE = "gratitude";
     public static final String SALES = "sales";
+    public static final String SEARCHSALE = "searchsale";
 }

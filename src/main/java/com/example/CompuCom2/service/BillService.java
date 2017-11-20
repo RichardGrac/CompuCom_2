@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface BillService {
     ArrayList<BillModel> getAllBills();
+    BillModel findBill(Integer bill_id);
 }
