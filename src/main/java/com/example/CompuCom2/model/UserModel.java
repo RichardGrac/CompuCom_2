@@ -13,8 +13,8 @@ public class UserModel {
     private String email;
     private Set<Role> roles;
     private UserAddress userAdress;
-    private ShoppingCartModel shoppingCartModel;
-    private List<BillModel> bills;
+    private ShoppingCartModel shoppingCartModel = null;
+    private List<BillModel> bills = null;
 
 
     public UserModel(){

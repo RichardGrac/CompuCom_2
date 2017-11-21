@@ -94,7 +94,7 @@ public class UserController {
             Role role = roleService.findByType("USER");
             roleSet.add(role);
             userModel.setRoles(roleSet);
-            modelAndView.setViewName("redirect:/index");
+            modelAndView.setViewName(Constants.LOGIN);
         }
         UserModel userModel1 = userService.addUser(userModel);
         if (userModel1 != null){
@@ -135,6 +135,7 @@ public class UserController {
     @GetMapping("/edit-user")
     public ModelAndView editUser(@RequestParam(name = "id") Integer id,
                                  HttpSession httpSession){
+        LOG.info("METHOD: editUser() --PARAM: id="+id);
         UserModel userGlobal = (UserModel) httpSession.getAttribute("userGlobal");
         ModelAndView modelAndView = new ModelAndView(Constants.REGISTER);
         if (!id.equals(userGlobal.getId())){

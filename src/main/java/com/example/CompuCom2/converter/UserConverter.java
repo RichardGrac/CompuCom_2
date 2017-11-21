@@ -28,11 +28,14 @@ public class UserConverter {
 //        user.setUserAdress(userModel.getUserAdress());
 
         List<Bill> bills = new ArrayList<>();
-        for (BillModel billModel : userModel.getBills()) {
-            Bill bill = billConverter.modelToEntity(billModel);
-            bills.add(bill);
+        if (userModel.getBills() != null){
+            for (BillModel billModel : userModel.getBills()) {
+                Bill bill = billConverter.modelToEntity(billModel);
+                bills.add(bill);
+            }
         }
         user.setBills(bills);
+
         return user;
     }
 
@@ -46,9 +49,11 @@ public class UserConverter {
 //        userModel.setUserAdress(user.getUserAdress());
 
         List<BillModel> billsModels = new ArrayList<>();
-        for (Bill bill : user.getBills()) {
-            BillModel billModel = billConverter.entityToModel(bill);
-            billsModels.add(billModel);
+        if (user.getBills() != null){
+            for (Bill bill : user.getBills()) {
+                BillModel billModel = billConverter.entityToModel(bill);
+                billsModels.add(billModel);
+            }
         }
         userModel.setBills(billsModels);
         return userModel;

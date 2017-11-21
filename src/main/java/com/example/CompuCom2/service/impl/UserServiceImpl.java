@@ -52,6 +52,10 @@ public class UserServiceImpl implements UserService {
         LOG.info("User Entity - " + user.toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        //Seteamos manualmente la dirección del Usuario correspondiente:
+        UserAddressModel address = userAddressConverter.entityToModel(userModel.getUserAdress());
+        address.setId(userModel.getId());
+        addAddressUser(address);
         // Retornamos en forma de "Modelo" para el controlador
         return userConverter.entityToModel(user);
     }
