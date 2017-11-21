@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Test</title>
+    <link rel="stylesheet" href="../static/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/vendor/bootstrap/js/bootstrap.min.js">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<h1 class="text-lg-center">Title</h1>
+<br>
+<form action="">
+    <label>
+        <input type="text" required
+               pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/" title="Me la pelas">
+    </label>
+    <input type="submit">
+
+</form>
+
+<script src="../static/vendor/jquery/jquery.min.js"></script>
+<script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../static/js/validation.js"></script>
+<script>
+    $("#basicfeedback_validation").vindicate("init");
+    var submitBasicFeedback = function() {
+        $("#basicfeedback_validation").vindicate("validate");
+    }
+
+</script>
+</body>
+</html>
