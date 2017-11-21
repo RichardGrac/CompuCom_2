@@ -19,7 +19,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Venta
+                Ventas
                 <small th:if="${search != null}">"# <span th:text="${search}"></span>"</small>
             </h1>
             <ol class="breadcrumb">
@@ -32,9 +32,21 @@
 
         <!-- Main content -->
         <section class="content">
-
+            <div class="row">
+                <form method="post" th:action="@{/sales/searchsale}" >
+                    <div class="col-md-3 form-group">
+                        <label>Busqueda:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <input placeholder="# Venta" class="form-control" type="number" min="1" required="true" th:id="id" th:name="id"/>
+                        </div>
+                    </div>
+                    <!-- /.form-group -->
+                </form>
+            </div>
             <!-- Default box -->
-            <div class="box" th:if="${search !=  null}">
+
+            <div class="box" th:if="${bill !=  null}">
                 <div class="box-header with-border">
                     <h3 class="box-title">Detalles de la venta #<span th:text="${bill.id}"></span></h3>
 
@@ -49,8 +61,8 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-3">
-                            <b>Usuario</b>: # <span th:text="${bill.id_user}"></span><br></br>
-                            <b>Envío</b>: # <span th:text="${bill.shipping.id}"></span><br></br>
+                            <b>Usuario</b>: <a th:href="@{/users/searchuser?id=__${bill.id_user}__}"># <span th:text="${bill.id_user}"></span></a><br></br>
+                            <b>Envío</b>: <a th:href="@{/shippings/searchshipping?id=__${bill.shipping.id}__}"># <span th:text="${bill.shipping.id}"></span></a><br></br>
                             <b>Fecha</b>: # <span th:text="${bill.date}"></span><br></br><br></br>
                             <b>Costo de envío</b>: $ <span th:text="${bill.shipping_price}"></span><br></br>
                             <b>Subtotal</b>: $ <span th:text="${bill.subtotal}"></span><br></br>
@@ -77,7 +89,7 @@
                                                     <td th:text="${product.id}"></td>
                                                     <td th:text="${product.name}"></td>
                                                     <td>$ <span th:text="${product.price}"></span></td>
-                                                    <td><span th:text="${product.discount}">%</span></td>
+                                                    <td><span th:text="${product.discount}"></span>%</td>
                                                     <td th:text="${product.quantity}"></td>
                                                 </tr>
                                             </table>
@@ -100,6 +112,13 @@
             </div>
             <!-- /.box -->
 
+            <div class="row"></div>
+            <div class="row" th:if="${notFound == 1}">
+                <div class="col-md-6">
+                    <h3>La venta '<span th:text="${search}"></span>' no está registrada.</h3>
+                </div>
+            </div>
+            <!--./row-->
         </section>
         <!-- /.content -->
     </div>

@@ -12,4 +12,5 @@ public interface BillRepository extends JpaRepository<Bill, Serializable>{
 
     List<Bill> findAll();
     Bill findById(int bill_id);
+//    List<Bill> findAllByUserPropietary_id(int user_id);
 }

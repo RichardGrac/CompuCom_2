@@ -39,11 +39,16 @@ public class SalesController {
         LOG.info("METHOD: search() --PARAMS: id=" + id);
         ModelAndView mav = new ModelAndView(Constants.SEARCHSALE);
         if (id != null){
-            mav.addObject("bill", billService.findBill(id));
-            mav.addObject("search", id);
+            BillModel bill = billService.findBill(id);
+            if (bill != null) {
+                mav.addObject("bill", bill);
+            }else{
+                mav.addObject("notFound", 1);
+            }
         }else{
-            mav.addObject("search", null);
+            mav.addObject("bill", null);
         }
+        mav.addObject("search", id);
         return mav;
     }
 }

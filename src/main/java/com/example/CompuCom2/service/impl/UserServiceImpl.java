@@ -70,7 +70,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserModel findUserByIdModel(int id) {
         LOG.info("METHOD: findUserByModel() --PARAMS: id=" + id);
-        return userConverter.entityToModel(userRepository.findById(id));
+        User user = userRepository.findById(id);
+        if (user != null){
+            return userConverter.entityToModel(user);
+        }else{
+            return null;
+        }
     }
 
     @Override

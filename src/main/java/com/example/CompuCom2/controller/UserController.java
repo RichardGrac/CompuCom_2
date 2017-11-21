@@ -7,6 +7,7 @@ import com.example.CompuCom2.model.UserAddressModel;
 import com.example.CompuCom2.model.UserModel;
 import com.example.CompuCom2.service.RoleService;
 import com.example.CompuCom2.service.UserService;
+import com.example.CompuCom2.service.impl.BillServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,10 @@ public class UserController {
     @Autowired
     @Qualifier("userAddressConverter")
     private UserAddressConverter userAddressConverter;
+
+    @Autowired
+    @Qualifier("billServiceImpl")
+    private BillServiceImpl billService;
 
     @Autowired
     private RoleService roleService;
@@ -154,5 +159,25 @@ public class UserController {
             modelAndView.addObject("update", false);
         }
         return modelAndView;
+    }
+
+    @RequestMapping("/searchuser")
+    public ModelAndView showUser(@RequestParam(name = "id", required = false) Integer id){
+        LOG.info("METHOD: showUser() --PARAM: id="+id);
+        ModelAndView mav = new ModelAndView(Constants.SEARCHUSER);
+        if (id != null){
+            UserModel user = userService.findUserByIdModel(id);
+            if(user != null){
+                mav.addObject("address", userService.findUserAddressByIdModel(user.getId()));
+                mav.addObject("user", user);
+//                mav.addObject("bills", billService.getAllByUser(id));
+            }else{
+                mav.addObject("notFound", 1);
+            }
+        }else{
+            mav.addObject("user", null);
+        }
+        mav.addObject("search", id);
+        return mav;
     }
 }
