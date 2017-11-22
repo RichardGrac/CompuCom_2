@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Ventas</title>
+    <title>Envíos</title>
     <!-- Tell the browser to be responsive to screen width -->
     <div th:replace="fragments/imports::css">&nbsp;</div>
 </head>
@@ -19,12 +19,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Ventas
+                Envíos
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Ventas</a></li>
-                <li class="active">Todas las ventas</li>
+                <li><a href="#">Envíos</a></li>
+                <li class="active">Finalizados</li>
             </ol>
         </section>
 
@@ -41,43 +41,38 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th># Venta</th>
-                            <th># Usuario</th>
                             <th># Envio</th>
-                            <th>Fecha</th>
-                            <th>Costo de envío</th>
-                            <th>Subtotal</th>
-                            <th>IVA (16%)</th>
-                            <th>Importe</th>
-                            <th>Ver detalles</th>
+                            <th># Usuario</th>
+                            <th># Venta</th>
+                            <th>Estado</th>
+                            <th>Última actualización</th>
+                            <th>Detalles</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr class="center" th:each="bill : ${bills}">
-                            <td><a th:href="@{/sales/searchsale?id=__${bill.id}__}"><span th:text="${bill.id}"></span></a></td>
-                            <td><a th:href="@{/users/searchuser?id=__${bill.id_user}__}"><span th:text="${bill.id_user}"></span></a></td>
                             <td><a th:href="@{/shippings/searchshipping?id=__${bill.shipping.id}__}"><span th:text="${bill.shipping.id}"></span></a></td>
-                            <td th:text="${bill.date}"></td>
-                            <td>$ <span th:text="${bill.shipping_price}"></span></td>
-                            <td>$ <span th:text="${bill.subtotal}"></span></td>
-                            <td>$ <span th:text="${bill.iva}"></span></td>
-                            <td>$ <span th:text="${bill.total}"></span></td>
+                            <td><a th:href="@{/users/searchuser?id=__${bill.id_user}__}"><span th:text="${bill.id_user}"></span></a></td>
+                            <td><a th:href="@{/sales/searchsale?id=__${bill.id}__}"><span th:text="${bill.id}"></span></a></td>
+                            <td>
+                                <div class="label label-success">
+                                    <span th:text="${bill.shipping.StatusShippingModel.status}"></span>
+                                </div>
+                            </td>
+                            <td th:text="${bill.shipping.StatusShippingModel.last_update}"></td>
                             <td class="center">
-                                <a th:href="@{/sales/searchsale?id=__${bill.id}__}"><i class="fa fa-search fa-fw"></i></a>
+                                <a th:href="@{/shippings/searchshipping?id=__${bill.shipping.StatusShippingModel.id}__}"><i class="fa fa-search fa-fw"></i></a>
                             </td>
                         </tr>
                         </tbody>
                         <tfoot>
                         <tr>
-                            <th># Venta</th>
-                            <th># Usuario</th>
                             <th># Envio</th>
-                            <th>Fecha</th>
-                            <th>Costo de envío</th>
-                            <th>Subtotal</th>
-                            <th>IVA (16%)</th>
-                            <th>Importe</th>
-                            <th>Ver detalles</th>
+                            <th># Usuario</th>
+                            <th># Venta</th>
+                            <th>Estado</th>
+                            <th>Última actualización</th>
+                            <th>Detalles</th>
                         </tr>
                         </tfoot>
                     </table>

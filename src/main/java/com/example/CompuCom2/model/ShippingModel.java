@@ -11,11 +11,11 @@ public class ShippingModel {
     private String zip;
     private String country;
     private String reference;
-    private StatusShippingModel statusShippingModel;
+    private StatusShippingModel status_shipping;
 
     public ShippingModel(){}
 
-    public ShippingModel(int id, String street, String number, String colony, String city, String state, String zip, String country, String reference, StatusShippingModel statusShippingModel) {
+    public ShippingModel(int id, String street, String number, String colony, String city, String state, String zip, String country, String reference, StatusShippingModel status_shipping) {
         this.id = id;
         this.street = street;
         this.number = number;
@@ -25,7 +25,7 @@ public class ShippingModel {
         this.zip = zip;
         this.country = country;
         this.reference = reference;
-        this.statusShippingModel = statusShippingModel;
+        this.status_shipping = status_shipping;
     }
 
     public int getId() {
@@ -101,11 +101,11 @@ public class ShippingModel {
     }
 
     public StatusShippingModel getStatusShippingModel() {
-        return statusShippingModel;
+        return status_shipping;
     }
 
-    public void setStatusShippingModel(StatusShippingModel statusShippingModel) {
-        this.statusShippingModel = statusShippingModel;
+    public void setStatusShippingModel(StatusShippingModel status_shipping) {
+        this.status_shipping = status_shipping;
     }
 
     @Override
@@ -120,7 +120,7 @@ public class ShippingModel {
                 ", zip='" + zip + '\'' +
                 ", country='" + country + '\'' +
                 ", reference='" + reference + '\'' +
-                ", statusShippingModel=" + statusShippingModel +
+                ", status_shipping=" + status_shipping +
                 '}';
     }
 }

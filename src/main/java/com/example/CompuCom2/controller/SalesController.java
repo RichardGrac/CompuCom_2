@@ -1,7 +1,9 @@
 package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
+import com.example.CompuCom2.entity.Bill;
 import com.example.CompuCom2.model.BillModel;
+import com.example.CompuCom2.repository.BillRepository;
 import com.example.CompuCom2.service.impl.BillServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,6 +22,11 @@ import java.util.ArrayList;
 public class SalesController {
 
     public static final Log LOG = LogFactory.getLog(SalesController.class);
+
+
+    @Autowired
+    @Qualifier("billRepository")
+    private BillRepository billRepository;
 
     @Autowired
     @Qualifier("billServiceImpl")
@@ -50,5 +57,15 @@ public class SalesController {
         }
         mav.addObject("search", id);
         return mav;
+    }
+
+
+    @GetMapping("/test")
+    public String test(){
+        ArrayList<Bill> billsPending = (ArrayList<Bill>) billRepository.getAllBillsByStatus("Pendiente");
+        for (Bill bill:billsPending) {
+            System.out.println("BILLS="+bill);
+        }
+        return "redirect:/index";
     }
 }
