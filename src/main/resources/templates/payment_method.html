@@ -43,7 +43,7 @@
                     </div>
                     <p><b>Seleccione su método de pago.</b></p>
                     <p>La información proporcionada por su métodologia de pago es totalmente confidencial.
-                    Las transacciones entre la empresa y nuestros clientes son totalmente seguras y transparentes.
+                        Las transacciones entre la empresa y nuestros clientes son totalmente seguras y transparentes.
                     </p>
                 </div>
             </div>
@@ -55,28 +55,28 @@
                     <div class="col-md-10">
                         <div id="accordion" role="tablist">
                             <div class="card">
-                                <div class="card-header" role="tab" id="headingOne">
-                                    <h5 class="mb-0">
-                                        <a class="pay-method" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" onclick="activate_radioBtn(1)">
-                                            <input type="radio" name="radio1" id="radio1" disabled="disabled" /> &nbsp;
-                                            <img th:src="@{/img/credit/visa.png}" alt="visa-icon" height="40" width="40"/>
-                                            <img th:src="@{/img/credit/master-card.png}" alt="visa-icon" height="40" width="40"/>
-                                            &nbsp;<span class="sans-letter-b">TARJETA DE CRÉDITO</span>
-                                        </a>
-                                    </h5>
-                                </div>
+                                <form>
+                                    <div class="card-header" role="tab" id="headingOne">
+                                        <h5 class="mb-0">
+                                            <a class="pay-method" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" onclick="activate_radioBtn(1)">
+                                                <input type="radio" name="radio1" id="radio1" disabled="disabled" /> &nbsp;
+                                                <img th:src="@{/img/credit/visa.png}" alt="visa-icon" height="40" width="40"/>
+                                                <img th:src="@{/img/credit/master-card.png}" alt="visa-icon" height="40" width="40"/>
+                                                &nbsp;<span class="sans-letter-b">TARJETA DE CRÉDITO</span>
+                                            </a>
+                                        </h5>
+                                    </div>
 
-                                <form id="shipping-form">
                                     <div id="collapseOne" class="collapse grey-background" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-1"></div>
                                                 <div class="col-md-10">
                                                     <!-- Text input-->
-                                                    <div class="form-group row has-success">
+                                                    <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">TIPO DE TARJETA</label>
                                                         <div class="col-md-6">
-                                                            <select class="form-control" name="cardType">
+                                                            <select class="form-control" name="cardType" required="">
                                                                 <option value="">Selecciona un tipo</option>
                                                                 <option value="Master">Master</option>
                                                                 <option value="Visa">Visa</option>
@@ -88,7 +88,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">NÚMERO DE TARJETA DE CRÉDITO</label>
                                                         <div class="col-md-6">
-                                                            <input type="text" class="form-control" name="cc" placeholder="WWWWXXXXYYYYZZZZ"/>
+                                                            <input type="text" class="form-control" name="cc" placeholder="WWWWXXXXYYYYZZZZ" required="" pattern="(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})" title="Ingrese una tarjeta valida"/>
                                                         </div>
                                                     </div>
 
@@ -96,7 +96,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">MES DE VENCIMIENTO<br/></label>
                                                         <div class="col-md-4">
-                                                            <select name="month" class="form-control">
+                                                            <select name="mes" class="form-control" required="">
                                                                 <option value=" ">MM</option>
                                                                 <option>01</option>
                                                                 <option>02</option>
@@ -119,7 +119,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">AÑO DE VENCIMIENTO<br/></label>
                                                         <div class="col-md-4">
-                                                            <select name="year" class="form-control">
+                                                            <select name="año" class="form-control" required="">
                                                                 <option value=" ">AAAA</option>
                                                                 <option>2017</option>
                                                                 <option>2018</option>
@@ -143,7 +143,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">TITULAR DE LA TARJETA</label>
                                                         <div class="col-md-6">
-                                                            <input name="name" class="form-control" type="text"  placeholder="Nombre del titular"/>
+                                                            <input name="titular" class="form-control" type="text"  placeholder="Nombre del titular" required="" pattern="[a-zA-Z]+" />
                                                         </div>
                                                     </div>
 
@@ -151,7 +151,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">CÓDIGO DE SEGURIDAD</label>
                                                         <div class="col-md-4">
-                                                            <input name="cvc" class="form-control" type="text" placeholder="XYZ"/>
+                                                            <input name="codigo" class="form-control" type="text" placeholder="XYZ" required="" pattern="[0-9]{3}+"/>
                                                         </div>
 
                                                         <div class="row"></div>
@@ -163,7 +163,7 @@
 
                                                     <div class="row">
                                                         <label class="col-md-4"></label>
-                                                        <button type="button" class="btn btn-secondary btn-lg" id="verify1">VERIFICAR</button>
+                                                        <button type="submit" class="btn btn-secondary btn-lg">VERIFICAR</button>
                                                     </div>
 
 
@@ -173,7 +173,6 @@
                                             <!--./row-->
                                         </div>
                                     </div>
-                                    <!--./collapse grey-background-->
                                 </form>
                             </div>
                             <!--./card-->
@@ -240,7 +239,7 @@
                         Verificar envío
                     </button>
                 </a>
-                <a th:href="@{/shopping_cart/finish_sale?id_user=__${session.userGlobal.id}__}">
+                <a href="#">
                     <button type="button" class="btn btn-success" id="btn_continue">
                         <i class="material-icons md-18">payment</i>
                         Finalizar compra
@@ -259,53 +258,10 @@
 <div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
 <div th:replace="front-fragments/fimports::js">&nbsp;</div>
 <script th:src="@{/js/shopping-cart.js}"></script>
-<!--<script th:src="@{/js/payment_method.js}"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $("#shipping-form").bootstrapValidator({
-            // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-            framework: 'bootstrap4',
-            icon: {
-                valid: 'has-success',
-                invalid: 'has-danger',
-                validating: 'has-warning'
-            },
-            fields: {
-                name: {
-                    validators: {
-                        stringLength: {
-                            min: 15,
-                            message: 'Mínimo 15 caracteres'
-                        },
-                        notEmpty: {
-                            message: 'Por favor completa tu nombre'
-                        }
-                    }
-                }
-            }
-        })
-            .on('success.form.bv', function(e) {
-                $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
-                $('#shipping-form').data('bootstrapValidator').resetForm();
+    function validate() {
 
-                // Prevent form submission
-                e.preventDefault();
-
-                // Get the form instance
-                var $form = $(e.target);
-
-                // Get the BootstrapValidator instance
-                var bv = $form.data('bootstrapValidator');
-
-                // Use Ajax to submit form data
-                $.post($form.attr('action'), $form.serialize(), function(result) {
-                    console.log(result);
-                }, 'json');
-            });
-    });
-
-
+    }
 </script>
 
 </body>
