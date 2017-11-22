@@ -78,6 +78,21 @@
                         </ul>
                     </li>
 
+                    <li class="treeview" th:classappend="${#httpServletRequest.requestURI.contains('shippings')} ? 'active' : ' '">
+                        <a href="#">
+                            <i class="fa fa-truck fa-fw"></i> <span>Envíos</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="#" th:href="@{/shippings/showshippings}"><i class="fa fa-asterisk fa-fw"></i> Todas los envíos </a></li>
+                            <li><a href="#" th:href="@{/shippings/pendings}"><i class="fa fa-hourglass-end fa-fw"></i> Envíos pendientes </a></li>
+                            <li><a href="#" th:href="@{/shippings/finished}"><i class="fa fa-check fa-fw"></i> Envíos finalizados </a></li>
+                            <li><a href="#" th:href="@{/shippings/searchshipping}"><i class="fa fa-search fa-fw"></i> Buscar envío </a></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </section>
             <!-- /.sidebar -->

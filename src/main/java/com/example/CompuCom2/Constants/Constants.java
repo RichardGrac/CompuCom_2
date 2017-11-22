@@ -22,5 +22,7 @@ public class Constants {
     public static final String SALES = "sales";
     public static final String SEARCHSALE = "searchsale";
     public static final String SEARCHUSER = "searchuser";
+    public static final String SEARCHSHIPPING = "searchshipping";
+    public static final String SFINISHED = "sfinished";
     public static final String FORM_USER_PASSWORD = "front/form-password";
 }
