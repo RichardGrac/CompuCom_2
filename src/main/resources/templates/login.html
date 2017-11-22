@@ -67,6 +67,14 @@
                 </div>
             </div>
         </div>
+        <div class="row" th:if="${result == 1}">
+            <div class="col-lg-12">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    ¡Usuario registrado correctamente!
+                </div>
+            </div>
+        </div>
 
     </div>
     <!-- /.login-box -->

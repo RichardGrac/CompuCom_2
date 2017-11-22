@@ -89,6 +89,7 @@
                                 <td th:text="${user.email}"></td>
                                 <td th:text="${user.roles}"></td>
                                 <td>
+                                    <a th:href="@{/users/searchuser?id=__${user.id}__}"><i class="fa fa-search fa-fw"></i></a>
                                     <a th:href="@{/users/userform?id=__${user.id}__}"><i class="fa fa-pencil fa-fw"></i></a>
                                     <a th:attr="data-href=@{/users/removeUser?id=__${user.id}__}" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times fa-fw"></i></a>
                                 </td>

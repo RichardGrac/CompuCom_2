@@ -35,9 +35,25 @@ public class Shipping {
     @Column(name = "reference")
     private String reference;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Override
+    public String toString() {
+        return "Shipping{" +
+                "id=" + id +
+                ", street='" + street + '\'' +
+                ", number='" + number + '\'' +
+                ", colony='" + colony + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip='" + zip + '\'' +
+                ", country='" + country + '\'' +
+                ", reference='" + reference + '\'' +
+                ", status_shipping=" + status_shipping +
+                '}';
+    }
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "status_shipping_id")
-    private StatusShipping status_shipping;
+    private StatusShipping status_shipping = null;
 
     public Shipping(){}
 
@@ -133,19 +149,4 @@ public class Shipping {
         this.status_shipping = status_shipping;
     }
 
-    @Override
-    public String toString() {
-        return "Shipping{" +
-                "id=" + id +
-                ", street='" + street + '\'' +
-                ", number='" + number + '\'' +
-                ", colony='" + colony + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", zip='" + zip + '\'' +
-                ", country='" + country + '\'' +
-                ", reference='" + reference + '\'' +
-                ", status_shipping=" + status_shipping +
-                '}';
-    }
 }

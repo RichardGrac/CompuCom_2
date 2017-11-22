@@ -7,4 +7,5 @@ import java.util.ArrayList;
 public interface BillService {
     ArrayList<BillModel> getAllBills();
     BillModel findBill(Integer bill_id);
+//    ArrayList<BillModel> getAllByUser(int id_user);
 }

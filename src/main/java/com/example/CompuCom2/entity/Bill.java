@@ -6,6 +6,7 @@ import lombok.Builder;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,16 +35,16 @@ public class Bill {
     @Column(name = "date")
     LocalDateTime date;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "bill_details", joinColumns =
         @JoinColumn(name = "bill_id", referencedColumnName = "id"),
         inverseJoinColumns =
         @JoinColumn(name = "details_id", referencedColumnName = "id"))
-    private List<Details> details_bill;
+    private List<Details> details_bill = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_id")
-    private Shipping shipping;
+    private Shipping shipping = new Shipping();
 
     @Column(name = "bill_id")
     private int bill_id;

@@ -52,6 +52,10 @@ public class UserServiceImpl implements UserService {
         LOG.info("User Entity - " + user.toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        //Seteamos manualmente la dirección del Usuario correspondiente:
+        UserAddressModel address = userAddressConverter.entityToModel(userModel.getUserAdress());
+        address.setId(userModel.getId());
+        addAddressUser(address);
         // Retornamos en forma de "Modelo" para el controlador
         return userConverter.entityToModel(user);
     }
@@ -70,7 +74,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserModel findUserByIdModel(int id) {
         LOG.info("METHOD: findUserByModel() --PARAMS: id=" + id);
-        return userConverter.entityToModel(userRepository.findById(id));
+        User user = userRepository.findById(id);
+        if (user != null){
+            return userConverter.entityToModel(user);
+        }else{
+            return null;
+        }
     }
 
     @Override

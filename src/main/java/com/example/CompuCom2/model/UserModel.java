@@ -3,6 +3,7 @@ package com.example.CompuCom2.model;
 import com.example.CompuCom2.entity.Role;
 import com.example.CompuCom2.entity.UserAddress;
 
+import java.util.List;
 import java.util.Set;
 
 public class UserModel {
@@ -12,7 +13,8 @@ public class UserModel {
     private String email;
     private Set<Role> roles;
     private UserAddress userAdress;
-    private ShoppingCartModel shoppingCartModel;
+    private ShoppingCartModel shoppingCartModel = null;
+    private List<BillModel> bills = null;
 
 
     public UserModel(){
@@ -83,6 +85,14 @@ public class UserModel {
         this.shoppingCartModel = shoppingCartModel;
     }
 
+    public List<BillModel> getBills() {
+        return bills;
+    }
+
+    public void setBills(List<BillModel> bills) {
+        this.bills = bills;
+    }
+
     @Override
     public String toString() {
         return "UserModel{" +
@@ -90,7 +100,10 @@ public class UserModel {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", roles=" + roles +
                 ", userAdress=" + userAdress +
+                ", shoppingCartModel=" + shoppingCartModel +
+                ", bills=" + bills +
                 '}';
     }
 }

@@ -34,6 +34,21 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public BillModel findBill(Integer bill_id) {
-        return billConverter.entityToModel(billRepository.findById(bill_id));
+        Bill bill = billRepository.findById(bill_id);
+        if (bill != null){
+            return billConverter.entityToModel(bill);
+        }else{
+            return null;
+        }
     }
+
+//    @Override
+//    public ArrayList<BillModel> getAllByUser(int id_user) {
+//        ArrayList<BillModel> billModels = new ArrayList<>();
+//        for (Bill bill : billRepository.findAllByBill_id(id_user)) {
+//            BillModel billModel = billConverter.entityToModel(bill);
+//            billModels.add(billModel);
+//        }
+//        return billModels;
+//    }
 }
