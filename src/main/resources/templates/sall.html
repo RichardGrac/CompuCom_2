@@ -24,7 +24,7 @@
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="#">Envíos</a></li>
-                <li class="active">Finalizados</li>
+                <li class="active">Todos los envíos</li>
             </ol>
         </section>
 
@@ -34,7 +34,7 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Envíos finalizados</h3>
+                    <h3 class="box-title">Todas las envíos</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -54,8 +54,18 @@
                             <td><a th:href="@{/shippings/searchshipping?id=__${bill.shipping.id}__}"><span th:text="${bill.shipping.id}"></span></a></td>
                             <td><a th:href="@{/users/searchuser?id=__${bill.id_user}__}"><span th:text="${bill.id_user}"></span></a></td>
                             <td><a th:href="@{/sales/searchsale?id=__${bill.id}__}"><span th:text="${bill.id}"></span></a></td>
-                            <td>
+                            <td th:if="${bill.shipping.StatusShippingModel.status == 'Finalizado'}">
                                 <div class="label label-success">
+                                    <span th:text="${bill.shipping.StatusShippingModel.status}"></span>
+                                </div>
+                            </td>
+                            <td th:if="${bill.shipping.StatusShippingModel.status == 'Pendiente'}">
+                                <div class="label label-warning">
+                                    <span th:text="${bill.shipping.StatusShippingModel.status}"></span>
+                                </div>
+                            </td>
+                            <td th:if="${bill.shipping.StatusShippingModel.status == 'En camino'}">
+                                <div class="label label-primary">
                                     <span th:text="${bill.shipping.StatusShippingModel.status}"></span>
                                 </div>
                             </td>
