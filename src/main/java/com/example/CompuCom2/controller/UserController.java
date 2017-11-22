@@ -8,6 +8,7 @@ import com.example.CompuCom2.model.UserModel;
 import com.example.CompuCom2.service.RoleService;
 import com.example.CompuCom2.service.UserService;
 import com.example.CompuCom2.service.impl.BillServiceImpl;
+import jdk.internal.org.objectweb.asm.tree.MethodNode;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,11 +155,33 @@ public class UserController {
         LOG.info("METHOD: saveUser(), --PARAMS: " + userAddressModel.toString() + "," + userModel.toString());
         ModelAndView modelAndView = new ModelAndView("redirect:/index");
         userModel.setUserAdress(userAddressConverter.modelToEntity(userAddressModel));
-        if (userService.addUser(userModel) != null){
+        if (userService.updateUser(userModel) != null){
             modelAndView.addObject("update", true);
         }else {
             modelAndView.addObject("update", false);
         }
+        return modelAndView;
+    }
+
+    @GetMapping("/update-password")
+    public ModelAndView showFormUpdatePassword(@RequestParam(name = "id") Integer idUser,
+                                               HttpSession  httpSession){
+        UserModel userGlobal = (UserModel) httpSession.getAttribute("userGlobal");
+        ModelAndView modelAndView = new ModelAndView(Constants.FORM_USER_PASSWORD);
+        if (!idUser.equals(userGlobal.getId())){
+            modelAndView.setViewName("redirect:/index");
+            modelAndView.addObject("autherr", true);
+            return modelAndView;
+        }
+        return modelAndView;
+    }
+
+    @PostMapping("/update-password")
+    public ModelAndView updatePassword(Integer id, String password){
+        LOG.info("METHOD updatePassword()  --PARAMS id=" + id + ", password=" + password);
+        ModelAndView modelAndView = new ModelAndView("redirect:/index");
+        if (userService.updatePassword(id, password) != null)
+            modelAndView.addObject("update", true);
         return modelAndView;
     }
 

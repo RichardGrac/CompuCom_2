@@ -27,7 +27,7 @@
             </div>
         </div>
         <hr></hr>
-        <h2 class="h2-letter">Registro</h2><br></br>
+        <h2 class="h2-letter" th:text="${userModel.id == 0} ? 'Registro' : 'Datos Personales'"></h2><br></br>
 
         <div th:if="${repeat}" class="row">
             <div  class="col-5">
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="form-row">
+            <div class="form-row" th:if="${userModel.id == 0}">
                 <div class="form-group col-md-6">
                     <label for="password">Contraseña</label>
                     <input type="password" class="form-control" th:field="*{userModel.password}" placeholder="Crea una contraseña" required="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 o más caracteres"/>
@@ -70,7 +70,7 @@
                     <input type="password" class="form-control" id="passwordr" placeholder="Confirma tú contraseña" required="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
                 </div>
             </div>
-
+            <hr></hr>
             <div class="form-group">
                 <label for="street">Calle</label>
                 <input type="text" class="form-control" th:field="*{userAddressModel.street}" placeholder="Índica tú calle" />
@@ -116,7 +116,7 @@
 
             <button type="submit" class="btn btn-primary btn-lg">
                 <i class="material-icons">fingerprint</i>
-                Registrarse
+                <span th:text="${userModel.id == 0} ? 'Registrarse' : 'Guardar'"></span>
             </button>
         </form>
     </div>
