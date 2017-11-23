@@ -66,17 +66,17 @@
                                     </h5>
                                 </div>
 
-                                <form id="cardForm" novalidate="">
+                                <!--?<form id="cardForm" novalidate="" action="javascrpit:" onsubmit="validateForm()">-->
                                     <div id="collapseOne" class="collapse grey-background" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-1"></div>
                                                 <div class="col-md-10">
                                                     <!-- Text input-->
-                                                    <div class="form-group row has-success">
+                                                    <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">TIPO DE TARJETA</label>
                                                         <div class="col-md-6">
-                                                            <select class="form-control" name="cardType" required="">
+                                                            <select class="form-control" name="cardType" required="" id="cardType">
                                                                 <option value="">Selecciona un tipo</option>
                                                                 <option value="Master">Master</option>
                                                                 <option value="Visa">Visa</option>
@@ -163,7 +163,7 @@
 
                                                     <div class="row">
                                                         <label class="col-md-4"></label>
-                                                        <button type="submit" class="btn btn-secondary btn-lg" id="verify1">VERIFICAR</button>
+                                                        <button type="button" class="btn btn-secondary btn-lg" id="verify1" onclick="validate()">VERIFICAR</button>
                                                     </div>
 
 
@@ -174,7 +174,7 @@
                                         </div>
                                     </div>
                                     <!--./collapse grey-background-->
-                                </form>
+                                <!--?</form>-->
                             </div>
                             <!--./card-->
                             <div class="card">
@@ -293,6 +293,22 @@
     $('#name').bind('keypress', aplhaInput);
     $('#cvc').bind('keypress', numericInput);
 
+    function validateForm() {
+        $('#name').addClass('is-valid').disabled(true)
+        $('#name').disabled;
+    }
+
+    function validate() {
+        'use strict';
+        if($('#name').val() !== ''){
+            $('#name').addClass('is-valid').prop('disabled', true);
+        }else {
+            $('#name').addClass('is-invalid')
+        }
+    }
+
+    var log = $('#cardType').val();
+    console.log(log);
 </script>
 
 </body>
