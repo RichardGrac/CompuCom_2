@@ -186,4 +186,10 @@ public class UserServiceImpl implements UserService {
         return userAddress;
     }
 
+    @Override
+    public UserModel updatePassword(Integer id, String password) {
+        User user = userRepository.findById(id);
+        user.setPassword(passwordEncoder.encode(password));
+        return userConverter.entityToModel(userRepository.save(user));
+    }
 }
