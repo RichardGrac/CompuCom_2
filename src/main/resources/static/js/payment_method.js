@@ -1,96 +1,113 @@
-$(document).ready(function() {
-    // Generate a simple captcha
-    function randomNumber(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    }
-    $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
-
-    $('#basicBootstrap4Form').formValidation({
-        framework: 'bootstrap4',
-        icon: {
-            valid: 'fa fa-check',
-            invalid: 'fa fa-times',
-            validating: 'fa fa-refresh'
+$().ready( function () {
+    $('#cardForm').validate({
+        debug: true,
+        errorClass: 'is-invalid',
+        validClass: 'is-valid',
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass(errorClass).removeClass(validClass);
         },
-        fields: {
-            firstName: {
-                row: '.col-xs-4',
-                validators: {
-                    notEmpty: {
-                        message: 'The first name is required'
-                    }
-                }
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass(errorClass).addClass(validClass);
+        },
+        errorPlacement: function(error, element) {
+            error.insertAfter(element);
+            error.addClass('invalid-feedback');  // add a class to the wrapper
+        },
+        rules:{
+            cardType : {
+                required : true
             },
-            lastName: {
-                row: '.col-xs-4',
-                validators: {
-                    notEmpty: {
-                        message: 'The last name is required'
-                    }
-                }
+            cc : {
+                required : true,
+                minlength : 16
             },
-            username: {
-                validators: {
-                    notEmpty: {
-                        message: 'The username is required'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 30,
-                        message: 'The username must be more than 6 and less than 30 characters long'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_\.]+$/,
-                        message: 'The username can only consist of alphabetical, number, dot and underscore'
-                    }
-                }
+            month : {
+                required : true
             },
-            email: {
-                validators: {
-                    notEmpty: {
-                        message: 'The email address is required'
-                    },
-                    emailAddress: {
-                        message: 'The input is not a valid email address'
-                    }
-                }
+            year : {
+                required : true
             },
-            password: {
-                validators: {
-                    notEmpty: {
-                        message: 'The password is required'
-                    },
-                    different: {
-                        field: 'username',
-                        message: 'The password cannot be the same as username'
-                    }
-                }
+            name : {
+                required : true ,
+                minlength: 10
             },
-            gender: {
-                validators: {
-                    notEmpty: {
-                        message: 'The gender is required'
-                    }
-                }
-            },
-            captcha: {
-                validators: {
-                    callback: {
-                        message: 'Wrong answer',
-                        callback: function(value, validator, $field) {
-                            var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
-                            return value == sum;
-                        }
-                    }
-                }
-            },
-            agree: {
-                validators: {
-                    notEmpty: {
-                        message: 'You must agree with the terms and conditions'
-                    }
-                }
+            cvc : {
+                required : true ,
+                digits : true
             }
+        },
+        messages : {
+            cardType : {
+                required : 'Tipo de tarjeta requerido'
+            },
+            cc : {
+                required : 'Numero de tarjeta requerido',
+                minlength : 'Numero no valido'
+            },
+            month : {
+                required : 'Seleccione un mes'
+            },
+            year : {
+                required : 'Seleccione un año'
+            },
+            name : {
+                required : 'Complete el nombre del titular' ,
+                minlength: 'Mínimo 10 caracteres'
+            },
+            cvc : {
+                required : 'Codigo requerido' ,
+                digits : 'Codigo no valido'
+            }
+        },
+        submitHandler : function () {
+            $('#cardForm').each(function () {
+                $(this).find(':input').prop('disabled', true);
+            });
+            $('#verify1').removeClass('btn-secondary').addClass('btn-success').html('VERIFICADO');
+            $('#collapseTwo').prop('disabled', true);
+            $('#btn_continue').prop('disabled', false);
+        }
+    });
+
+    $('#paypalForm').validate({
+        debug: true,
+        errorClass: 'is-invalid',
+        validClass: 'is-valid',
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass(errorClass).removeClass(validClass);
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass(errorClass).addClass(validClass);
+        },
+        errorPlacement: function(error, element) {
+            error.insertAfter(element);
+            error.addClass('invalid-feedback');  // add a class to the wrapper
+        },
+        rules:{
+            email : {
+                required : true,
+                email: true
+            },
+            password : {
+                required: true
+            }
+        },
+        messages : {
+            email : {
+                required : 'Campo requerido',
+                email: 'Formato no valido'
+            },
+            password : {
+                required: 'Campo requerido'
+            }
+        },
+        submitHandler : function () {
+            $('#paypalForm').each(function () {
+                $(this).find(':input').prop('disabled', true);
+            });
+            $('#paypal-button').removeClass('btn-secondary').addClass('btn-success').html('VERIFICADO');
+            $('#collapseOne').prop('disabled', true);
+            $('#btn_continue').prop('disabled', false);
         }
     });
 });
