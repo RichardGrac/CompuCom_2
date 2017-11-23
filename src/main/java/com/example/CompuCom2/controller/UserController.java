@@ -2,9 +2,13 @@ package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
 import com.example.CompuCom2.converter.UserAddressConverter;
+import com.example.CompuCom2.entity.Bill;
 import com.example.CompuCom2.entity.Role;
+import com.example.CompuCom2.model.BillModel;
+import com.example.CompuCom2.model.ProductCategoryModel;
 import com.example.CompuCom2.model.UserAddressModel;
 import com.example.CompuCom2.model.UserModel;
+import com.example.CompuCom2.service.ProductCategoryService;
 import com.example.CompuCom2.service.RoleService;
 import com.example.CompuCom2.service.UserService;
 import com.example.CompuCom2.service.impl.BillServiceImpl;
@@ -25,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -46,6 +51,9 @@ public class UserController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private ProductCategoryService productCategoryService;
 
     @GetMapping("/userform")
     private ModelAndView userForm(@RequestParam(name = "id", required = false) Integer id, Model model){
@@ -202,6 +210,18 @@ public class UserController {
             mav.addObject("user", null);
         }
         mav.addObject("search", id);
+        return mav;
+    }
+
+    @RequestMapping("/history")
+    public ModelAndView showUserHistory(@RequestParam(name = "id", required = true) Integer id){
+        LOG.info("METHOD: showUserHistory() --PARAM: id="+id);
+        ModelAndView mav = new ModelAndView(Constants.USERHISTORY);
+        List<BillModel> bills = userService.findUserByIdModel(id).getBills();
+        System.out.println(bills);
+        mav.addObject("bills", bills);
+        ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
+        mav.addObject("categories", productCategoryModels);
         return mav;
     }
 }

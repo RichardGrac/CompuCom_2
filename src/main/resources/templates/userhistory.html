@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>CompuCom - Historial</title>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/one-page-wonder.css}" />
+
+    <div th:replace="front-fragments/fimports::css">&nbsp;</div>
+</head>
+
+<body>
+<!-- Navigation -->
+<div th:replace="front-fragments/fheader::navigation">&nbsp;</div>
+
+<!-- Page Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <label class="col-3">&nbsp;</label>
+            <div class="col-6 center-align">
+                <img th:src="@{/img/Logotipos/logo-lema.png}" alt="CompuCom" height="100px" width="80%" />
+            </div>
+        </div>
+        <hr></hr>
+        <h2 class="margin-bottom">Compras realizadas</h2>
+        <div th:each="bill,iterStat : ${bills}" class="card margin-bottom">
+            <h4 class="card-header">Compra #<span th:text="${iterStat.count}"></span>
+                <small>(<span th:text="${bill.date}"></span>)</small>
+            </h4>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <b>ID Venta: </b>#<span th:text="${bill.id}"></span><br></br>
+                        <b>ID Usuario: </b>#<span th:text="${bill.id_user}"></span><br></br>
+                        <b>ID Envío: </b>#<span th:text="${bill.shipping.id}"></span><br></br>
+                    </div>
+                    <div class="col-md-6">
+                        <b>Costo de envío: </b> $ <span th:text="${bill.shipping_price}"></span><br></br>
+                        <b>Subtotal: </b> $ <span th:text="${bill.subtotal}"></span><br></br>
+                        <b>IVA(16%): </b> $ <span th:text="${bill.iva}"></span><br></br>
+                    </div>
+                </div>
+                <!--./row-->
+                <div class="row"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Productos</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body table-responsive no-padding">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>ID Producto</th>
+                                        <th>Nombre</th>
+                                        <th>Precio</th>
+                                        <th>Descuento</th>
+                                        <th>Cantidad</th>
+                                    </tr>
+                                    <tr th:each="product : ${bill.details_bill}">
+                                        <td th:text="${product.id_prod}"></td>
+                                        <td th:text="${product.name}"></td>
+                                        <td>$ <span th:text="${product.price}"></span></td>
+                                        <td><span th:text="${product.discount}"></span>%</td>
+                                        <td th:text="${product.quantity}"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+                <!--./row-->
+            </div>
+            <div class="card-footer">
+                <b>TOTAL: </b>$ <span th:text="${bill.total}"></span>
+            </div>
+        </div>
+
+    </div>
+    <!--./container-->
+</section>
+
+<!-- footer & js -->
+<div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
+<div th:replace="front-fragments/fimports::js">&nbsp;</div>
+
+</body>
+</html>

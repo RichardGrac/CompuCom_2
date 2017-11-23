@@ -193,7 +193,9 @@ public class ShoppingController {
         ArrayList<ShoppingCartModel> SCUser = shoppingCartService.findAllProductsByUser(user.getId());
         // For each one, We added to a Details' Arraylist and subtract the inventory:
         for (ShoppingCartModel sc : SCUser) {
-            details.add(new Details(sc.getProduct().getId(), sc.getProduct().getName(), sc.getProduct().getPrice(),
+            DecimalFormat formatter = new DecimalFormat("#0.00");
+            Double price = Double.parseDouble(formatter.format((sc.getProduct().getPrice() * 0.84)));
+            details.add(new Details(sc.getProduct().getId(), sc.getProduct().getName(), price,
                     sc.getProduct().getDiscount().getPercentage(), sc.getQuantity()));
             subtract_products(sc.getProduct().getId(), sc.getQuantity());
         }
@@ -240,7 +242,7 @@ public class ShoppingController {
         Double subtotal = 0.0d;
 
         for (Details product : details){
-            Double sub = (product.getPrice() - (product.getPrice() * 0.16)) * product.getQuantity();
+            Double sub = product.getPrice() * product.getQuantity();
             subtotal += sub - (sub * (product.getDiscount() / 100));
         }
         DecimalFormat formatter = new DecimalFormat("#0.00");
