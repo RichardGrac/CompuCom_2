@@ -160,6 +160,13 @@ public class UserServiceImpl implements UserService {
         return userConverter.entityToModel(userRepository.save(user));
     }
 
+    @Override
+    public UserModel updatePassword(Integer id, String password) {
+        User user = userRepository.findById(id);
+        user.setPassword(passwordEncoder.encode(password));
+        return userConverter.entityToModel(userRepository.save(user));
+    }
+
     private User changeValuesUser(UserModel userModel){
         User user = userRepository.findById(userModel.getId());
         user.setUsername(userModel.getUsername());
@@ -179,10 +186,4 @@ public class UserServiceImpl implements UserService {
         return userAddress;
     }
 
-    @Override
-    public UserModel updatePassword(Integer id, String password) {
-        User user = userRepository.findById(id);
-        user.setPassword(passwordEncoder.encode(password));
-        return userConverter.entityToModel(userRepository.save(user));
-    }
 }
