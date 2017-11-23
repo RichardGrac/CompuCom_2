@@ -26,6 +26,7 @@ public interface UserService {
     UserModel findUserModelByEmail(String email);
     List<String> findAllEmail();
     UserModel updateUser(UserModel userModel);
+    UserModel updatePassword(Integer id, String password);
 
 
 }

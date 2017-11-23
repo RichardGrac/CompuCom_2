@@ -57,6 +57,7 @@
     "font-awesome": "^4.7.0",
     "Ionicons": "ionicons#^2.0.1",
     "jquery-ui": "1.11.4",
-    "open-iconic": "^1.1.1"
+    "open-iconic": "^1.1.1",
+    "jquery-validation": "^1.17.0"
   }
 }

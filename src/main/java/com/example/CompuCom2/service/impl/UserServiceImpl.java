@@ -153,6 +153,43 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserModel updateUser(UserModel userModel) {
-        return null;
+        LOG.info("METHOD updateUser() --PARAMS " + userModel);
+        User user = changeValuesUser(userModel);
+        UserAddress userAddress = updateAddress(userModel);
+        userAddressRepository.save(userAddress);
+        return userConverter.entityToModel(userRepository.save(user));
+    }
+
+    @Override
+    public UserModel updatePassword(Integer id, String password) {
+        User user = userRepository.findById(id);
+        user.setPassword(passwordEncoder.encode(password));
+        return userConverter.entityToModel(userRepository.save(user));
+    }
+
+    private User changeValuesUser(UserModel userModel){
+        User user = userRepository.findById(userModel.getId());
+        user.setUsername(userModel.getUsername());
+        user.setEmail(userModel.getEmail());
+        return user;
+    }
+
+    private UserAddress updateAddress(UserModel userModel){
+        UserAddress userAddress = userAddressRepository.findById(userModel.getId());
+        userAddress.setStreet(userModel.getUserAdress().getStreet());
+        userAddress.setNumber(userModel.getUserAdress().getNumber());
+        userAddress.setColony(userModel.getUserAdress().getColony());
+        userAddress.setZip(userModel.getUserAdress().getZip());
+        userAddress.setState(userModel.getUserAdress().getState());
+        userAddress.setCountry(userModel.getUserAdress().getCountry());
+        userAddress.setReference(userModel.getUserAdress().getReference());
+        return userAddress;
+    }
+
+    @Override
+    public UserModel updatePassword(Integer id, String password) {
+        User user = userRepository.findById(id);
+        user.setPassword(passwordEncoder.encode(password));
+        return userConverter.entityToModel(userRepository.save(user));
     }
 }

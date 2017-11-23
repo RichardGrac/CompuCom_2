@@ -43,7 +43,7 @@
                     </div>
                     <p><b>Seleccione su método de pago.</b></p>
                     <p>La información proporcionada por su métodologia de pago es totalmente confidencial.
-                    Las transacciones entre la empresa y nuestros clientes son totalmente seguras y transparentes.
+                        Las transacciones entre la empresa y nuestros clientes son totalmente seguras y transparentes.
                     </p>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                                     </h5>
                                 </div>
 
-                                <form id="shipping-form">
+                                <form id="cardForm" novalidate="">
                                     <div id="collapseOne" class="collapse grey-background" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                         <div class="card-body">
                                             <div class="row">
@@ -76,7 +76,7 @@
                                                     <div class="form-group row has-success">
                                                         <label class="col-md-6 col-form-label">TIPO DE TARJETA</label>
                                                         <div class="col-md-6">
-                                                            <select class="form-control" name="cardType">
+                                                            <select class="form-control" name="cardType" required="">
                                                                 <option value="">Selecciona un tipo</option>
                                                                 <option value="Master">Master</option>
                                                                 <option value="Visa">Visa</option>
@@ -88,7 +88,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">NÚMERO DE TARJETA DE CRÉDITO</label>
                                                         <div class="col-md-6">
-                                                            <input type="text" class="form-control" name="cc" placeholder="WWWWXXXXYYYYZZZZ"/>
+                                                            <input type="text" class="form-control" name="cc" id="cc" placeholder="WWWWXXXXYYYYZZZZ" required="" pattern="(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})" title="Ingrese una tarjeta valida"/>
                                                         </div>
                                                     </div>
 
@@ -96,8 +96,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">MES DE VENCIMIENTO<br/></label>
                                                         <div class="col-md-4">
-                                                            <select name="month" class="form-control">
-                                                                <option value=" ">MM</option>
+                                                            <select name="month" class="form-control" required="">
+                                                                <option value="" disabled="" selected="">MM</option>
                                                                 <option>01</option>
                                                                 <option>02</option>
                                                                 <option>03</option>
@@ -119,8 +119,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">AÑO DE VENCIMIENTO<br/></label>
                                                         <div class="col-md-4">
-                                                            <select name="year" class="form-control">
-                                                                <option value=" ">AAAA</option>
+                                                            <select name="year" class="form-control" required="">
+                                                                <option value="" disabled="" selected="">AAAA</option>
                                                                 <option>2017</option>
                                                                 <option>2018</option>
                                                                 <option>2019</option>
@@ -143,7 +143,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">TITULAR DE LA TARJETA</label>
                                                         <div class="col-md-6">
-                                                            <input name="name" class="form-control" type="text"  placeholder="Nombre del titular"/>
+                                                            <input name="name" id="name" class="form-control" type="text"  placeholder="Nombre del titular" required=""/>
                                                         </div>
                                                     </div>
 
@@ -151,7 +151,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">CÓDIGO DE SEGURIDAD</label>
                                                         <div class="col-md-4">
-                                                            <input name="cvc" class="form-control" type="text" placeholder="XYZ"/>
+                                                            <input name="cvc" id="cvc" class="form-control" type="text" placeholder="XYZ" pattern="[0-9]*" required=""/>
                                                         </div>
 
                                                         <div class="row"></div>
@@ -163,7 +163,7 @@
 
                                                     <div class="row">
                                                         <label class="col-md-4"></label>
-                                                        <button type="button" class="btn btn-secondary btn-lg" id="verify1">VERIFICAR</button>
+                                                        <button type="submit" class="btn btn-secondary btn-lg" id="verify1">VERIFICAR</button>
                                                     </div>
 
 
@@ -262,49 +262,36 @@
 <!--<script th:src="@{/js/payment_method.js}"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $("#shipping-form").bootstrapValidator({
-            // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-            framework: 'bootstrap4',
-            icon: {
-                valid: 'has-success',
-                invalid: 'has-danger',
-                validating: 'has-warning'
-            },
-            fields: {
-                name: {
-                    validators: {
-                        stringLength: {
-                            min: 15,
-                            message: 'Mínimo 15 caracteres'
-                        },
-                        notEmpty: {
-                            message: 'Por favor completa tu nombre'
-                        }
-                    }
+    (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+            var cardForm = document.getElementById('cardForm');
+            cardForm.addEventListener('input', function(event) {
+                if (cardForm.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
                 }
-            }
-        })
-            .on('success.form.bv', function(e) {
-                $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
-                $('#shipping-form').data('bootstrapValidator').resetForm();
+                cardForm.classList.add('was-validated');
+            }, false);
+        }, false);
+    })();
 
-                // Prevent form submission
-                e.preventDefault();
+    function aplhaInput(event) {
+        var value = String.fromCharCode(event.which);
+        var pattern = new RegExp(/[a-zåäö ]/i);
+        return pattern.test(value);
+    }
 
-                // Get the form instance
-                var $form = $(e.target);
+    function numericInput(event) {
+        var value = String.fromCharCode(event.which);
+        var patter = new RegExp(/[0-9]/i);
+        return patter.test(value);
+    }
 
-                // Get the BootstrapValidator instance
-                var bv = $form.data('bootstrapValidator');
-
-                // Use Ajax to submit form data
-                $.post($form.attr('action'), $form.serialize(), function(result) {
-                    console.log(result);
-                }, 'json');
-            });
-    });
-
+    $('#cc').bind('keypress', numericInput);
+    $('#name').bind('keypress', aplhaInput);
+    $('#cvc').bind('keypress', numericInput);
 
 </script>
 
