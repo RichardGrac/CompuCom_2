@@ -55,25 +55,25 @@
                     <div class="col-md-10">
                         <div id="accordion" role="tablist">
                             <div class="card">
-                                <form>
-                                    <div class="card-header" role="tab" id="headingOne">
-                                        <h5 class="mb-0">
-                                            <a class="pay-method" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" onclick="activate_radioBtn(1)">
-                                                <input type="radio" name="radio1" id="radio1" disabled="disabled" /> &nbsp;
-                                                <img th:src="@{/img/credit/visa.png}" alt="visa-icon" height="40" width="40"/>
-                                                <img th:src="@{/img/credit/master-card.png}" alt="visa-icon" height="40" width="40"/>
-                                                &nbsp;<span class="sans-letter-b">TARJETA DE CRÉDITO</span>
-                                            </a>
-                                        </h5>
-                                    </div>
+                                <div class="card-header" role="tab" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <a class="pay-method" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" onclick="activate_radioBtn(1)">
+                                            <input type="radio" name="radio1" id="radio1" disabled="disabled" /> &nbsp;
+                                            <img th:src="@{/img/credit/visa.png}" alt="visa-icon" height="40" width="40"/>
+                                            <img th:src="@{/img/credit/master-card.png}" alt="visa-icon" height="40" width="40"/>
+                                            &nbsp;<span class="sans-letter-b">TARJETA DE CRÉDITO</span>
+                                        </a>
+                                    </h5>
+                                </div>
 
+                                <form id="cardForm" novalidate="">
                                     <div id="collapseOne" class="collapse grey-background" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-1"></div>
                                                 <div class="col-md-10">
                                                     <!-- Text input-->
-                                                    <div class="form-group row">
+                                                    <div class="form-group row has-success">
                                                         <label class="col-md-6 col-form-label">TIPO DE TARJETA</label>
                                                         <div class="col-md-6">
                                                             <select class="form-control" name="cardType" required="">
@@ -88,7 +88,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">NÚMERO DE TARJETA DE CRÉDITO</label>
                                                         <div class="col-md-6">
-                                                            <input type="text" class="form-control" name="cc" placeholder="WWWWXXXXYYYYZZZZ" required="" pattern="(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})" title="Ingrese una tarjeta valida"/>
+                                                            <input type="text" class="form-control" name="cc" id="cc" placeholder="WWWWXXXXYYYYZZZZ" required="" pattern="(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})" title="Ingrese una tarjeta valida"/>
                                                         </div>
                                                     </div>
 
@@ -96,8 +96,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">MES DE VENCIMIENTO<br/></label>
                                                         <div class="col-md-4">
-                                                            <select name="mes" class="form-control" required="">
-                                                                <option value=" ">MM</option>
+                                                            <select name="month" class="form-control" required="">
+                                                                <option value="" disabled="" selected="">MM</option>
                                                                 <option>01</option>
                                                                 <option>02</option>
                                                                 <option>03</option>
@@ -119,8 +119,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">AÑO DE VENCIMIENTO<br/></label>
                                                         <div class="col-md-4">
-                                                            <select name="año" class="form-control" required="">
-                                                                <option value=" ">AAAA</option>
+                                                            <select name="year" class="form-control" required="">
+                                                                <option value="" disabled="" selected="">AAAA</option>
                                                                 <option>2017</option>
                                                                 <option>2018</option>
                                                                 <option>2019</option>
@@ -143,7 +143,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">TITULAR DE LA TARJETA</label>
                                                         <div class="col-md-6">
-                                                            <input name="titular" class="form-control" type="text"  placeholder="Nombre del titular" required="" pattern="[a-zA-Z]+" />
+                                                            <input name="name" id="name" class="form-control" type="text"  placeholder="Nombre del titular" required=""/>
                                                         </div>
                                                     </div>
 
@@ -151,7 +151,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">CÓDIGO DE SEGURIDAD</label>
                                                         <div class="col-md-4">
-                                                            <input name="codigo" class="form-control" type="text" placeholder="XYZ" required="" pattern="[0-9]{3}+"/>
+                                                            <input name="cvc" id="cvc" class="form-control" type="text" placeholder="XYZ" pattern="[0-9]*" required=""/>
                                                         </div>
 
                                                         <div class="row"></div>
@@ -163,7 +163,7 @@
 
                                                     <div class="row">
                                                         <label class="col-md-4"></label>
-                                                        <button type="submit" class="btn btn-secondary btn-lg">VERIFICAR</button>
+                                                        <button type="submit" class="btn btn-secondary btn-lg" id="verify1">VERIFICAR</button>
                                                     </div>
 
 
@@ -173,6 +173,7 @@
                                             <!--./row-->
                                         </div>
                                     </div>
+                                    <!--./collapse grey-background-->
                                 </form>
                             </div>
                             <!--./card-->
@@ -239,7 +240,7 @@
                         Verificar envío
                     </button>
                 </a>
-                <a href="#">
+                <a th:href="@{/shopping_cart/finish_sale?id_user=__${session.userGlobal.id}__}">
                     <button type="button" class="btn btn-success" id="btn_continue">
                         <i class="material-icons md-18">payment</i>
                         Finalizar compra
@@ -258,10 +259,40 @@
 <div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
 <div th:replace="front-fragments/fimports::js">&nbsp;</div>
 <script th:src="@{/js/shopping-cart.js}"></script>
+<!--<script th:src="@{/js/payment_method.js}"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
 <script>
-    function validate() {
+    (function() {
+        'use strict';
 
+        window.addEventListener('load', function() {
+            var cardForm = document.getElementById('cardForm');
+            cardForm.addEventListener('input', function(event) {
+                if (cardForm.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                cardForm.classList.add('was-validated');
+            }, false);
+        }, false);
+    })();
+
+    function aplhaInput(event) {
+        var value = String.fromCharCode(event.which);
+        var pattern = new RegExp(/[a-zåäö ]/i);
+        return pattern.test(value);
     }
+
+    function numericInput(event) {
+        var value = String.fromCharCode(event.which);
+        var patter = new RegExp(/[0-9]/i);
+        return patter.test(value);
+    }
+
+    $('#cc').bind('keypress', numericInput);
+    $('#name').bind('keypress', aplhaInput);
+    $('#cvc').bind('keypress', numericInput);
+
 </script>
 
 </body>
