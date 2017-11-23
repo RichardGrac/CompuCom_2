@@ -25,5 +25,6 @@ public class Constants {
     public static final String SEARCHSHIPPING = "searchshipping";
     public static final String SFINISHED = "sfinished";
     public static final String SALL = "sall";
+    public static final String SPENDING = "spending";
     public static final String FORM_USER_PASSWORD = "front/form-password";
 }
