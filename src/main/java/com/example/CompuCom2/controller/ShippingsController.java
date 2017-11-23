@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -46,6 +47,26 @@ public class ShippingsController {
         ModelAndView mav = new ModelAndView(Constants.SPENDING);
         mav.addObject("billsPending", shippingService.getBillsByShippingStatus("Pendiente"));
         mav.addObject("billsInProgress", shippingService.getBillsByShippingStatus("En camino"));
+        return mav;
+    }
+
+    @RequestMapping("/searchshipping")
+    public ModelAndView search(@RequestParam(name = "id", required = false) Integer id){
+        LOG.info("METHOD: search() --PARAMS: id=" + id);
+        ModelAndView mav = new ModelAndView(Constants.SEARCHSHIPPING);
+        if (id != null){
+            BillModel bill;
+            bill = billService.findBill(id);
+            if (bill != null) {
+                mav.addObject("bill", bill);
+            }else{
+                mav.addObject("notFound", 1);
+            }
+        }else{
+            mav.addObject("bill", null);
+        }
+
+        mav.addObject("search", id);
         return mav;
     }
 }
