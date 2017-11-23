@@ -40,4 +40,12 @@ public class ShippingsController {
         mav.addObject("bills", billService.getAllBills());
         return mav;
     }
+
+    @GetMapping("/pendings")
+    public ModelAndView pendingShippings(){
+        ModelAndView mav = new ModelAndView(Constants.SPENDING);
+        mav.addObject("billsPending", shippingService.getBillsByShippingStatus("Pendiente"));
+        mav.addObject("billsInProgress", shippingService.getBillsByShippingStatus("En camino"));
+        return mav;
+    }
 }

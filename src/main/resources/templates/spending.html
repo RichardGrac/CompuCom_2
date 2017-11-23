@@ -24,7 +24,7 @@
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="#">Envíos</a></li>
-                <li class="active">Todos los envíos</li>
+                <li class="active">Pendientes</li>
             </ol>
         </section>
 
@@ -34,7 +34,7 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Todas las envíos</h3>
+                    <h3 class="box-title">Envíos por cargar</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -50,21 +50,62 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="center" th:each="bill : ${bills}">
+                        <tr class="center" th:each="bill : ${billsPending}">
                             <td><a th:href="@{/shippings/searchshipping?id=__${bill.shipping.id}__}"><span th:text="${bill.shipping.id}"></span></a></td>
                             <td><a th:href="@{/users/searchuser?id=__${bill.id_user}__}"><span th:text="${bill.id_user}"></span></a></td>
                             <td><a th:href="@{/sales/searchsale?id=__${bill.id}__}"><span th:text="${bill.id}"></span></a></td>
-                            <td th:if="${bill.shipping.StatusShippingModel.status == 'Finalizado'}">
-                                <div class="label label-success">
-                                    <span th:text="${bill.shipping.StatusShippingModel.status}"></span>
-                                </div>
-                            </td>
-                            <td th:if="${bill.shipping.StatusShippingModel.status == 'Pendiente'}">
+                            <td>
                                 <div class="label label-warning">
                                     <span th:text="${bill.shipping.StatusShippingModel.status}"></span>
                                 </div>
                             </td>
-                            <td th:if="${bill.shipping.StatusShippingModel.status == 'En camino'}">
+                            <td th:text="${bill.shipping.StatusShippingModel.last_update}"></td>
+                            <td class="center">
+                                <a th:href="@{/shippings/searchshipping?id=__${bill.shipping.StatusShippingModel.id}__}"><i class="fa fa-search fa-fw"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th># Envio</th>
+                            <th># Usuario</th>
+                            <th># Venta</th>
+                            <th>Estado</th>
+                            <th>Última actualización</th>
+                            <th>Detalles</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+            <div class="row"></div>
+            <!-- Default box -->
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Envíos en camino</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table id="example2" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th># Envio</th>
+                            <th># Usuario</th>
+                            <th># Venta</th>
+                            <th>Estado</th>
+                            <th>Última actualización</th>
+                            <th>Detalles</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="center" th:each="bill : ${billsInProgress}">
+                            <td><a th:href="@{/shippings/searchshipping?id=__${bill.shipping.id}__}"><span th:text="${bill.shipping.id}"></span></a></td>
+                            <td><a th:href="@{/users/searchuser?id=__${bill.id_user}__}"><span th:text="${bill.id_user}"></span></a></td>
+                            <td><a th:href="@{/sales/searchsale?id=__${bill.id}__}"><span th:text="${bill.id}"></span></a></td>
+                            <td>
                                 <div class="label label-primary">
                                     <span th:text="${bill.shipping.StatusShippingModel.status}"></span>
                                 </div>
@@ -128,11 +169,11 @@
         $('#example1').DataTable()
         $('#example2').DataTable({
             'paging'      : true,
-            'lengthChange': false,
-            'searching'   : false,
+            'lengthChange': true,
+            'searching'   : true,
             'ordering'    : true,
             'info'        : true,
-            'autoWidth'   : false
+            'autoWidth'   : true
         })
     })
 </script>
