@@ -49,7 +49,7 @@
 
         <div class="box-body">
           <div class="row">
-            <form class="" method="post" th:action="@{/products/addproduct}" enctype="multipart/form-data">
+            <form class="" method="post" th:action="@{/products/addproduct}" enctype="multipart/form-data" id="productForm">
               <div class="col-md-6">
 
                 <input type="hidden" th:field="*{productModel.id}"/>
@@ -58,7 +58,7 @@
                   <label>Nombre</label>
                   <div class="input-group">
                       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                      <input placeholder="Nombre del producto" class="form-control" type="text" th:field="*{productModel.name}" required="" />
+                      <input placeholder="Nombre del producto" class="form-control" type="text" th:field="*{productModel.name}"/>
                   </div>
                 </div>
                 <!-- /.form-group -->
@@ -72,7 +72,7 @@
                             <option>No hay categorias definidas</option>
                         </select>
                         <select class="form-control" th:if="${!categories.isEmpty()}" th:field="*{productModel.category}">
-                            <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}" required="" >***</option>
+                            <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}" >***</option>
                         </select>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                   <label>Precio</label>
                   <div class="input-group">
                       <span class="input-group-addon">&nbsp;$&nbsp;</span>
-                      <input placeholder="Precio del producto" class="form-control" type="number" min="0.0" step="any" th:field="*{productModel.price}" required="" />
+                      <input placeholder="Precio del producto" class="form-control" type="number" min="0.0" step="any" th:field="*{productModel.price}"/>
                   </div>
                 </div>
                 <!-- /.form-group -->
@@ -95,7 +95,7 @@
                     <label>Descripción: </label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                        <textarea class="form-control" placeholder="Descripción del producto" rows="5" th:field="*{productModel.description}" style="resize: none;" required="" ></textarea>
+                        <textarea class="form-control" placeholder="Descripción del producto" rows="5" th:field="*{productModel.description}" style="resize: none;" ></textarea>
                     </div>
                 </div>
                 <!-- /.form-group -->
@@ -104,7 +104,7 @@
                     <label>Imagen: </label>
                     <div class="input-group">
                       <div class="input-group">
-                          <input type="file"  th:field="*{productModel.image}"/>
+                          <input type="file" class="form-control"  th:field="*{productModel.image}"/>
                       </div>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                   <label>Descuento (%): </label>
                       <div class="input-group">
                           <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                          <input type="number" th:field="*{discountModel.percentage}" required="" min="0.0" placeholder="Descuento"/> %
+                          <input type="number" class="form-control" step="any" th:field="*{discountModel.percentage}" min="0.0" placeholder="Descuento" />
                       </div>
                 </div>
                 <!-- /.form-group -->
@@ -123,7 +123,7 @@
                   <label>Unidades: </label>
                   <div class="input-group">
                       <span class="input-group-addon"><i class="glyphicon glyphicon-option-horizontal"></i></span>
-                      <input type="number" th:field="*{quantityModel.quantity}" required="" min="0" step="1" placeholder="Disponibles" />
+                      <input type="number" class="form-control" value="0" th:field="*{quantityModel.quantity}" min="0" step="1" placeholder="Disponibles" />
                   </div>
                 </div>
                 <!-- /.form-group -->
@@ -160,13 +160,11 @@
   <!-- /.control-sidebar -->
   <div th:replace="fragments/footer::footer">&nbsp;</div>    
   <div th:replace="fragments/imports::js">&nbsp;</div>
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
 
   <div class="control-sidebar-bg"></div>
 
 </div>
 <!-- ./wrapper -->
-
+<script th:src="@{/js/admin/validations/products.js}"></script>
 </body>
 </html>

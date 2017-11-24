@@ -72,7 +72,7 @@
 
                 <div class="box-body">
                     <div class="row">
-                        <form class="" th:action="@{/category/add-category}" method="post" th:object="${category}">
+                        <form class="" th:action="@{/category/add-category}" method="post" th:object="${category}" id="categoryForm">
                             <input type="hidden" th:field="*{id}" />
                             <div class="col-md-6">
                                 <input type="hidden" />
@@ -193,6 +193,7 @@
 </div>
 
 <div th:replace="fragments/imports::js">&nbsp;</div>
+<script th:src="@{/js/admin/validations/category.js}"></script>
 
 </body>
 </html>

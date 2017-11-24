@@ -51,10 +51,10 @@ public class UserServiceImpl implements UserService {
         User user = userConverter.modelToEntity(userModel);
         LOG.info("User Entity - " + user.toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        User user1 = userRepository.save(user);
         //Seteamos manualmente la dirección del Usuario correspondiente:
         UserAddressModel address = userAddressConverter.entityToModel(userModel.getUserAdress());
-        address.setId(userModel.getId());
+        address.setId(user1.getId());
         addAddressUser(address);
         // Retornamos en forma de "Modelo" para el controlador
         return userConverter.entityToModel(user);
@@ -171,6 +171,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userModel.getId());
         user.setUsername(userModel.getUsername());
         user.setEmail(userModel.getEmail());
+        user.setRole(userModel.getRoles());
         return user;
     }
 
@@ -181,6 +182,7 @@ public class UserServiceImpl implements UserService {
         userAddress.setColony(userModel.getUserAdress().getColony());
         userAddress.setZip(userModel.getUserAdress().getZip());
         userAddress.setState(userModel.getUserAdress().getState());
+        userAddress.setCity(userModel.getUserAdress().getCity());
         userAddress.setCountry(userModel.getUserAdress().getCountry());
         userAddress.setReference(userModel.getUserAdress().getReference());
         return userAddress;

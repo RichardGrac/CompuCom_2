@@ -73,10 +73,10 @@
                                                 <div class="col-md-1"></div>
                                                 <div class="col-md-10">
                                                     <!-- Text input-->
-                                                    <div class="form-group row has-success">
+                                                    <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">TIPO DE TARJETA</label>
                                                         <div class="col-md-6">
-                                                            <select class="form-control" name="cardType" required="">
+                                                            <select class="form-control" name="cardType" id="cardType">
                                                                 <option value="">Selecciona un tipo</option>
                                                                 <option value="Master">Master</option>
                                                                 <option value="Visa">Visa</option>
@@ -88,7 +88,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">NÚMERO DE TARJETA DE CRÉDITO</label>
                                                         <div class="col-md-6">
-                                                            <input type="text" class="form-control" name="cc" id="cc" placeholder="WWWWXXXXYYYYZZZZ" required="" pattern="(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})" title="Ingrese una tarjeta valida"/>
+                                                            <input type="text" class="form-control" name="cc" id="cc" placeholder="WWWWXXXXYYYYZZZZ"/>
                                                         </div>
                                                     </div>
 
@@ -96,7 +96,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">MES DE VENCIMIENTO<br/></label>
                                                         <div class="col-md-4">
-                                                            <select name="month" class="form-control" required="">
+                                                            <select name="month" class="form-control">
                                                                 <option value="" disabled="" selected="">MM</option>
                                                                 <option>01</option>
                                                                 <option>02</option>
@@ -119,7 +119,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">AÑO DE VENCIMIENTO<br/></label>
                                                         <div class="col-md-4">
-                                                            <select name="year" class="form-control" required="">
+                                                            <select name="year" class="form-control">
                                                                 <option value="" disabled="" selected="">AAAA</option>
                                                                 <option>2017</option>
                                                                 <option>2018</option>
@@ -143,7 +143,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">TITULAR DE LA TARJETA</label>
                                                         <div class="col-md-6">
-                                                            <input name="name" id="name" class="form-control" type="text"  placeholder="Nombre del titular" required=""/>
+                                                            <input name="name" id="name" class="form-control" type="text"  placeholder="Nombre del titular" />
                                                         </div>
                                                     </div>
 
@@ -151,7 +151,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-md-6 col-form-label">CÓDIGO DE SEGURIDAD</label>
                                                         <div class="col-md-4">
-                                                            <input name="cvc" id="cvc" class="form-control" type="text" placeholder="XYZ" pattern="[0-9]*" required=""/>
+                                                            <input name="cvc" id="cvc" class="form-control" type="text" placeholder="XYZ" />
                                                         </div>
 
                                                         <div class="row"></div>
@@ -187,36 +187,38 @@
                                         </a>
                                     </h5>
                                 </div>
-                                <div id="collapseTwo" class="collapse grey-background" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <label class="col-md-1"></label>
-                                            <div class="col-md-10">
-                                                <!-- Text input-->
-                                                <div class="form-group row">
-                                                    <label class="col-md-5 col-form-label">CORREO ELECTRÓNICO</label>
-                                                    <div class="col-md-7">
-                                                        <input type="text" class="form-control" name="correo" placeholder="correo_de_paypal@correo.com"/>
+                                <form novalidate="" id="paypalForm">
+                                    <div id="collapseTwo" class="collapse grey-background" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <label class="col-md-1"></label>
+                                                <div class="col-md-10">
+                                                    <!-- Text input-->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-5 col-form-label">CORREO ELECTRÓNICO</label>
+                                                        <div class="col-md-7">
+                                                            <input type="email" class="form-control" name="email" id="email" placeholder="correo_de_paypal@correo.com"/>
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <!-- Text input-->
-                                                <div class="form-group row">
-                                                    <label class="col-md-5 col-form-label">CONTRASEÑA</label>
-                                                    <div class="col-md-7">
-                                                        <input type="password" class="form-control" name="password" placeholder="*************" />
+                                                    <!-- Text input-->
+                                                    <div class="form-group row">
+                                                        <label class="col-md-5 col-form-label">CONTRASEÑA</label>
+                                                        <div class="col-md-7">
+                                                            <input type="password" class="form-control" name="password" placeholder="*************" />
+                                                        </div>
                                                     </div>
-                                                </div>
 
-                                                <div class="row">
-                                                    <label class="col-md-4"></label>
-                                                    <button type="button" class="btn btn-secondary btn-lg">VERIFICAR</button>
-                                                </div>
+                                                    <div class="row">
+                                                        <label class="col-md-4"></label>
+                                                        <button type="submit" class="btn btn-secondary btn-lg" id="paypal-button">VERIFICAR</button>
+                                                    </div>
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                             <!--./card-->
                         </div>
@@ -241,7 +243,7 @@
                     </button>
                 </a>
                 <a th:href="@{/shopping_cart/finish_sale?id_user=__${session.userGlobal.id}__}">
-                    <button type="button" class="btn btn-success" id="btn_continue">
+                    <button type="button" class="btn btn-success" id="btn_continue" disabled="">
                         <i class="material-icons md-18">payment</i>
                         Finalizar compra
                     </button>
@@ -259,41 +261,8 @@
 <div th:replace="front-fragments/ffooter::footer">&nbsp;</div>
 <div th:replace="front-fragments/fimports::js">&nbsp;</div>
 <script th:src="@{/js/shopping-cart.js}"></script>
-<!--<script th:src="@{/js/payment_method.js}"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
-<script>
-    (function() {
-        'use strict';
-
-        window.addEventListener('load', function() {
-            var cardForm = document.getElementById('cardForm');
-            cardForm.addEventListener('input', function(event) {
-                if (cardForm.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                cardForm.classList.add('was-validated');
-            }, false);
-        }, false);
-    })();
-
-    function aplhaInput(event) {
-        var value = String.fromCharCode(event.which);
-        var pattern = new RegExp(/[a-zåäö ]/i);
-        return pattern.test(value);
-    }
-
-    function numericInput(event) {
-        var value = String.fromCharCode(event.which);
-        var patter = new RegExp(/[0-9]/i);
-        return patter.test(value);
-    }
-
-    $('#cc').bind('keypress', numericInput);
-    $('#name').bind('keypress', aplhaInput);
-    $('#cvc').bind('keypress', numericInput);
-
-</script>
+<script th:src="@{/js/front/validations/payment_method.js}"></script>
 
 </body>
 </html>
+
