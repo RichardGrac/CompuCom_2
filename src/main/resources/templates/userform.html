@@ -49,7 +49,7 @@
 
                 <div class="box-body">
                     <div class="row">
-                        <form class="" th:action="@{/users/adduser}" method="post"  id="formato-alta-usuario">
+                        <form class="" th:action="${userModel.id == 0} ? @{/users/adduser} : @{/users/update-user}" method="post"  id="formato-alta-usuario">
                             <div class="col-md-12">
                                 <legend>Datos de la cuenta</legend>
                             </div>

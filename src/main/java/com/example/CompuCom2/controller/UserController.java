@@ -123,12 +123,14 @@ public class UserController {
     }
 
     @GetMapping("/showusers")
-    public ModelAndView showUsers(@RequestParam(name = "result", required = false) Integer result){
+    public ModelAndView showUsers(@RequestParam(name = "result", required = false) Integer result,
+                                  @RequestParam(name = "update", required = false) boolean update){
         LOG.info("METHOD: showUsers()");
         ModelAndView mav = new ModelAndView(Constants.USERS);
         // El for:each que se recorre en el HTML es "users"
         mav.addObject("users", userService.listAllUsers());
         mav.addObject("result",result);
+        mav.addObject("update", update);
         return mav;
     }
 
@@ -162,6 +164,20 @@ public class UserController {
                                  @ModelAttribute(name = "userAddressModel") UserAddressModel userAddressModel){
         LOG.info("METHOD: saveUser(), --PARAMS: " + userAddressModel.toString() + "," + userModel.toString());
         ModelAndView modelAndView = new ModelAndView("redirect:/index");
+        userModel.setUserAdress(userAddressConverter.modelToEntity(userAddressModel));
+        if (userService.updateUser(userModel) != null){
+            modelAndView.addObject("update", true);
+        }else {
+            modelAndView.addObject("update", false);
+        }
+        return modelAndView;
+    }
+
+    @PostMapping("/update-user")
+    public ModelAndView updateUser(@ModelAttribute(name = "userModel") UserModel userModel,
+                                 @ModelAttribute(name = "userAddressModel") UserAddressModel userAddressModel){
+        LOG.info("METHOD: updateUser(), --PARAMS: " + userAddressModel.toString() + "," + userModel.toString());
+        ModelAndView modelAndView = new ModelAndView("redirect:/users/showusers");
         userModel.setUserAdress(userAddressConverter.modelToEntity(userAddressModel));
         if (userService.updateUser(userModel) != null){
             modelAndView.addObject("update", true);
