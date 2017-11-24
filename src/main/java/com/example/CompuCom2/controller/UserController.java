@@ -59,7 +59,6 @@ public class UserController {
     private ModelAndView userForm(@RequestParam(name = "id", required = false) Integer id, Model model){
         LOG.info("METHOD: userForm() --PARAMS: id=" + id);
         ModelAndView modelAndView = new ModelAndView(Constants.USER_FORM);
-        UserModel pop = (UserModel) model.asMap().get("user");
 
         UserModel userModel = new UserModel();
         UserAddressModel userAddressModel = new UserAddressModel();
@@ -67,6 +66,7 @@ public class UserController {
             userModel = userService.findUserByIdModel(id);
             userAddressModel = userService.findUserAddressByIdModel(id);
         }
+        UserModel pop = (UserModel) model.asMap().get("user");
         if (pop != null) {
             modelAndView.addObject("userModel", pop);
             modelAndView.addObject("userAddressModel", model.asMap().get("address"));
@@ -83,10 +83,8 @@ public class UserController {
     //El name="userModel" se corresponde con el objeto en el HTML 'contactModel'
     // y el UserModel usermodel se corresponde con Java
     private ModelAndView addUser(@ModelAttribute(name="userModel") UserModel userModel,
-                           @ModelAttribute(name = "userAddressModel") UserAddressModel userAddressModel,
-                           RedirectAttributes redirectAttributes,
-                           Model model){
-
+                                 @ModelAttribute(name = "userAddressModel") UserAddressModel userAddressModel,
+                                 RedirectAttributes redirectAttributes) {
         //Comprobacion de usuarios repetidos
         if (userService.findAllEmail().contains(userModel.getEmail())){
             redirectAttributes.addFlashAttribute("user", userModel);
@@ -117,6 +115,30 @@ public class UserController {
             }
         }else{
 //            model.addAttribute("result", 0);
+            modelAndView.addObject("result",0);
+        }
+        return modelAndView;
+    }
+
+
+    @PostMapping("/add-user")
+    private ModelAndView addUserAdmin(@ModelAttribute(name="userModel") UserModel userModel,
+                                      @ModelAttribute(name = "userAddressModel") UserAddressModel userAddressModel,
+                                      RedirectAttributes redirectAttributes){
+        if (userService.findAllEmail().contains(userModel.getEmail())){
+            redirectAttributes.addFlashAttribute("user", userModel);
+            redirectAttributes.addFlashAttribute("address", userAddressModel);
+            return new ModelAndView("redirect:/users/userform");
+        }
+        ModelAndView modelAndView = new ModelAndView("redirect:/users/showusers");
+        LOG.info("METHOD: addUser() --PARAMS: " + userModel.toString() + " --userAddressModel: " + userAddressModel);
+        // Seteamos el obj. UserAddress que tenemos dentro de userModel
+        userModel.setUserAdress(userAddressConverter.modelToEntity(userAddressModel));
+        //Lo añadimos, si es correcta la adición sacamos su ID para hacer referencia al Domicilio:
+        UserModel userModel1 = userService.addUser(userModel);
+        if (userModel1 != null){
+            modelAndView.addObject("result",1);
+        }else{
             modelAndView.addObject("result",0);
         }
         return modelAndView;
