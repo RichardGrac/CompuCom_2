@@ -256,7 +256,6 @@ public class UserController {
         LOG.info("METHOD: showUserHistory() --PARAM: id="+id);
         ModelAndView mav = new ModelAndView(Constants.USERHISTORY);
         List<BillModel> bills = userService.findUserByIdModel(id).getBills();
-        System.out.println(bills);
         mav.addObject("bills", bills);
         ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();
         mav.addObject("categories", productCategoryModels);

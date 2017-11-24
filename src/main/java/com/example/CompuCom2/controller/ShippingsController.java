@@ -4,6 +4,7 @@ import com.example.CompuCom2.Constants.Constants;
 import com.example.CompuCom2.model.BillModel;
 import com.example.CompuCom2.service.impl.BillServiceImpl;
 import com.example.CompuCom2.service.impl.ShippingServiceImpl;
+import com.example.CompuCom2.service.impl.StatusShippingServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,10 @@ public class ShippingsController {
     @Autowired
     @Qualifier("billServiceImpl")
     private BillServiceImpl billService;
+
+    @Autowired
+    @Qualifier("statusShippingServiceImpl")
+    private StatusShippingServiceImpl statusShippingService;
 
     @GetMapping("/finished")
     public ModelAndView shippingsFinished(){
@@ -67,6 +72,15 @@ public class ShippingsController {
         }
 
         mav.addObject("search", id);
+        return mav;
+    }
+
+    @RequestMapping("/updatestatus")
+    public ModelAndView updateStatus(@RequestParam(name = "id_ss", required = true) Integer id_ss,
+                                     @RequestParam(name = "status", required = true) String status){
+        LOG.info("METHOD: updateStatus() --PARAMS: id_ss="+id_ss + ", status="+status);
+        ModelAndView mav = new ModelAndView("redirect:/shippings/pendings");
+        statusShippingService.updateStatusShipping(id_ss, status);
         return mav;
     }
 }
