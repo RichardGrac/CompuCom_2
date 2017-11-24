@@ -147,7 +147,7 @@ $().ready( function () {
                 },
                 email : {
                     required : 'Correo electronico requerido',
-                    email : true
+                    email : 'Ingrese un correo electronico valido'
                 },
                 street : {
                     minlength : 'Minimo 5 caracteres'
