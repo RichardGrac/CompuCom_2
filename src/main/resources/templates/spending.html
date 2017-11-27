@@ -34,7 +34,11 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Envíos por cargar</h3>
+                    <h3 class="box-title">
+                        <div class="label label-warning">
+                            Pendientes
+                        </div>
+                    </h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -50,14 +54,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="center" th:each="bill : ${billsPending}">
+                        <tr class="center" th:each="bill, iterStat : ${billsPending}">
                             <td><a th:href="@{/shippings/searchshipping?id=__${bill.shipping.id}__}"><span th:text="${bill.shipping.id}"></span></a></td>
                             <td><a th:href="@{/users/searchuser?id=__${bill.id_user}__}"><span th:text="${bill.id_user}"></span></a></td>
                             <td><a th:href="@{/sales/searchsale?id=__${bill.id}__}"><span th:text="${bill.id}"></span></a></td>
                             <td>
-                                <div class="label label-warning">
-                                    <span th:text="${bill.shipping.StatusShippingModel.status}"></span>
-                                </div>
+                                <select th:id="'pending' + ${iterStat.index}" class="form-control selectpicker" th:onchange="'changeStatus(\'pending\', ' + ${bill.shipping.StatusShippingModel.id} + ',' + ${iterStat.index} + ');'">
+                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="En camino">En camino</option>
+                                </select>
                             </td>
                             <td th:text="${bill.shipping.StatusShippingModel.last_update}"></td>
                             <td class="center">
@@ -85,7 +90,11 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Envíos en camino</h3>
+                    <h3 class="box-title">
+                        <div class="label label-primary">
+                            En camino
+                        </div>
+                    </h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -101,14 +110,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="center" th:each="bill : ${billsInProgress}">
+                        <tr class="center" th:each="bill, iterStat : ${billsInProgress}">
                             <td><a th:href="@{/shippings/searchshipping?id=__${bill.shipping.id}__}"><span th:text="${bill.shipping.id}"></span></a></td>
                             <td><a th:href="@{/users/searchuser?id=__${bill.id_user}__}"><span th:text="${bill.id_user}"></span></a></td>
                             <td><a th:href="@{/sales/searchsale?id=__${bill.id}__}"><span th:text="${bill.id}"></span></a></td>
                             <td>
-                                <div class="label label-primary">
-                                    <span th:text="${bill.shipping.StatusShippingModel.status}"></span>
-                                </div>
+                                <select th:id="'inProgress' + ${iterStat.index}" class="form-control selectpicker" th:onchange="'changeStatus(\'inProgress\',' + ${bill.shipping.StatusShippingModel.id} + ',' + ${iterStat.index} + ');'">
+                                    <option value="En camino">En camino</option>
+                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="Finalizado">Finalizado</option>
+                                </select>
                             </td>
                             <td th:text="${bill.shipping.StatusShippingModel.last_update}"></td>
                             <td class="center">
@@ -177,6 +188,6 @@
         })
     })
 </script>
-
+<script th:src="@{/js/stateChangeShipping.js}"></script>
 </body>
 </html>
