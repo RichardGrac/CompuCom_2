@@ -26,7 +26,205 @@
         <!-- Main content -->
         <section class="content">
 
-            <h1>Bienvenido - <span th:text="${session.userGlobal.username}"></span></h1>
+            <!--<h1>Bienvenido - <span th:text="${session.userGlobal.username}"></span></h1>-->
+
+            <div class="row">
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3 id="quantity"></h3>
+                            <p>Nuevas Compras</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-shopping-cart"></i>
+                        </div>
+                        <a th:href="@{/sales/showsales}" class="small-box-footer">
+                            Mas informacion <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3 id="users"></h3>
+                            <p>Usuarios Activos</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3 id="user"></h3>
+                            <p>Usuarios Logeados</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-user-circle"></i>
+                        </div>
+                        <a href="" class="small-box-footer">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <p>Mes con mas compras</p>
+                            <h3 id="month"></h3>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-calendar-check-o"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">Top Productos mas Vendidos</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad Vendida</th>
+                                </tr>
+                                <tr th:each="top : ${topProduct}">
+                                    <td th:text="${top.product.id}">183</td>
+                                    <td th:text="${top.product.name}">John Doe</td>
+                                    <td th:text="${top.product.price}">11-7-2014</td>
+                                    <td th:text="${top.sum}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">Productos con baja Disponibilidad</h3>
+                        </div>
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Precio</th>
+                                    <th>Disponibilidad</th>
+                                </tr>
+                                <tr th:each="low : ${productLowAvailability}">
+                                    <td th:text="${low.id}">183</td>
+                                    <td th:text="${low.name}">John Doe</td>
+                                    <td th:text="${low.price}">11-7-2014</td>
+                                    <td th:text="${low.productQuantity.quantity}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Ganancias por mes</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="chart">
+                                <canvas id="earnigsMonth" style="height:230px"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">Productos mas Vendidos en el mes de: <span th:text="${month}"></span></h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad Vendida</th>
+                                </tr>
+                                <tr th:each="top : ${saleProductCurrentMonth}">
+                                    <td th:text="${top.product.id}">183</td>
+                                    <td th:text="${top.product.name}">John Doe</td>
+                                    <td th:text="${top.product.price}">11-7-2014</td>
+                                    <td th:text="${top.quantity}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h4>Usuario con mas Compras</h4>
+                            <h3 id="userMax"></h3>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-user-circle-o"></i>
+                        </div>
+                        <a href="javascript:document.searchForm.submit()" class="small-box-footer" onclick="">
+                            <form th:action="@{/users/searchuser}" method="post" th:hidden="true" name="searchForm">
+                                <input type="hidden" id="id" name="id" />
+                                <input type="submit" hidden="" />
+                            </form>
+                            Mas informacion<i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="info-box bg-yellow">
+                        <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Inventario</span>
+                            <span class="info-box-number" id="numberInventory"></span>
+                            <div class="progress">
+                                <div id="percentage" class="progress-bar" ></div>
+                            </div>
+                            <span class="progress-description" id="description"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-box bg-green">
+                        <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Promedio de ventas</span>
+                            <span class="info-box-number" id="salesperday"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-box bg-red">
+                        <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+                        <div class="info-box-content">
+                            <span class="info-box-text">Promedio Hora de ventas</span>
+                            <span class="info-box-number" id="hoursaleavg"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </section>
         <!-- /.content -->
@@ -43,8 +241,40 @@
     <div class="control-sidebar-bg"></div>
 
 </div><!-- ./wrapper -->
+<script th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/bower_components/chart.js/Chart.min.js}"></script>
 
+<script >
+    $().ready(function () {
+        $.get('/statistics/bill-day', function (data) {
+            $("#quantity").html(data);
+        });
+        $.get('/statistics/users-active', function (data) {
+            $('#users').html(data);
+        });
+        $.get('/statistics/user-logged', function (data) {
+            $('#user').html(data);
+        });
+        $.getJSON('/statistics/user-max', function (data) {
+            $('#userMax').html(data.user.username + " - # Compras - " + data.count);
+            $('#id').val(data.user.id);
+        });
+        $.get('/statistics/month-max', function (data) {
+            $('#month').html(data);
+        });
+        $.getJSON('/statistics/percentage-inventory', function (data) {
+            $('#numberInventory').html(data.inventory);
+            $('#percentage').width(data.percentage + '%');
+            $('#description').html('Vendido el ' + data.percentage + '%');
+        });
 
+        $.get('/statistics/avg-sales-day', function (data) {
+            $('#salesperday').html(data)
+        });
+    });
+</script>
+
+<script th:src="@{/js/admin/charts/earnigsPerMonth.js}"></script>
 
 </body>
 </html>

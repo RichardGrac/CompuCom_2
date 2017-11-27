@@ -1,7 +1,6 @@
 package com.example.CompuCom2.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -34,16 +33,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/bower_components/**","/css/**","/dist/*","/img/**","/js/**","/plugins/**","/vendor/**").permitAll()
-//                .antMatchers("/","/index","/about","/questions","/users/**").permitAll()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/**").permitAll()
+                .antMatchers("/banner/show-deals", "/banner/save-deals", "/banner/change-status", "/banner/delete-banner").hasRole("ADMIN")
+                .antMatchers("/banner/files", "/banner/image").permitAll()
+                .antMatchers("/","/index","/about","/questions","/fproducts","/search","/more").permitAll()
+                .antMatchers("/login","/registro").permitAll()
+                .antMatchers("/category/**").hasRole("ADMIN")
+                .antMatchers("/products/productform","/products/addproduct","/products/showproducts","/products/removeproduct").hasRole("ADMIN")
+                .antMatchers("/products/files").permitAll()
+                .antMatchers("/sales/**").hasRole("ADMIN")
+                .antMatchers("/shippings/**").hasRole("ADMIN")
+                .antMatchers("/shopping_cart/**").hasRole("USER")
+                .antMatchers("/statistics/**").hasRole("ADMIN")
+                .antMatchers("/users/userform", "/users/showusers", "/users/removeUser", "/users/update-user","/users/searchuser").hasRole("ADMIN")
+                .antMatchers("/users/edit-user", "/users/update-password", "/users/save-user", "/users/history").hasRole("USER")
+                .antMatchers("/users/adduser", "/users/add-user", "/users/adduser", "/users/adduser").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").loginProcessingUrl("/logincheck")
                 .usernameParameter("username").passwordParameter("password")
                 .defaultSuccessUrl("/loginsuccess").permitAll()
                 .and()
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/index?logout")
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/index?logout=true")
                 .permitAll();
     }
 

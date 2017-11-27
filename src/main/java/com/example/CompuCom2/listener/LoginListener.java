@@ -13,6 +13,14 @@ import javax.servlet.http.HttpSession;
 @Component
 public class LoginListener implements ApplicationListener<InteractiveAuthenticationSuccessEvent> {
 
+    private static int couter;
+    public static int getCouter(){
+        return couter;
+    }
+    public static void subCounter(){
+        LoginListener.couter--;
+    }
+
     @Autowired
     private UserService userService;
 
@@ -21,6 +29,7 @@ public class LoginListener implements ApplicationListener<InteractiveAuthenticat
 
     @Override
     public void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {
+        couter++;
         UserDetails userDetails = (UserDetails) event.getAuthentication().getPrincipal();
         UserModel userModel = userService.findUserModelByEmail(userDetails.getUsername());
         httpSession.setAttribute("userGlobal", userModel);
