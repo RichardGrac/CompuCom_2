@@ -2,6 +2,7 @@ package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
 import com.example.CompuCom2.entity.DealsBanner;
+import com.example.CompuCom2.listener.LoginListener;
 import com.example.CompuCom2.model.ProductCategoryModel;
 import com.example.CompuCom2.model.ProductModel;
 import com.example.CompuCom2.service.DealsBannerService;
@@ -43,8 +44,12 @@ public class IndexController {
     @RequestMapping("/index")
     public ModelAndView index(@RequestParam(name = "update", required = false) boolean update,
                               @RequestParam(name = "result", required = false) Integer result,
-                              @RequestParam(name = "autherr", required = false) boolean autherr){
+                              @RequestParam(name = "autherr", required = false) boolean autherr,
+                              @RequestParam(name = "logout", required = false) boolean logout){
         LOG.info("METHOD: index()");
+        if (logout){
+            LoginListener.subCounter();
+        }
         ModelAndView mav = new ModelAndView(Constants.INDEX);
 //        Seteamos categorias:
         ArrayList<ProductCategoryModel> productCategoryModels = (ArrayList<ProductCategoryModel>) productCategoryService.findAll();

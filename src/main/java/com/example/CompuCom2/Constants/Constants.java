@@ -28,4 +28,5 @@ public class Constants {
     public static final String SPENDING = "spending";
     public static final String FORM_USER_PASSWORD = "front/form-password";
     public static final String USERHISTORY = "userhistory";
+    public static final String ADMIN_INDEX = "index-admin";
 }
