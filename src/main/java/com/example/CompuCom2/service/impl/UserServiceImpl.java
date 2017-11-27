@@ -171,7 +171,9 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userModel.getId());
         user.setUsername(userModel.getUsername());
         user.setEmail(userModel.getEmail());
-        user.setRole(userModel.getRoles());
+        if (userModel.getRoles() != null) {
+            user.setRole(userModel.getRoles());
+        }
         return user;
     }
 

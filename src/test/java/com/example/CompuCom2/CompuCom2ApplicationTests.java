@@ -1,6 +1,6 @@
 package com.example.CompuCom2;
 
-import com.example.CompuCom2.repository.Estadisticas;
+import com.example.CompuCom2.repository.Statistics;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class CompuCom2ApplicationTests {
 
 	@Autowired
-	Estadisticas estadisticas;
+	Statistics estadisticas;
 	Log LOG = LogFactory.getLog(CompuCom2ApplicationTests.class);
 
 	@Test

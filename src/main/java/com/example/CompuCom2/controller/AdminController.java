@@ -1,7 +1,7 @@
 package com.example.CompuCom2.controller;
 
 import com.example.CompuCom2.Constants.Constants;
-import com.example.CompuCom2.repository.Estadisticas;
+import com.example.CompuCom2.repository.Statistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,20 +14,20 @@ import java.time.LocalDate;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final Estadisticas estadisticas;
+    private final Statistics statistics;
 
     @Autowired
-    AdminController(Estadisticas estadisticas){
-        this.estadisticas= estadisticas;
+    AdminController(Statistics statistics){
+        this.statistics = statistics;
     }
 
     @GetMapping("/index")
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView(Constants.ADMIN_INDEX);
         modelAndView.addObject("month", LocalDate.now().getMonth().name());
-        modelAndView.addObject("topProduct", estadisticas.topProductHistory());
-        modelAndView.addObject("saleProductCurrentMonth", estadisticas.salesPerProductInThCurrentMonth());
-        modelAndView.addObject("productLowAvailability" , estadisticas.productsWithLittleAvailability());
+        modelAndView.addObject("topProduct", statistics.topProductHistory());
+        modelAndView.addObject("saleProductCurrentMonth", statistics.salesPerProductInThCurrentMonth());
+        modelAndView.addObject("productLowAvailability" , statistics.productsWithLittleAvailability());
         return modelAndView;
     }
 }
