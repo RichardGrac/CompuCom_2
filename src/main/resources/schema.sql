@@ -9,3 +9,21 @@ CREATE OR REPLACE VIEW sales_product AS
     product.name = details.name
   GROUP BY product.id
   ORDER BY count(details.id) DESC LIMIT 5;
+
+DROP PROCEDURE getUsers;
+CREATE DEFINER='compucom'@'localhost' PROCEDURE getUserEmails()
+  BEGIN
+    SELECT email FROM user;
+  END;
+
+DROP PROCEDURE getUsers;
+CREATE DEFINER='compucom'@'localhost' PROCEDURE getUsers()
+  BEGIN
+    SELECT * FROM user;
+  END;
+
+DROP PROCEDURE getUser;
+CREATE DEFINER='compucom'@'localhost' PROCEDURE getUser(IN p_id INT)
+  BEGIN
+    SELECT * FROM user WHERE id = p_id;
+  END;
