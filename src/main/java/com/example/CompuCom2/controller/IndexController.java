@@ -8,15 +8,16 @@ import com.example.CompuCom2.model.ProductModel;
 import com.example.CompuCom2.service.DealsBannerService;
 import com.example.CompuCom2.service.ProductCategoryService;
 import com.example.CompuCom2.service.impl.ProductServiceImpl;
+import com.example.CompuCom2.utils.storage.StorageService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class IndexController {
     @Autowired
     private DealsBannerService dealsBannerService;
 
+    @Autowired
+    private StorageService storageService;
     @RequestMapping("/")
     public String goIndex(){
         LOG.info("METHOD: goIndex()");
@@ -162,6 +165,17 @@ public class IndexController {
             }
         }
         return productModels;
+    }
+
+    @GetMapping("/files")
+    @ResponseBody
+    public ResponseEntity<Resource> serveFile(@RequestParam String name) {
+        if (name != null){
+            Resource file = storageService.loadAsResource(name);
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                    "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+        }
+        return null;
     }
 
 }

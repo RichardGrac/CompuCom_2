@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/bower_components/**","/css/**","/dist/*","/img/**","/js/**","/plugins/**","/vendor/**").permitAll()
+                .antMatchers("/bower_components/**","/css/**","/dist/*","/img/**","/js/**","/plugins/**","/vendor/**", "/files").permitAll()
                 .antMatchers("/banner/show-deals", "/banner/save-deals", "/banner/change-status", "/banner/delete-banner").hasRole("ADMIN")
                 .antMatchers("/banner/files", "/banner/image").permitAll()
                 .antMatchers("/","/index","/about","/questions","/fproducts","/search","/more").permitAll()

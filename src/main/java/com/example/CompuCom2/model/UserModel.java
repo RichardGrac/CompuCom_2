@@ -2,10 +2,14 @@ package com.example.CompuCom2.model;
 
 import com.example.CompuCom2.entity.Role;
 import com.example.CompuCom2.entity.UserAddress;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import java.util.List;
 import java.util.Set;
 
+@AllArgsConstructor
+@Builder
 public class UserModel {
     private int id;
     private String username;
