@@ -1,5 +1,8 @@
 package com.example.CompuCom2.model;
 
+import lombok.Builder;
+
+@Builder
 public class UserAddressModel {
     private int id;
     private String street;

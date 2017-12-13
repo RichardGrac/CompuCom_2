@@ -1,5 +1,7 @@
 package com.example.CompuCom2;
 
+import com.example.CompuCom2.model.UserAddressModel;
+import com.example.CompuCom2.model.UserModel;
 import com.example.CompuCom2.repository.procedures.Procedures;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,7 +45,27 @@ public class CompuCom2ApplicationTests {
 
 	@Test
 	public void testSingleUser(){
-		LOG.info(procedures.getUser(3));
+		LOG.info(procedures.getUser(34));
+	}
+
+	@Test
+	public void addSingleUser(){
+		UserModel userModel = UserModel.builder()
+				.email("qq@qq.com")
+				.password("qq")
+				.username("qq")
+				.build();
+		UserAddressModel userAddressModel = UserAddressModel.builder()
+				.city("qq")
+				.colony("qq")
+				.country("qq")
+				.number("qq")
+				.reference("qq")
+				.state("qq")
+				.street("qq")
+				.zip("qq")
+				.build();
+		procedures.addUser(userModel, userAddressModel);
 	}
 
 }

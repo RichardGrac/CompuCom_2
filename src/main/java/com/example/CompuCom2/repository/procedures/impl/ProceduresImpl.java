@@ -1,7 +1,10 @@
 package com.example.CompuCom2.repository.procedures.impl;
 
 import com.example.CompuCom2.entity.User;
+import com.example.CompuCom2.model.UserAddressModel;
+import com.example.CompuCom2.model.UserModel;
 import com.example.CompuCom2.repository.procedures.Procedures;
+import org.apache.catalina.Store;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -42,5 +45,33 @@ public class ProceduresImpl implements Procedures {
                 .registerStoredProcedureParameter("p_id", Integer.class, ParameterMode.IN)
                 .setParameter("p_id", id);
         return (User) storedProcedureQuery.getSingleResult();
+    }
+
+    @Override
+    public void addUser(UserModel userModel, UserAddressModel userAddressModel) {
+        StoredProcedureQuery storedProcedureQuery = entityManager
+                .createStoredProcedureQuery("addUser")
+                .registerStoredProcedureParameter("p_email", String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("p_password", String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("p_username", String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("p_city", String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("p_colony", String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("p_country", String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("p_number", String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("p_referece", String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("p_state", String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("p_street", String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter("p_zip", String.class, ParameterMode.IN)
+                .setParameter("p_email", userModel.getEmail())
+                .setParameter("p_password", userModel.getPassword())
+                .setParameter("p_username", userModel.getUsername())
+                .setParameter("p_city", userAddressModel.getCity())
+                .setParameter("p_colony", userAddressModel.getColony())
+                .setParameter("p_country", userAddressModel.getCountry())
+                .setParameter("p_number", userAddressModel.getNumber())
+                .setParameter("p_referece", userAddressModel.getReference())
+                .setParameter("p_state", userAddressModel.getState())
+                .setParameter("p_street", userAddressModel.getStreet())
+                .setParameter("p_zip", userAddressModel.getZip());
     }
 }
