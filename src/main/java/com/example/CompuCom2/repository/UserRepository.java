@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Serializable> {
-    User findById(int id);
+    public abstract User findById(int id);
     User findByUsername(String username);
     User findByEmail(String email);
 

@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface DealsBannerRepository extends JpaRepository<DealsBanner , Serializable> {
-
     DealsBanner findById(Integer id);
     @Transactional
     void deleteById(Integer id);
