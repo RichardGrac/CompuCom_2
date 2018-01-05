@@ -10,13 +10,9 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface DealsBannerRepository extends JpaRepository<DealsBanner , Serializable> {
-
-    @Query("SELECT db from DealsBanner as db where db.id = :id")
-    DealsBanner findById(@Param("id") Integer id);
-
+    DealsBanner findById(Integer id);
     @Transactional
-    @Query("delete from DealsBanner as db where db.id = :id")
-    void deleteById(@Param("id") Integer id);
+    void deleteById(Integer id);
 
     @Query("select d.image from DealsBanner d where d.id = :id")
     String findImageById(@Param("id") Integer id);
