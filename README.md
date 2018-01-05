@@ -17,5 +17,8 @@
 </p>
 <p>
   Now you can run the Web application since your browser at http://localhost:9000 (Or Port established).
+<p>
+</p>
+ To get into the administration side, you can use: <code><b>Username:</b> root@hotmail.com and <b>Password:</b> admin</code>
 </p>
 
