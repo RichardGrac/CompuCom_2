@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/compucom?useSSL=false
-    username: compucom
-    password: admincompucom
+    username: root
+    password: admin
     initialize: true
   http:
       multipart:
