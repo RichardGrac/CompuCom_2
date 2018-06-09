@@ -22,3 +22,4 @@
  To get into the administration side, you can use: <code><b>Username:</b> root@hotmail.com and <b>Password:</b> admin</code>
 </p>
 
+<h3>Project Images: </h3> https://drive.google.com/open?id=15HlsUlIG2WqitM-SxeZCmRg1QmiGQqK0
